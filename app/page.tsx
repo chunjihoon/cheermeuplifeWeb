@@ -74,7 +74,7 @@ const reviews = [
 
 export default function CheerMeUpLifeMain() {
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalImg, setModalImg] = useState(null);
+  const [modalImg, setModalImg] = useState<string | null>(null)
 
   return (
     <div className="w-full min-h-screen bg-gradient-to-b from-yellow-50 to-pink-100 font-sans overflow-x-hidden">
@@ -100,7 +100,10 @@ export default function CheerMeUpLifeMain() {
         </p>
         <button
           className="bg-gradient-to-r from-yellow-400 to-pink-400 text-white text-2xl px-12 py-5 rounded-full shadow-lg hover:scale-110 transition-all"
-          onClick={() => setModalOpen(true)}
+          // onClick={() => setModalOpen(true)}
+          onClick={() => {
+            window.location.href = "https://open.kakao.com/o/swR5LlZg"; // ← 오픈톡 링크로 수정
+          }}
         >
           <h2 className="font-[Giants-Inline] text-3xl text-white-600">지금 바로 예약하기</h2>
         </button>
@@ -141,7 +144,7 @@ export default function CheerMeUpLifeMain() {
             <img
               src="/cheermeup_profile_June.png"
               alt="천지훈 프로필"
-              className="w-60 object-contain"
+              className="w-50 object-contain"
               style={{ border: "none" }}
             />
           </div>
@@ -237,7 +240,7 @@ export default function CheerMeUpLifeMain() {
       {/* 3. 지그재그 섹션 #3 */}
       <section className="max-w-6xl mx-auto py-16 px-6 grid md:grid-cols-2 gap-10 items-center">
         <div>
-          <iframe width="500" height="315" className="rounded-[3rem]" src="https://www.youtube.com/embed/uPlCSt3_qZg?si=Do7k50I4HiwGTHPG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe width="500" height="315" className="rounded-[3rem]" src="https://www.youtube.com/embed/uPlCSt3_qZg?si=Do7k50I4HiwGTHPG" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
         </div>
         <div>
           <h2 className="font-[Giants-inline] text-[40px] text-pink-600 mb-3">결혼식 축하무대, 저희가 직접 뛰어드립니다!</h2>
@@ -270,12 +273,12 @@ export default function CheerMeUpLifeMain() {
                     <li key={i}>{f}</li>
                   ))}
                 </ul>
-                <button
+                {/* <button
                   className="bg-gradient-to-r from-yellow-300 to-pink-400 text-white text-lg font-bold px-8 py-3 rounded-full shadow-md hover:scale-105 transition-all"
                   onClick={() => setModalOpen(true)}
                 >
                   {p.cta}
-                </button>
+                </button> */}
               </div>
             ))}
           </div>
@@ -415,7 +418,10 @@ export default function CheerMeUpLifeMain() {
         
         <button
           className="bg-gradient-to-r from-yellow-400 to-pink-400 text-white text-2xl px-12 py-5 rounded-full shadow-lg hover:scale-110 transition-all"
-          onClick={() => setModalOpen(true)}
+          // onClick={() => setModalOpen(true)}
+          onClick={() => {
+            window.location.href = "https://open.kakao.com/o/swR5LlZg"; // ← 오픈톡 링크로 수정
+          }}
         >
           <h2 className="font-[Giants-Inline] text-3xl text-white-600">👉🏼 취미로운 응원레슨, 지금 바로 예약하기</h2>
         </button>
