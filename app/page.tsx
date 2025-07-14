@@ -91,7 +91,7 @@ export default function CheerMeUpLifeMain() {
       {/* 텍스트/버튼 - 우측 */}
       <div className="w-full md:w-1/2 flex flex-col items-start">
         <div className="font-[Giants-Inline]  text-pink-500 mb-4 leading-tight">
-          <h1 className="text-[90px] font-bold block mb-2">치어리딩,</h1>
+          <h1 className="text-9xl font-bold block mb-2">치어리딩,</h1>
           <br className="hidden md:block" />
           <h1 className="text-[25px] font-bold text-yellow-400">처음이여도 신나게! 어렵지 않고 취미롭게!</h1>
         </div>
