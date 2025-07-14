@@ -53,24 +53,24 @@ const products = [
 ];
 
 // 더미 후기
-const reviews = [
-  {
-    name: "이수진",
-    text: "처음 치어리딩 배웠는데 수업이 진짜 재밌어요. 아이들도 신나하고, 선생님 정말 친절해요!",
-  },
-  {
-    name: "홍지원",
-    text: "단체 공연 준비하려고 신청했는데, 체계적이고 분위기도 좋아서 적극 추천합니다.",
-  },
-  {
-    name: "윤은지",
-    text: "안무 맞춤 제작이 가능해서 저희 팀 공연 컨셉에 딱 맞는 안무를 받을 수 있었어요.",
-  },
-  {
-    name: "최혜림",
-    text: "레슨 듣고 실력이 눈에 띄게 늘었어요! 다음에 또 듣고 싶어요.",
-  },
-];
+// const reviews = [
+//   {
+//     name: "이수진",
+//     text: "처음 치어리딩 배웠는데 수업이 진짜 재밌어요. 아이들도 신나하고, 선생님 정말 친절해요!",
+//   },
+//   {
+//     name: "홍지원",
+//     text: "단체 공연 준비하려고 신청했는데, 체계적이고 분위기도 좋아서 적극 추천합니다.",
+//   },
+//   {
+//     name: "윤은지",
+//     text: "안무 맞춤 제작이 가능해서 저희 팀 공연 컨셉에 딱 맞는 안무를 받을 수 있었어요.",
+//   },
+//   {
+//     name: "최혜림",
+//     text: "레슨 듣고 실력이 눈에 띄게 늘었어요! 다음에 또 듣고 싶어요.",
+//   },
+// ];
 
 export default function CheerMeUpLifeMain() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -156,7 +156,7 @@ export default function CheerMeUpLifeMain() {
               <li>2014 수원대학교 적토마응원단 27대 단장</li>
               <li>어린이응원단 강습을 시작으로 직장인 <br />워크숍 공연 레슨, 중고생/대학생 훈련 지도,<br /> 결혼식 축무 레슨, 일반인 취미반 레슨, <br />어르신 복지센터 출강
               등 남녀노소 다양한 수강생 경험 </li>
-              <li>2022 유튜브 채널 "취미CheerMe로운 응원생활" 운영중</li>
+              <li>2022 유튜브 채널 &quot;취미CheerMe로운 응원생활&quot; 운영중</li>
               <li>2024 크몽, 숨고, 탈잉 오프라인 레슨 운영중</li>
             </ul>
             <span className="text-sm text-gray-400">유아부터 시니어까지, 모든 수강생의 개성을 살리는 100% 맞춤형 멘토</span>
@@ -178,7 +178,7 @@ export default function CheerMeUpLifeMain() {
             <h3 className="font-[SANJUGotgam] text-3xl font-bold text-yellow-600 mb-1">홍수관 강사</h3>
             <p className="text-lg text-gray-700 font-semibold mb-2">치어리딩 15년 경력</p>
             <ul className="text-base text-gray-700 space-y-1 mb-2 list-disc ml-4">
-              <li>레인보우 Ent. 소속 "레인보우 치어" 활동</li>
+              <li>레인보우 Ent. 소속 &quot;레인보우 치어&quot; 활동</li>
               <li>일본 올스타 치어리딩 대회 입상 2회</li>
               <li>롯데월드 치어리딩 대회 입상</li>
               <li>대영중, 장훈고, 수원대 응원단 훈련부장 출신</li>
@@ -203,7 +203,7 @@ export default function CheerMeUpLifeMain() {
           />
         </div>
         <div>
-          <h2 className="font-[Giants-inline] text-[40px] text-pink-600 mb-3">치어리딩, 한 번도 안해봤다고? Don't worry!</h2>
+          <h2 className="font-[Giants-inline] text-[40px] text-pink-600 mb-3">치어리딩, 한 번도 안해봤다고? Don&quot;t worry!</h2>
           <li><p className="text-lg text-gray-700 mb-4">누구나 처음! 동작부터 음악까지 <b>하루만에 공연 가능!</b></p>
           <p className="text-lg text-gray-700 mb-4">초등학생, 중고생, 대학생, 직장인, 시니어 / 남녀노소 입문자부터 경력자까지 모두 커버 가능</p></li>
           <ul className="list-disc text-pink-600 ml-6 space-y-1">
