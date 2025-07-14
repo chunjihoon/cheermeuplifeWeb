@@ -9,8 +9,8 @@ module.exports = {
       extend: {
         // 아래처럼 커스텀 폰트 지정 가능
         fontFamily: {
-          giants: ['Giants-Bold', 'sans-serif'],
-          sans: ['"Noto Sans KR"', 'Apple SD Gothic Neo', 'sans-serif'],
+          //giants: ['Giants-Bold', 'sans-serif'],
+          //sans: ['"Noto Sans KR"', 'Apple SD Gothic Neo', 'sans-serif'],
           // 예시: Giants: ['Giants-Bold'], 등
         },
       },
