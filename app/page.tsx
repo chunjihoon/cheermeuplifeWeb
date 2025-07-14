@@ -90,7 +90,7 @@ export default function CheerMeUpLifeMain() {
       </div>
       {/* 텍스트/버튼 - 우측 */}
       <div className="w-full md:w-1/2 flex flex-col items-start">
-        <div className="font-[Giants-Inline]  text-pink-500 mb-4 leading-tight">
+        <div className="font-giantsInline  text-pink-500 mb-4 leading-tight">
           <h1 className="text-9xl font-bold block mb-2">치어리딩,</h1>
           <br className="hidden md:block" />
           <h1 className="text-[25px] font-bold text-yellow-400">처음이여도 신나게! 어렵지 않고 취미롭게!</h1>
@@ -105,7 +105,7 @@ export default function CheerMeUpLifeMain() {
             window.location.href = "https://open.kakao.com/o/swR5LlZg"; // ← 오픈톡 링크로 수정
           }}
         >
-          <h2 className="font-[Giants-Inline] text-3xl text-white-600">지금 바로 예약하기</h2>
+          <h2 className="font-giantsInline text-3xl text-white-600">지금 바로 예약하기</h2>
         </button>
       </div>
     </section>
@@ -150,7 +150,7 @@ export default function CheerMeUpLifeMain() {
           </div>
           {/* 실제 내용은 padding-top으로 이미지 공간 확보 */}
           <div className="flex-1 flex flex-col items-start pt-[140px] md:pt-0">
-            <h3 className="font-[SANJUGotgam] text-3xl font-bold text-pink-600 mb-1">천지훈 강사</h3>
+            <h3 className="font-gotgam text-3xl font-bold text-pink-600 mb-1">천지훈 강사</h3>
             <p className="text-lg text-gray-700 font-semibold mb-2">유튜버 취미로운응원생활</p>
             <ul className="text-base text-gray-700 space-y-1 mb-2 list-disc ml-4">
               <li>2014 수원대학교 적토마응원단 27대 단장</li>
@@ -175,7 +175,7 @@ export default function CheerMeUpLifeMain() {
             />
           </div>
           <div className="flex-1 flex flex-col items-start pt-[90px] md:pt-0">
-            <h3 className="font-[SANJUGotgam] text-3xl font-bold text-yellow-600 mb-1">홍수관 강사</h3>
+            <h3 className="font-gotgam text-3xl font-bold text-yellow-600 mb-1">홍수관 강사</h3>
             <p className="text-lg text-gray-700 font-semibold mb-2">치어리딩 15년 경력</p>
             <ul className="text-base text-gray-700 space-y-1 mb-2 list-disc ml-4">
               <li>레인보우 Ent. 소속 &quot;레인보우 치어&quot; 활동</li>
@@ -203,7 +203,7 @@ export default function CheerMeUpLifeMain() {
           />
         </div>
         <div>
-          <h2 className="font-[Giants-inline] text-[40px] text-pink-600 mb-3">치어리딩, 한 번도 안해봤다고? Don&quot;t worry!</h2>
+          <h2 className="font-giantsInline text-[40px] text-pink-600 mb-3">치어리딩, 한 번도 안해봤다고? Don&quot;t worry!</h2>
           <li><p className="text-lg text-gray-700 mb-4">누구나 처음! 동작부터 음악까지 <b>하루만에 공연 가능!</b></p>
           <p className="text-lg text-gray-700 mb-4">초등학생, 중고생, 대학생, 직장인, 시니어 / 남녀노소 입문자부터 경력자까지 모두 커버 가능</p></li>
           <ul className="list-disc text-pink-600 ml-6 space-y-1">
@@ -217,7 +217,7 @@ export default function CheerMeUpLifeMain() {
       {/* 4. 지그재그 섹션 #2 (이미지 오른쪽) */}
       <section className="max-w-6xl mx-auto py-16 px-6 grid md:grid-cols-2 gap-10 items-center">
         <div className="order-2 md:order-1">
-          <h2 className="font-[Giants-inline] text-[40px] text-yellow-600 mb-3">단체/입시/동아리, 상황별 100% 맞춤형!
+          <h2 className="font-giantsInline text-[40px] text-yellow-600 mb-3">단체/입시/동아리, 상황별 100% 맞춤형!
           </h2>
           <p className="text-lg text-gray-700 mb-4">
           학교·동아리·기업행사·입시·방송까지 <b>우리 팀만의 퍼포먼스</b>가 필요하다면?
@@ -243,7 +243,7 @@ export default function CheerMeUpLifeMain() {
           <iframe width="500" height="315" className="rounded-[3rem]" src="https://www.youtube.com/embed/uPlCSt3_qZg?si=Do7k50I4HiwGTHPG" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
         </div>
         <div>
-          <h2 className="font-[Giants-inline] text-[40px] text-pink-600 mb-3">결혼식 축하무대, 저희가 직접 뛰어드립니다!</h2>
+          <h2 className="font-giantsInline text-[40px] text-pink-600 mb-3">결혼식 축하무대, 저희가 직접 뛰어드립니다!</h2>
           <p className="text-lg text-gray-700 mb-4">신랑/신부, 친구, 가족 누구든 주인공! 인생 한 번뿐인 순간, 제대로 즐기세요</p>
           <ul className="list-disc text-pink-600 ml-6 space-y-1">
             <li>전국 어디든 직접 방문하여 축하 공연</li>
@@ -258,15 +258,15 @@ export default function CheerMeUpLifeMain() {
       {/* 6. 상품(가격/플랜) 카드 */}
       <section className="w-full py-16 bg-gradient-to-r from-yellow-50 to-pink-100">
         <div className="max-w-6xl mx-auto flex flex-col items-center">
-          <h2 className="font-[SANJUGotgam] text-4xl font-bold text-pink-500 mb-8">상품/가격 안내</h2>
+          <h2 className="font-gotgam text-4xl font-bold text-pink-500 mb-8">상품/가격 안내</h2>
           <div className="w-full flex flex-col md:flex-row gap-8 justify-center">
             {products.map((p, idx) => (
               <div
                 key={idx}
                 className="flex-1 bg-white rounded-2xl shadow-2xl border-4 border-pink-200 flex flex-col items-center px-8 py-10 min-w-[300px] max-w-[350px] mx-auto hover:scale-105 transition-all"
               >
-                <h3 className="font-[SANJUGotgam] text-2xl font-extrabold text-pink-600 mb-2">{p.name}</h3>
-                <p className="font-[SANJUGotgam] text-3xl font-bold text-yellow-500 mb-2">{p.price}</p>
+                <h3 className="font-gotgam text-2xl font-extrabold text-pink-600 mb-2">{p.name}</h3>
+                <p className="font-gotgam text-3xl font-bold text-yellow-500 mb-2">{p.price}</p>
                 <p className="text-base text-gray-600 mb-4 text-center">{p.desc}</p>
                 <ul className="mb-4 text-left list-disc ml-4 text-pink-500 space-y-1">
                   {p.features.map((f, i) => (
@@ -289,7 +289,7 @@ export default function CheerMeUpLifeMain() {
       <section className="max-w-6xl mx-auto py-16 px-6 flex flex-col items-center ">
       {/* <section> */}
         <br/><br/>
-        <h2 className="font-[SANJUGotgam] text-4xl font-extrabold text-pink-500 mb-6">Reference</h2>
+        <h2 className="font-gotgam text-4xl font-extrabold text-pink-500 mb-6">Reference</h2>
         <div className="w-full flex flex-col md:flex-row gap-10 items-center justify-center">
           <iframe
             width="400"
@@ -365,7 +365,7 @@ export default function CheerMeUpLifeMain() {
       {/* 8. 후기 그리드 (이미지 버전) */}
       <section className="w-full py-16 bg-white">
       <div className="max-w-6xl mx-auto flex flex-col items-center">
-        <h2 className="font-[SANJUGotgam] text-4xl font-extrabold text-yellow-500 mb-6">
+        <h2 className="font-gotgam text-4xl font-extrabold text-yellow-500 mb-6">
           한치의 거짓없는 소중한 리뷰들
         </h2>
         <div className="w-full grid grid-cols-2 md:grid-cols-3 gap-8">
@@ -423,7 +423,7 @@ export default function CheerMeUpLifeMain() {
             window.location.href = "https://open.kakao.com/o/swR5LlZg"; // ← 오픈톡 링크로 수정
           }}
         >
-          <h2 className="font-[Giants-Inline] text-3xl text-white-600">👉🏼 취미로운 응원레슨, 지금 바로 예약하기</h2>
+          <h2 className="font-giantsInline text-3xl text-white-600">👉🏼 취미로운 응원레슨, 지금 바로 예약하기</h2>
         </button>
       </section>
 
@@ -435,7 +435,7 @@ export default function CheerMeUpLifeMain() {
               className="absolute top-4 right-4 text-gray-400 text-2xl hover:text-pink-400"
               onClick={() => setModalOpen(false)}
             >×</button>
-            <h3 className="font-[SANJUGotgam] text-2xl font-bold mb-4 text-pink-500">레슨 예약 신청</h3>
+            <h3 className="font-gotgam text-2xl font-bold mb-4 text-pink-500">레슨 예약 신청</h3>
             <form
               className="flex flex-col gap-3"
               onSubmit={e => {
@@ -450,7 +450,7 @@ export default function CheerMeUpLifeMain() {
               <input className="text-gray-900 border rounded-lg px-4 py-2" placeholder="희망 날짜/시간" required />
               <input className="text-gray-900 border rounded-lg px-4 py-2" placeholder="인원수" required />
               <textarea className="text-gray-900 border rounded-lg px-4 py-2" placeholder="요청사항" />
-              <button className="font-[SANJUGotgam] bg-pink-400 hover:bg-yellow-400 text-white rounded-lg px-6 py-3 font-bold text-lg mt-3">
+              <button className="font-gotgam bg-pink-400 hover:bg-yellow-400 text-white rounded-lg px-6 py-3 font-bold text-lg mt-3">
                 예약 신청하기
               </button>
             </form>
