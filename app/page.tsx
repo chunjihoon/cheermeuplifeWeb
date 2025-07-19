@@ -222,7 +222,7 @@ export default function CheerMeUpLifeMain() {
       <ul className="text-base text-gray-700 space-y-1 mb-2 list-disc ml-4">
         <li>2014 수원대학교 적토마응원단 27대 단장</li>
         <li>어린이응원단 강습을 시작으로 직장인 워크숍 공연 레슨, 중고생/대학생 훈련 지도, 결혼식 축무 레슨, 일반인 취미반 레슨, 어르신 복지센터 출강 등 남녀노소 다양한 수강생 경험</li>
-        <li>2022 유튜브 채널 &quot취미CheerMe로운 응원생활&quot 운영중</li>
+        <li>2022 유튜브 채널 &quot;취미CheerMe로운 응원생활&quot; 운영중</li>
         <li>2024 크몽, 숨고, 탈잉 오프라인 레슨 운영중</li>
       </ul>
       <span className="text-sm text-gray-400">유아부터 시니어까지, 모든 수강생의 개성을 살리는 100% 맞춤형 멘토</span>
@@ -250,7 +250,7 @@ export default function CheerMeUpLifeMain() {
       <h3 className="font-gotgam text-4xl font-bold text-yellow-600 mb-1">홍수관 강사</h3>
       <p className="text-xl text-gray-800 font-semibold mb-3">치어리딩 15년 경력</p>
       <ul className="text-base text-gray-700 space-y-1 mb-2 list-disc ml-4">
-        <li>레인보우 Ent. 소속 &quot레인보우 치어&quot 활동</li>
+        <li>레인보우 Ent. 소속 &quot;레인보우 치어&quot; 활동</li>
         <li>일본 올스타 치어리딩 대회 입상 2회</li>
         <li>롯데월드 치어리딩 대회 입상</li>
         <li>대영중, 장훈고, 수원대 응원단 훈련부장 출신</li>
