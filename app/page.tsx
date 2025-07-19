@@ -79,121 +79,196 @@ export default function CheerMeUpLifeMain() {
   return (
     <div className="w-full min-h-screen bg-gradient-to-b from-yellow-50 to-pink-100 font-sans overflow-x-hidden">
 
-    {/* Hero Section with YouTube */}
-    <section className="w-full max-w-4xl mx-auto pt-16 pb-12 flex flex-col md:flex-row items-center gap-30">
-      <div >
-          <img
-            src="/cheermeuplife_logo.jpg"
-            className="w-80 object-contain rounded-[3rem]"
-            style={{ border: "none" }}
-          />
+    {/* 1. Hero Section */}
+    <section
+      className="
+        w-full
+        pt-16 pb-12
+        flex flex-col md:flex-row
+        items-center md:items-start
+        justify-center
+        gap-8
+        max-w-4xl mx-auto
+      "
+    >
+      <div>
+        <img
+          src="/cheermeuplife_logo.jpg"
+          className="
+            w-[70vw] max-w-[330px] 
+            object-contain rounded-[3rem] 
+            mx-auto md:mx-0
+          "
+          style={{ border: "none" }}
+        />
       </div>
-      {/* 텍스트/버튼 - 우측 */}
-      <div className="w-full md:w-1/2 flex flex-col items-start">
-        <div className="font-giantsInline  text-pink-500 mb-4 leading-tight">
-          <h1 className="text-9xl font-bold block mb-2">치어리딩,</h1>
+      <div
+        className="
+          w-full md:w-1/2
+          flex flex-col
+          items-center md:items-start
+          text-center md:text-left
+          "
+      >
+        <div className="font-giantsInline text-pink-500 mb-4 leading-tight">
+          <h1
+            className="
+              font-bold 
+              mb-2
+              text-[13vw] md:text-8xl
+            "
+          >
+            치어리딩,
+          </h1>
           <br className="hidden md:block" />
-          <h1 className="text-[25px] font-bold text-yellow-400">처음이여도 신나게! 어렵지 않고 취미롭게!</h1>
+          <h1
+            className="
+              font-bold
+              text-yellow-400
+              text-[5vw] md:text-[25px]
+            "
+          >
+            처음이여도 신나게! 어렵지 않고 취미롭게!
+          </h1>
         </div>
-        <p className="text-lg text-gray-700 mb-6">
+        <p
+          className="
+            text-[3vw] md:text-lg
+            text-gray-700
+            mb-6
+          "
+        >
           초중고,대학생/직장인/시니어, 남녀노소, 단체·동아리·개인 모두 OK
         </p>
         <button
-          className="bg-gradient-to-r from-yellow-400 to-pink-400 text-white text-2xl px-12 py-5 rounded-full shadow-lg hover:scale-110 transition-all"
-          // onClick={() => setModalOpen(true)}
+          className="
+            bg-gradient-to-r from-yellow-400 to-pink-400
+            text-white
+            font-giantsInline
+            rounded-full
+            shadow-lg
+            text-[5vw] md:text-2xl
+            px-[8vw] md:px-12
+            py-[2.5vw] md:py-5
+            mb-3
+            hover:scale-110 transition-all
+          "
           onClick={() => {
-            window.location.href = "https://open.kakao.com/o/swR5LlZg"; // ← 오픈톡 링크로 수정
+            window.location.href = "https://open.kakao.com/o/swR5LlZg";
           }}
         >
-          <h2 className="font-giantsInline text-3xl text-white-600">지금 바로 예약하기</h2>
+          <span className="text-white-600 text-[5vw] md:text-3xl">
+            지금 바로 예약하기
+          </span>
         </button>
       </div>
     </section>
 
-          {/* 2. 초록색 슬로건 띠 (좌우 무한 슬라이드) */}
-          <section className="w-full bg-gradient-to-r from-yellow-300 to-pink-400 overflow-x-hidden">
-        <div className="animate-marquee whitespace-nowrap py-2 text-lg font-bold text-white flex items-center">
-          <span className="mx-6">치어리딩이 이렇게 쉬울 수 있다니!</span>
-          <span className="mx-6">입문자/동아리/공연 단체 모두 가능!</span>
-          <span className="mx-6">프로강사진 1:1 컨설팅</span>
-          <span className="mx-6">실전/대회/방송 경험 풍부</span>
-          <span className="mx-6">최초 100% 환불 보장</span>
-          <span className="mx-6">치어리딩이 이렇게 쉬울 수 있다니!</span>
-          <span className="mx-6">입문자/동아리/공연 단체 모두 가능!</span>
-          <span className="mx-6">프로강사진 1:1 컨설팅</span>
-          <span className="mx-6">실전/대회/방송 경험 풍부</span>
-          <span className="mx-6">최초 100% 환불 보장</span>
-        </div>
-      </section>
-      <style>{`
-        .animate-marquee {
-          animation: marquee 22s linear infinite;
-        }
-        @keyframes marquee {
-          0% { transform: translateX(0%);}
-          100% { transform: translateX(-50%);}
-        }
-      `}</style>
+    {/* 2. 초록색 슬로건 띠 (좌우 무한 슬라이드) */}
+<section className="w-full bg-gradient-to-r from-yellow-300 to-pink-400 overflow-x-hidden">
+  <div className="
+    animate-marquee whitespace-nowrap
+    py-[3vw] md:py-2
+    text-[3.5vw] md:text-lg
+    font-bold text-white flex items-center
+    justify-center
+  ">
+    <span className="mx-[5vw] md:mx-6">아니, 치어리딩이 이렇게 쉬웠다고?</span>
+    <span className="mx-[5vw] md:mx-6">입문자/동아리/공연 단체 모두 가능!</span>
+    <span className="mx-[5vw] md:mx-6">프로 강사진 1:1 컨설팅</span>
+    <span className="mx-[5vw] md:mx-6">실전/대회/방송 경험 풍부</span>
+    <span className="mx-[5vw] md:mx-6">최초 100% 환불 보장</span>
+    <span className="mx-[5vw] md:mx-6">아니, 치어리딩이 이렇게 쉬웠다고?</span>
+    <span className="mx-[5vw] md:mx-6">입문자/동아리/공연 단체 모두 가능!</span>
+    <span className="mx-[5vw] md:mx-6">프로강사진 1:1 컨설팅</span>
+    <span className="mx-[5vw] md:mx-6">실전/대회/방송 경험 풍부</span>
+    <span className="mx-[5vw] md:mx-6">최초 100% 환불 보장</span>
+  </div>
+  <style>{`
+    .animate-marquee {
+      animation: marquee 22s linear infinite;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0%);}
+      100% { transform: translateX(-50%);}
+    }
+  `}</style>
+</section>
 
-    <section className="w-full py-20 flex flex-col items-center justify-center bg-white">
-      <div className="w-full max-w-6xl flex flex-col md:flex-row gap-10 justify-center items-center px-4">
-        {/* June */}
-        <div className="flex-1 relative flex flex-col md:flex-row items-center gap-8 bg-gradient-to-br from-pink-100 to-yellow-50 rounded-3xl p-6 shadow-xl">
-          {/* 이미지 - 상단 튀어나오게 */}
-          <div className="absolute left-1/2 -translate-x-1/5 -top-10 z-20 flex justify-center w-full pointer-events-none">
-            <img
-              src="/cheermeup_profile_June.png"
-              alt="천지훈 프로필"
-              className="w-50 object-contain"
-              style={{ border: "none" }}
-            />
-          </div>
-          {/* 실제 내용은 padding-top으로 이미지 공간 확보 */}
-          <div className="flex-1 flex flex-col items-start pt-[140px] md:pt-0">
-            <h3 className="font-gotgam text-3xl font-bold text-pink-600 mb-1">천지훈 강사</h3>
-            <p className="text-lg text-gray-700 font-semibold mb-2">유튜버 취미로운응원생활</p>
-            <ul className="text-base text-gray-700 space-y-1 mb-2 list-disc ml-4">
-              <li>2014 수원대학교 적토마응원단 27대 단장</li>
-              <li>어린이응원단 강습을 시작으로 직장인 <br />워크숍 공연 레슨, 중고생/대학생 훈련 지도,<br /> 결혼식 축무 레슨, 일반인 취미반 레슨, <br />어르신 복지센터 출강
-              등 남녀노소 다양한 수강생 경험 </li>
-              <li>2022 유튜브 채널 &quot;취미CheerMe로운 응원생활&quot; 운영중</li>
-              <li>2024 크몽, 숨고, 탈잉 오프라인 레슨 운영중</li>
-            </ul>
-            <span className="text-sm text-gray-400">유아부터 시니어까지, 모든 수강생의 개성을 살리는 100% 맞춤형 멘토</span>
-          </div>
-        </div>
+<section className="w-full bg-gradient-to-r from-yellow-300 to-pink-400 overflow-x-hidden mb-14"></section>
 
-        
-        {/* 홍수관 - 동일하게 처리 가능 */}
-        <div className="flex-1 relative flex flex-col md:flex-row items-center gap-8 bg-gradient-to-br from-yellow-100 to-pink-50 rounded-3xl p-6 shadow-xl">
-          <div className="absolute left-1/2 -translate-x-1/5 -top-10 z-20 flex justify-center w-full pointer-events-none">
-            <img
-              src="/cheermeup_profile_Hong.jpeg"
-              alt="홍수관 프로필"
-              className="w-40 object-cover"
-              style={{ border: "none" }}
-            />
-          </div>
-          <div className="flex-1 flex flex-col items-start pt-[90px] md:pt-0">
-            <h3 className="font-gotgam text-3xl font-bold text-yellow-600 mb-1">홍수관 강사</h3>
-            <p className="text-lg text-gray-700 font-semibold mb-2">치어리딩 15년 경력</p>
-            <ul className="text-base text-gray-700 space-y-1 mb-2 list-disc ml-4">
-              <li>레인보우 Ent. 소속 &quot;레인보우 치어&quot; 활동</li>
-              <li>일본 올스타 치어리딩 대회 입상 2회</li>
-              <li>롯데월드 치어리딩 대회 입상</li>
-              <li>대영중, 장훈고, 수원대 응원단 훈련부장 출신</li>
-              <li>원주다이내믹페스티벌, 원주청소년축제, 천안거리퍼레이드공연, 시즌 스포츠 강습 자격증/경험 보유</li>
-            </ul>
-            <span className="text-sm text-gray-400">누구도 따라올 수 없는 15년 치어리딩 실전 노하우와 깊은 이해</span>
-          </div>
-        </div>
-      </div>
-  </section>
+{/* 3. 강사 소개 */}
+<section className="  flex-col md:flex-row ">
+  {/* ------------- 강사 1: 천지훈 ------------- */}
+  <div className="relative rounded-3xl p-6 shadow-xl bg-gradient-to-br from-pink-100 to-yellow-50 min-h-[340px] mb-14 mx-8 md:mx-20 lg:mx-40">
+    {/* 강사 사진 - 우상단 플로팅, 반응형 */}
+    <div
+      className="absolute top-[-30px] right-6
+      w-[30vw] h-[30vw] max-w-[140px] max-h-[140px] md:w-[90px] md:h-[90px] 
+      flex items-center justify-center
+      z-20 bg-transparent"
+    >
+      <img
+        src="/cheermeup_profile_June.png"
+        alt="천지훈 프로필"
+        className="w-full h-full object-contain"
+        style={{ border: "none" }}
+      />
+    </div>
+    {/* 내용: 좌측 정렬 */}
+    <div className="flex flex-col items-start mt-2">
+      <h3 className="font-gotgam text-4xl font-bold text-pink-600 mb-1">천지훈 강사</h3>
+      <p className="text-xl text-gray-800 font-semibold mb-3">유튜버 취미로운응원생활</p>
+      <ul className="text-base text-gray-700 space-y-1 mb-2 list-disc ml-4">
+        <li>2014 수원대학교 적토마응원단 27대 단장</li>
+        <li>어린이응원단 강습을 시작으로 직장인 워크숍 공연 레슨, 중고생/대학생 훈련 지도, 결혼식 축무 레슨, 일반인 취미반 레슨, 어르신 복지센터 출강 등 남녀노소 다양한 수강생 경험</li>
+        <li>2022 유튜브 채널 "취미CheerMe로운 응원생활" 운영중</li>
+        <li>2024 크몽, 숨고, 탈잉 오프라인 레슨 운영중</li>
+      </ul>
+      <span className="text-sm text-gray-400">유아부터 시니어까지, 모든 수강생의 개성을 살리는 100% 맞춤형 멘토</span>
+    </div>
+  </div>
+
+  {/* ------------- 강사 2: 홍수관 ------------- */}
+  <div className="relative rounded-3xl p-6 shadow-xl bg-gradient-to-br from-yellow-100 to-pink-50 min-h-[340px] mx-8 md:mx-20 lg:mx-40">
+    {/* 강사 사진 - 우상단 플로팅, 반응형 */}
+    <div
+      className="absolute top-[-30px] right-6
+      w-[30vw] h-[30vw] max-w-[140px] max-h-[140px] md:w-[90px] md:h-[90px]
+      flex items-center justify-center
+      z-20 bg-transparent"
+    >
+      <img
+        src="/cheermeup_profile_Hong.jpeg"
+        alt="홍수관 프로필"
+        className="w-full h-full object-contain"
+        style={{ border: "none" }}
+      />
+    </div>
+    {/* 내용: 좌측 정렬 */}
+    <div className="flex flex-col items-start mt-2">
+      <h3 className="font-gotgam text-4xl font-bold text-yellow-600 mb-1">홍수관 강사</h3>
+      <p className="text-xl text-gray-800 font-semibold mb-3">치어리딩 15년 경력</p>
+      <ul className="text-base text-gray-700 space-y-1 mb-2 list-disc ml-4">
+        <li>레인보우 Ent. 소속 "레인보우 치어" 활동</li>
+        <li>일본 올스타 치어리딩 대회 입상 2회</li>
+        <li>롯데월드 치어리딩 대회 입상</li>
+        <li>대영중, 장훈고, 수원대 응원단 훈련부장 출신</li>
+        <li>원주다이내믹페스티벌, 원주청소년축제, 천안거리퍼레이드 공연, 시즌 스포츠 강습 자격증/경험 보유</li>
+      </ul>
+      <span className="text-sm text-gray-400">누구도 따라올 수 없는 15년 치어리딩 실전 노하우와 깊은 이해</span>
+    </div>
+  </div>
+</section>
 
 
 
 
-      {/* 3. 지그재그 섹션 #1 */}
+
+
+
+
+      {/* 4. 지그재그 섹션 #1 */}
       <section className="max-w-6xl mx-auto py-16 px-6 grid md:grid-cols-2 gap-10 items-center">
         <div>
           <img
@@ -237,11 +312,21 @@ export default function CheerMeUpLifeMain() {
         </div>
       </section>
 
-      {/* 3. 지그재그 섹션 #3 */}
+      {/* 4. 지그재그 섹션 #3 */}
+      
       <section className="max-w-6xl mx-auto py-16 px-6 grid md:grid-cols-2 gap-10 items-center">
-        <div>
-          <iframe width="500" height="315" className="rounded-[3rem]" src="https://www.youtube.com/embed/uPlCSt3_qZg?si=Do7k50I4HiwGTHPG" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+      <div className="w-full flex justify-center">
+        <div className="w-[90vw] max-w-[500px] md:w-[60vw] md:max-w-[700px]">
+          <iframe
+            className="w-full aspect-video rounded-[3rem]"
+            src="https://www.youtube.com/embed/uPlCSt3_qZg?si=Do7k50I4HiwGTHPG"
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          ></iframe>
         </div>
+      </div>
         <div>
           <h2 className="font-giantsInline text-[40px] text-pink-600 mb-3">결혼식 축하무대, 저희가 직접 뛰어드립니다!</h2>
           <p className="text-lg text-gray-700 mb-4">신랑/신부, 친구, 가족 누구든 주인공! 인생 한 번뿐인 순간, 제대로 즐기세요</p>
@@ -255,7 +340,7 @@ export default function CheerMeUpLifeMain() {
         </div>
       </section>
 
-      {/* 6. 상품(가격/플랜) 카드 */}
+      {/* 5. 상품(가격/플랜) 카드 */}
       <section className="w-full py-16 bg-gradient-to-r from-yellow-50 to-pink-100">
         <div className="max-w-6xl mx-auto flex flex-col items-center">
           <h2 className="font-gotgam text-4xl font-bold text-pink-500 mb-8">상품/가격 안내</h2>
@@ -285,7 +370,7 @@ export default function CheerMeUpLifeMain() {
         </div>
       </section>
 
-      {/* 7. 유튜브 강습영상 미리보기 */}
+      {/* 6. 유튜브 강습영상 미리보기 */}
       <section className="max-w-6xl mx-auto py-16 px-6 flex flex-col items-center ">
       {/* <section> */}
         <br/><br/>
@@ -361,8 +446,7 @@ export default function CheerMeUpLifeMain() {
         </div>
       </section>
 
-      {/* 8. 후기 그리드 */}
-      {/* 8. 후기 그리드 (이미지 버전) */}
+      {/* 7. 후기 그리드 (이미지 버전) */}
       <section className="w-full py-16 bg-white">
       <div className="max-w-6xl mx-auto flex flex-col items-center">
         <h2 className="font-gotgam text-4xl font-extrabold text-yellow-500 mb-6">
@@ -413,7 +497,7 @@ export default function CheerMeUpLifeMain() {
       </div>
       </section>
 
-      {/* 9. 예약/문의 콜투액션(버튼) */}
+      {/* 8. 예약/문의 콜투액션(버튼) */}
       <section className="w-full flex flex-col items-center justify-center py-12 bg-gradient-to-br from-yellow-200 to-pink-100">
         
         <button
