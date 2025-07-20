@@ -16,7 +16,13 @@ export async function POST(req: NextRequest) {
 
   // 2. 관리자에게 메일 발송
   const transporter = nodemailer.createTransport({
-    // Gmail 등 설정 (생략)
+    host: process.env.EMAIL_HOST,
+    port: Number(process.env.EMAIL_PORT),
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS
+    },
+    secure: true
   });
 
   // 승인/반려 링크 모두 reviewId 사용
