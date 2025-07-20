@@ -470,6 +470,21 @@ export default function CheerMeUpLifeMain() {
           ))}
         </div>
 
+        <section className="w-full bg-gray-50 py-12">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-2xl font-bold mb-6">실제 수강생 후기</h2>
+            <div className="space-y-4">
+              {reviews.map((r, i) => (
+                <div key={i} className="p-4 rounded bg-white shadow">
+                  <b>{r.name}</b> | {r.date} | {r.count}<br />
+                  <div>{r.content}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+
         {/* Modal */}
         {modalImg && (
           <div
