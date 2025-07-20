@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { getApprovedReviews, Review } from "@/lib/getApprovedReviews";
 
 const reviewImgs = [
   "/cheermeuplife_review_1.png",
@@ -52,25 +53,8 @@ const products = [
   },
 ];
 
-// 더미 후기
-// const reviews = [
-//   {
-//     name: "이수진",
-//     text: "처음 치어리딩 배웠는데 수업이 진짜 재밌어요. 아이들도 신나하고, 선생님 정말 친절해요!",
-//   },
-//   {
-//     name: "홍지원",
-//     text: "단체 공연 준비하려고 신청했는데, 체계적이고 분위기도 좋아서 적극 추천합니다.",
-//   },
-//   {
-//     name: "윤은지",
-//     text: "안무 맞춤 제작이 가능해서 저희 팀 공연 컨셉에 딱 맞는 안무를 받을 수 있었어요.",
-//   },
-//   {
-//     name: "최혜림",
-//     text: "레슨 듣고 실력이 눈에 띄게 늘었어요! 다음에 또 듣고 싶어요.",
-//   },
-// ];
+// 리뷰게시판 데이타
+const reviews: Review[] = await getApprovedReviews();
 
 export default function CheerMeUpLifeMain() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -474,9 +458,9 @@ export default function CheerMeUpLifeMain() {
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl font-bold mb-6">실제 수강생 후기</h2>
             <div className="space-y-4">
-              {reviews.map((r, i) => (
-                <div key={i} className="p-4 rounded bg-white shadow">
-                  <b>{r.name}</b> | {r.date} | {r.count}<br />
+              {reviews.map((r) => (
+                <div key={r.id} className="p-4 rounded bg-white shadow">
+                  <b>{r.name}</b> | {r.date} | {r.count}
                   <div>{r.content}</div>
                 </div>
               ))}

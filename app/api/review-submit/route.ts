@@ -1,34 +1,38 @@
+// /app/api/review-submit/route.ts
 import { NextRequest, NextResponse } from "next/server";
-// nodemailer 설치 필요: npm i nodemailer
+import { db } from "@/lib/firebase";
+import { collection, addDoc } from "firebase/firestore";
 import nodemailer from "nodemailer";
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
+  // 1. 리뷰 저장 (isApproved: false로)
+  const docRef = await addDoc(collection(db, "reviews"), {
+    ...body,
+    isApproved: false,
+    createdAt: new Date(),
+  });
+  const reviewId = docRef.id;
 
-  // 메일 설정 (gmail 예시, 환경변수로 관리 권장)
+  // 2. 관리자에게 메일 발송
   const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: { user: process.env.GMAIL_USER, pass: process.env.GMAIL_PASS }
+    // Gmail 등 설정 (생략)
   });
 
-  const mailOptions = {
-    from: process.env.GMAIL_USER,
+  // 승인/반려 링크 모두 reviewId 사용
+  await transporter.sendMail({
     to: "guatemala3081@gmail.com",
-    subject: "새로운 리뷰가 도착했습니다.",
-    text: `
-    이름: ${body.name}
-    수업일자: ${body.date}
-    수업횟수: ${body.count}
-    리뷰내용: ${body.content}
+    subject: "[리뷰 승인요청] 새 리뷰가 도착했습니다.",
+    html: `
+      <div>
+        <b>이름:</b> ${body.name}<br>
+        <b>수업일자:</b> ${body.date}<br>
+        <b>수업횟수:</b> ${body.count}<br>
+        <b>내용:</b> ${body.content}<br>
+        <a href="https://cheermeuplife-web.vercel.app/api/review-approve?id=${reviewId}">[승인]</a>
+      </div>
     `,
-    // 승인버튼 포함(아래 설명)
-    html: `<p>이름: ${body.name}</p>
-           <p>수업일자: ${body.date}</p>
-           <p>수업횟수: ${body.count}</p>
-           <p>리뷰내용: ${body.content}</p>
-           <a href="https://cheermeuplife-web.vercel.app/api/review-approve?name=${encodeURIComponent(body.name)}&date=${encodeURIComponent(body.date)}">[승인]</a>`
-  };
+  });
 
-  await transporter.sendMail(mailOptions);
   return NextResponse.json({ ok: true });
 }

@@ -1,11 +1,21 @@
 // /app/api/review-approve/route.ts
 import { NextRequest, NextResponse } from "next/server";
-// 예: 파일시스템/DB 등에서 해당 리뷰 찾아서 승인 처리
+import { db } from "@/lib/firebase";
+import { doc, updateDoc } from "firebase/firestore";
+
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
-  // const name = searchParams.get("name");
-  // const date = searchParams.get("date");
-  // DB/file에서 해당 name, date 리뷰 찾아서 isApproved: true로 업데이트
-  // 실제 구현 필요 (ex. json file, mongo, firebase 등)
-  return NextResponse.redirect("https://cheermeuplife-web.vercel.app/");
+  const id = searchParams.get("id");
+
+  if (!id) {
+    return NextResponse.json({ error: "리뷰 id 누락" }, { status: 400 });
+  }
+
+  try {
+    const reviewRef = doc(db, "reviews", id);
+    await updateDoc(reviewRef, { isApproved: true });
+    return NextResponse.redirect("https://cheermeuplife-web.vercel.app/");
+  } catch (e) {
+    return NextResponse.json({ error: "승인 처리 실패" }, { status: 500 });
+  }
 }
