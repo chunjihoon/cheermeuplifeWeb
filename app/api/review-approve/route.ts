@@ -16,6 +16,6 @@ export async function GET(req: NextRequest) {
     await updateDoc(reviewRef, { isApproved: true });
     return NextResponse.redirect("https://cheermeuplife-web.vercel.app/");
   } catch (e) {
-    return NextResponse.json({ error: "승인 처리 실패" }, { status: 500 });
+    return NextResponse.json({ error: e }, { status: 500 });
   }
 }
