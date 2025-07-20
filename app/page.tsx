@@ -601,10 +601,7 @@ export default function CheerMeUpLifeMain() {
           <h3 className="font-gotgam text-2xl font-bold mb-4 text-pink-500">레슨 예약 신청</h3>
           <form
             className="flex flex-col gap-3"
-            onSubmit={e => {
-              e.preventDefault();
-              handleSubmit;
-            }}
+            onSubmit={handleSubmit}
           >
             {selectedService ? (
                 // 상품명 고정 (읽기 전용)
