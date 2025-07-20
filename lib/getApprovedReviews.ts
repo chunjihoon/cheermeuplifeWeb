@@ -6,6 +6,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 export interface Review {
   id: string;
   name: string;
+  song: string;
   date: string;
   count: string;
   content: string;

@@ -22,7 +22,15 @@ export default function ReviewForm() {
       body: JSON.stringify(form),
       headers: { "Content-Type": "application/json" }
     });
-    alert("리뷰가 전송되었습니다. 승인 후 게시됩니다.");
+
+    // count 검증 (빈값, 1미만, 소수)
+    const countNum = Number(form.count);
+    if (!form.count || countNum < 1 || !Number.isInteger(countNum)) {
+      alert("레슨횟수는 1 이상의 정수만 입력할 수 있습니다.");
+      return;
+    }
+
+    alert("정성스러운 리뷰 작성 감사드립니다. 승인 후 게시됩니다.");
     setForm({ name: "", date: "", count: "", content: "" });
     router.push("/");
   };
@@ -33,7 +41,18 @@ export default function ReviewForm() {
       onSubmit={handleSubmit}
       style={{ boxShadow: "0 8px 36px 0 rgba(255,152,203,0.12), 0 1.5px 8px 0 rgba(255,180,80,0.10)" }}
     >
-      <h2 className="font-gotgam text-3xl font-bold text-pink-500 mb-2 tracking-tight animate-slidein text-center">여러분의 소중한 후기를 남겨주세요</h2>
+      <div>
+        <img
+          src="/cheermeuplife_logo.jpg"
+          className="
+            w-[30vw] max-w-[200px] 
+            object-contain rounded-[3rem] 
+            mx-auto
+          "
+          style={{ border: "none" }}
+        />
+      </div>
+      <h2 className="font-gotgam text-2xl font-bold text-pink-500 mb-2 tracking-tight animate-slidein text-center">여러분의 소중한 레슨 후기를 남겨주세요</h2>
 
       {/* 각 필드: 라벨 플로팅+애니메이션 */}
       {[
@@ -72,6 +91,38 @@ export default function ReviewForm() {
           </label>
         </div>
       ))}
+
+      <div className="relative">
+        <input
+          name="count"
+          type="number"
+          min={1}
+          step={1}
+          value={form.count}
+          onChange={handleChange}
+          onFocus={() => handleFocus("count", true)}
+          onBlur={() => handleFocus("count", false)}
+          className={`
+            w-full px-4 pt-7 pb-2 text-lg bg-white rounded-2xl border-2 
+            outline-none transition-all duration-200
+            ${focus.count || form.count ? "border-pink-400" : "border-gray-300"}
+            focus:ring-2 focus:ring-yellow-200
+            shadow-sm text-gray-800
+          `}
+          required
+          autoComplete="off"
+          pattern="[1-9]*"
+        />
+        <label
+          htmlFor="date"
+          className={`
+            absolute left-4 top-2 text-sm pointer-events-none transition-all duration-200
+            ${focus.date || form.date ? "text-pink-500 scale-95 font-bold" : "text-gray-400"}
+          `}
+        >
+          레슨횟수
+        </label>
+      </div>
 
       <div className="relative">
         <input

@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
   // 승인/반려 링크 모두 reviewId 사용
   await transporter.sendMail({
     to: "guatemala3081@gmail.com",
-    subject: "[리뷰 승인요청] 새 리뷰가 도착했습니다.",
+    subject: "[취미로운응원생활] 새로운 리뷰가 도착했습니다.",
     html: `
       <div>
         <b>이름:</b> ${body.name}<br>
