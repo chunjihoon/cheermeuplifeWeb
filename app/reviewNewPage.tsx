@@ -4,9 +4,12 @@ import { useState } from "react";
 
 export default function ReviewForm() {
   const [form, setForm] = useState({ name: "", date: "", count: "", content: "" });
-  const handleChange = (e: { target: { name: any; value: any; }; }) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => setForm({ ...form, [e.target.name]: e.target.value });
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await fetch("/api/review-submit", {
       method: "POST",
