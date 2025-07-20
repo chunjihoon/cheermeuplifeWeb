@@ -454,19 +454,36 @@ export default function CheerMeUpLifeMain() {
           ))}
         </div>
 
-        <section className="w-full bg-gray-50 py-12">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold mb-6">실제 수강생 후기</h2>
-            <div className="space-y-4">
-              {reviews.map((r) => (
-                <div key={r.id} className="p-4 rounded bg-white shadow">
-                  <b>{r.name}</b> | {r.date} | {r.count}
-                  <div>{r.content}</div>
+        <section className="w-full py-16 bg-gradient-to-br from-yellow-50 via-pink-50 to-white">
+          <div className="max-w-3xl mx-auto px-4">
+            <h2 className="text-3xl font-gotgam text-pink-500 font-bold mb-8 flex items-center gap-2">
+              <svg className="w-8 h-8 text-yellow-400" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3"></path><circle cx="12" cy="12" r="10"></circle></svg>
+              실제 수강생 후기
+            </h2>
+            <div className="flex flex-col gap-6">
+              {reviews.map((r, i) => (
+                <div key={i}
+                  className="relative bg-white bg-opacity-90 rounded-3xl shadow-xl p-6 border-l-8 border-gradient-to-b from-pink-200 to-yellow-200 hover:scale-[1.03] transition-all duration-300"
+                >
+                  <div className="absolute -top-5 left-6 text-yellow-300 text-3xl">★</div>
+                  <div className="flex flex-col gap-2">
+                    <div className="flex items-center gap-3">
+                      <span className="font-bold text-lg text-pink-600">{r.name}</span>
+                      <span className="text-gray-400 text-sm">{r.date}</span>
+                      <span className="text-yellow-500 text-xs px-2 py-1 rounded-full bg-yellow-100 font-semibold">
+                        {r.count}회
+                      </span>
+                    </div>
+                    <div className="text-gray-700 text-base leading-relaxed whitespace-pre-line font-gotgam">
+                      {r.content}
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         </section>
+
 
 
         {/* Modal */}
