@@ -91,7 +91,7 @@ export default function CheerMeUpLifeMain() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const [focus, setFocus] = useState({ name: false, date: false, count: false, content: false });
+  const [, setFocus] = useState({ name: false, date: false, count: false, content: false });
   const router = useRouter();
 
   const handleFocus = (field: string, val: boolean) => setFocus(prev => ({ ...prev, [field]: val }));
