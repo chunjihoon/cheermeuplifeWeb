@@ -86,10 +86,14 @@ export default function CheerMeUpLifeMain() {
   });
   
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
-    const { name, value } = e.target;
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm(f => ({
+      ...f,
+      [e.target.name]: e.target.value,               // name/value 구조 분해 삭제
+    }));
   };
 
   const [, setFocus] = useState({ name: false, date: false, count: false, content: false });
