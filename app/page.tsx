@@ -103,6 +103,7 @@ export default function CheerMeUpLifeMain() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(form);  // service 포함 모든 값이 채워졌는지 확인
     await fetch("/api/reserve-submit", {
       method: "POST",
       body: JSON.stringify(form),
@@ -402,6 +403,7 @@ export default function CheerMeUpLifeMain() {
                 className="bg-gradient-to-r from-yellow-300 to-pink-400 text-white text-lg font-bold px-8 py-3 rounded-full shadow-md hover:scale-105 transition-all"
                 onClick={() => {
                   setSelectedService(p.name); // 상품명 저장
+                  setForm(f => ({ ...f, service: p.name }));   // form.service 동기화
                   setModalOpen(true);
                 }}
               >
@@ -611,7 +613,7 @@ export default function CheerMeUpLifeMain() {
                 <input
                   name="service"
                   className="text-gray-900 border rounded-lg px-4 py-2 bg-gray-100 cursor-not-allowed"
-                  value={selectedService}
+                  value={form.service}
                   readOnly
                   tabIndex={-1}
                 /> ) : (
