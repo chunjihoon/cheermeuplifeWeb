@@ -88,6 +88,7 @@ export default function CheerMeUpLifeMain() {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
+    const { name, value } = e.target;
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -604,6 +605,7 @@ export default function CheerMeUpLifeMain() {
             {selectedService ? (
                 // 상품명 고정 (읽기 전용)
                 <input
+                  name="service"
                   className="text-gray-900 border rounded-lg px-4 py-2 bg-gray-100 cursor-not-allowed"
                   value={selectedService}
                   readOnly
@@ -611,7 +613,10 @@ export default function CheerMeUpLifeMain() {
                 /> ) : (
                 // 선택박스 (드롭다운)
                 <select
+                  name="service"
                   className="text-gray-900 border rounded-lg px-4 py-2"
+                  value={form.service}
+                  onChange={handleChange}
                   required
                 >
                   <option value="">서비스 선택</option>
@@ -621,9 +626,26 @@ export default function CheerMeUpLifeMain() {
                   <option value="질풍가도 VOD 튜토리얼">질풍가도 VOD 튜토리얼</option>
                   <option value="결혼식 축하공연 상담">결혼식 축하공연 상담</option>
                 </select>
-              )}
-            <input className="text-gray-900 border rounded-lg px-4 py-2" placeholder="이름/단체명" required />
-            <input className="text-gray-900 border rounded-lg px-4 py-2" placeholder="연락처/카카오톡" required />
+            )}
+            {/* 2) 이름 */}
+            <input
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+              placeholder="이름/단체명"
+              required
+              className="text-gray-900 border rounded-lg px-4 py-2"
+            />
+
+            {/* 3) 연락처 */}
+            <input
+              name="contact"
+              value={form.contact}
+              onChange={handleChange}
+              placeholder="연락처/카카오톡"
+              required
+              className="text-gray-900 border rounded-lg px-4 py-2"
+            />
             <div className="flex gap-2">
               <div className="flex flex-col flex-1">
                 <label htmlFor="date" className="text-sm font-bold text-pink-400 mb-1 ml-1">
@@ -658,12 +680,37 @@ export default function CheerMeUpLifeMain() {
                 />
               </div>
             </div>
+            {/* 5) 희망지역 */}
+            <input
+              name="region"
+              value={form.region}
+              onChange={handleChange}
+              placeholder="희망지역"
+              required
+              className="text-gray-900 border rounded-lg px-4 py-2"
+            />
 
+            {/* 6) 인원수 */}
+            <input
+              name="people"
+              type="number"
+              min={1}
+              value={form.people}
+              onChange={handleChange}
+              placeholder="인원수 (숫자만)"
+              required
+              className="text-gray-900 border rounded-lg px-4 py-2"
+            />
 
-            <input className="text-gray-900 border rounded-lg px-4 py-2" placeholder="희망지역" required />
-            <input type="number" min={1} className="text-gray-900 border rounded-lg px-4 py-2" placeholder="인원수 (숫자만)" required />
-            <textarea className="text-gray-900 border rounded-lg px-4 py-2" placeholder="요청사항" />
-            <button className="font-gotgam bg-pink-400 hover:bg-yellow-400 text-white rounded-lg px-6 py-3 font-bold text-lg mt-3">
+            {/* 7) 요청사항 */}
+            <textarea
+              name="request"
+              value={form.request}
+              onChange={handleChange}
+              placeholder="요청사항"
+              className="text-gray-900 border rounded-lg px-4 py-2"
+            />
+            <button type="submit" className="font-gotgam bg-pink-400 hover:bg-yellow-400 text-white rounded-lg px-6 py-3 font-bold text-lg mt-3">
               예약 신청하기
             </button>
           </form>
