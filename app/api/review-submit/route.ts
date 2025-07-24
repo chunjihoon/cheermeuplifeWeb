@@ -27,6 +27,7 @@ export async function POST(req: NextRequest) {
 
   // 승인/반려 링크 모두 reviewId 사용
   await transporter.sendMail({
+    from: `"취미로운응원생활 리뷰확인" <${process.env.EMAIL_USER}>`,
     to: "guatemala3081@gmail.com",
     subject: "[취미로운응원생활] 새로운 리뷰가 도착했습니다.",
     html: `
