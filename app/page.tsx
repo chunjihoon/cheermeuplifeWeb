@@ -103,7 +103,8 @@ export default function CheerMeUpLifeMain() {
       body: JSON.stringify(form),
       headers: { "Content-Type": "application/json" }
     });
-
+    alert("예약이 접수되었습니다! 남겨주신 연락처로 빠르게 연락드리도록 하겠습니다.");
+    setModalOpen(false);
     setForm({     
       service: "",
       name: "",
@@ -113,9 +114,6 @@ export default function CheerMeUpLifeMain() {
       region: "",
       people: "",
       request: "", });
-
-    alert("예약이 접수되었습니다! 남겨주신 연락처로 빠르게 연락드리도록 하겠습니다.");
-    setModalOpen(false);
     router.push("/");
   };
 
