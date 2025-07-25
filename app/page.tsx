@@ -111,6 +111,11 @@ export default function CheerMeUpLifeMain() {
     });
     alert("예약이 접수되었습니다! 남겨주신 연락처로 빠르게 연락드리도록 하겠습니다.");
     setModalOpen(false);
+    setFormDataInit();
+    router.push("/");
+  };
+
+  function setFormDataInit(){
     setForm({     
       service: "",
       name: "",
@@ -120,8 +125,7 @@ export default function CheerMeUpLifeMain() {
       region: "",
       people: "",
       request: "", });
-    router.push("/");
-  };
+  }
 
   return (
     <div className="w-full min-h-screen bg-gradient-to-b from-yellow-50 to-pink-100 font-sans overflow-x-hidden">
@@ -259,7 +263,7 @@ export default function CheerMeUpLifeMain() {
           <img
             src="/cheermeup_profile_June.png"
             alt="천지훈 프로필"
-            className="w-full h-full object-contain"
+            className="w-full h-full object-contain transform -scale-x-100"
             style={{ border: "none" }}
           />
         </div>
@@ -289,7 +293,7 @@ export default function CheerMeUpLifeMain() {
           <img
             src="/cheermeup_profile_Hong.jpeg"
             alt="홍수관 프로필"
-            className="w-full h-full object-contain"
+            className="w-full h-full object-contain transform -scale-x-100"
             style={{ border: "none" }}
           />
         </div>
@@ -503,7 +507,7 @@ export default function CheerMeUpLifeMain() {
           <div
             key={i}
             className="flex justify-center items-center rounded-2xl overflow-hidden p-4 cursor-pointer transition-transform duration-200 hover:scale-105"
-            onClick={() => setModalImg(src)}
+            onClick={() => {setModalImg(src)}}
           >
             <img
               src={src}
@@ -601,7 +605,7 @@ export default function CheerMeUpLifeMain() {
         <div className="bg-white rounded-3xl shadow-2xl p-10 max-w-md w-full relative animate-fade-in">
           <button
             className="absolute top-4 right-4 text-gray-400 text-2xl hover:text-pink-400"
-            onClick={() => setModalOpen(false)}
+            onClick={() => {setModalOpen(false); setFormDataInit();}}
           >×</button>
           <h3 className="font-gotgam text-2xl font-bold mb-4 text-pink-500">레슨 예약 신청</h3>
           <form
