@@ -1,7 +1,9 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApps, getApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
+import { getAnalytics, isSupported, type Analytics } from "firebase/analytics";
+
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -18,7 +20,11 @@ const firebaseConfig = {
   measurementId: "G-XYCD9H6Y5D"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
+export const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 export const db = getFirestore(app);
+
+// ✅ Next.js 서버 빌드/SSR에서 analytics 터지는 것 방지
+export const analyticsPromise: Promise<Analytics | null> =
+  typeof window === "undefined"
+    ? Promise.resolve(null)
+    : isSupported().then((ok) => (ok ? getAnalytics(app) : null));

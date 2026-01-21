@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { getApprovedReviews, Review } from "@/lib/getApprovedReviews";
 import { useRouter } from "next/navigation";
+import { track } from "@/lib/analytics";
 
 const reviewImgs = [
   "/cheermeuplife_review_1.png",
@@ -121,11 +122,19 @@ export default function CheerMeUpLifeMain() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(form);  // service 포함 모든 값이 채워졌는지 확인
-    await fetch("/api/reserve-submit", {
+    const res = await fetch("/api/reserve-submit", {
       method: "POST",
       body: JSON.stringify(form),
       headers: { "Content-Type": "application/json" }
     });
+
+    if (!res.ok) {
+      track("reserve_submit_fail");
+      alert("잠시 후 다시 시도해주세요. 오류가 지속될 경우 제 개인연락처 (010-3343-7576) 으로 연락 부탁드립니다.");
+      return;
+    }
+
+    track("reserve_submit_success", { service: form.service });
     alert("예약이 접수되었습니다! 남겨주신 연락처로 빠르게 연락드리도록 하겠습니다.");
     setModalOpen(false);
     setFormDataInit();
@@ -240,6 +249,7 @@ export default function CheerMeUpLifeMain() {
           onClick={() => {
             setSelectedService(null); // 상품명 저장
             setModalOpen(true);
+            track("reserve_modal_open", { location: "hero" });
           }}
         >
           <span className="text-white-600 text-[5vw] md:text-3xl">
@@ -442,6 +452,7 @@ export default function CheerMeUpLifeMain() {
                   setSelectedService(p.name); // 상품명 저장
                   //setForm(f => ({ ...f, service: p.name }));   // form.service 동기화
                   setModalOpen(true);
+                  track("reserve_modal_open", { location: "product_card", service: p.name });
                   setNoticeFromCard(true)
                   pickService(p.name);
                 }}
@@ -542,7 +553,10 @@ export default function CheerMeUpLifeMain() {
           <div
             key={i}
             className="flex justify-center items-center rounded-2xl overflow-hidden p-4 cursor-pointer transition-transform duration-200 hover:scale-105"
-            onClick={() => {setModalImg(src)}}
+            onClick={() => {
+              setModalImg(src);
+              track("review_image_click", { index: i + 1, src });
+            }}
           >
             <img
               src={src}
@@ -628,6 +642,7 @@ export default function CheerMeUpLifeMain() {
         onClick={() => {
           setSelectedService(null); // 상품명 저장
           setModalOpen(true);
+          track("reserve_modal_open", { location: "bottomArea" });
         }}
         // onClick={() => {
         //   window.location.href = "https://open.kakao.com/o/swR5LlZg"; // ← 오픈톡 링크로 수정
@@ -803,6 +818,7 @@ export default function CheerMeUpLifeMain() {
                   type="button"
                   className="flex-1 border rounded-lg px-4 py-2 text-gray-700 hover:bg-gray-50"
                   onClick={() => {
+                    track("coach_notice_cancel", { service: pendingService });
                     setCoachNoticeOpen(false);
                     setPendingService("");
                     setCoachNoticeAccepted(false);
@@ -824,6 +840,7 @@ export default function CheerMeUpLifeMain() {
                   disabled={!coachNoticeAccepted}
                   onClick={() => {
                     setCoachNoticeComplete(true);
+                    track("coach_notice_confirm", { service: pendingService });
                   
                     // ✅ 강제 적용으로 바로 form.service 세팅 (유저 추가 클릭 없음)
                     pickService(pendingService, true);
