@@ -10,6 +10,7 @@ export interface Review {
   date: string;
   count: string;
   content: string;
+  teacher: string;
   isApproved: boolean;
 }
 
