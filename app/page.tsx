@@ -18,7 +18,7 @@ const reviewImgs = [
 // 더미 상품 데이터
 const products = [
   {
-    name: "입문반 클래스(1~3인)",
+    name: "입문반 클래스 (1~3인)",
     price: "₩69,000",
     desc: "치어리딩 입문자(전 연령, 왕초보 맞춤 지도)를 위한 오프라인 레슨",
     features: ["1회 2시간 기준","1~3인 기준 레슨비 총 69,000원","최초 수업 불만족 시 100% 환불"],
@@ -57,6 +57,8 @@ const products = [
 // 리뷰게시판 데이타
 const reviews: Review[] = await getApprovedReviews();
 
+//let gServiceName: string = "";
+
 export default function CheerMeUpLifeMain() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<string | null>(null);
@@ -84,6 +86,21 @@ export default function CheerMeUpLifeMain() {
     people: "",
     request: "",
   });
+
+  // 오프라인(대면)으로 간주할 서비스 목록
+  const OFFLINE_SERVICES = new Set([
+    "입문반 클래스 (1~3인)", // 옵션에 공백 버전이 있어서 둘 다 넣음
+    "입문반 클래스 (4인 이상)",
+  ]);
+
+  const isOfflineService = (service: string) => OFFLINE_SERVICES.has(service);
+
+  // 2차 확인 모달 상태
+  const [coachNoticeOpen, setCoachNoticeOpen] = useState(false);
+  const [coachNoticeAccepted, setCoachNoticeAccepted] = useState(false); // 체크박스 처리만
+  const [coachNoticeComplete, setCoachNoticeComplete] = useState(false); // 실제 동의했는지 데이타
+  const [pendingService, setPendingService] = useState<string>(""); // 확인 모달에서 "확인" 누르면 적용할 서비스
+  const [noticeFromCard, setNoticeFromCard] = useState(false); // 상품카드 직접 눌러서 들어갔을때 노티스창 취소버튼 액션
   
   const handleChange = (
     e: React.ChangeEvent<
@@ -126,6 +143,22 @@ export default function CheerMeUpLifeMain() {
       people: "",
       request: "", });
   }
+
+  
+
+  const pickService = (serviceName: string, force = false) => {
+    // 오프라인 선택 + 아직 최종동의 안됨 + 강제적용 아님 → 2차모달
+    if (isOfflineService(serviceName) && !coachNoticeComplete && !force) {
+      setPendingService(serviceName);
+      setCoachNoticeAccepted(false); // 모달 열릴 때 체크 초기화 (원하면 유지해도 됨)
+      setCoachNoticeOpen(true);
+      return;
+    }
+  
+    // ✅ 여기서 드롭다운 value(form.service)가 즉시 반영됨
+    setForm(f => ({ ...f, service: serviceName }));
+  }
+  
 
   return (
     <div className="w-full min-h-screen bg-gradient-to-b from-yellow-50 to-pink-100 font-sans overflow-x-hidden">
@@ -407,8 +440,10 @@ export default function CheerMeUpLifeMain() {
                 className="bg-gradient-to-r from-yellow-300 to-pink-400 text-white text-lg font-bold px-8 py-3 rounded-full shadow-md hover:scale-105 transition-all"
                 onClick={() => {
                   setSelectedService(p.name); // 상품명 저장
-                  setForm(f => ({ ...f, service: p.name }));   // form.service 동기화
+                  //setForm(f => ({ ...f, service: p.name }));   // form.service 동기화
                   setModalOpen(true);
+                  setNoticeFromCard(true)
+                  pickService(p.name);
                 }}
               >
                 {p.cta}
@@ -544,6 +579,9 @@ export default function CheerMeUpLifeMain() {
                     레슨곡 - {r.song}
                   </div>
                   <div className="text-gray-700 text-base leading-relaxed whitespace-pre-line font-gotgam">
+                    담당선생님 - {r.teacher ?? "천지훈 선생님"}
+                  </div>
+                  <div className="text-gray-700 text-base leading-relaxed whitespace-pre-line font-gotgam">
                     {r.content}
                   </div>
                 </div>
@@ -626,7 +664,10 @@ export default function CheerMeUpLifeMain() {
                   name="service"
                   className="text-gray-900 border rounded-lg px-4 py-2"
                   value={form.service}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    const v = e.target.value;
+                    pickService(v);
+                  }}
                   required
                 >
                   <option value="">서비스 선택</option>
@@ -725,6 +766,79 @@ export default function CheerMeUpLifeMain() {
             </button>
           </form>
         </div>
+        {coachNoticeOpen && (
+          <div
+            className="fixed inset-0 z-[60] bg-black/60 flex items-center justify-center"
+            //onClick={() => setCoachNoticeOpen(false)}
+          >
+            <div
+              className="bg-white rounded-2xl shadow-2xl w-[92vw] max-w-md p-6 relative"
+              onClick={(e) => e.stopPropagation()}
+              role="dialog"
+              aria-modal="true"
+            >
+              <h4 className="font-gotgam text-xl font-bold text-pink-500 mb-3">
+                오프라인 수업 안내
+              </h4>
+
+              <p className="text-gray-800 leading-relaxed mb-4">
+                오프라인 수업은 천지훈 강사의 장기 해외 체류 일정으로 인해 <b>다른 강사가 배정</b>될 수 있습니다.
+                레슨 예약 시 참고 부탁드립니다.
+              </p>
+
+              <div className="flex items-center gap-2 mb-5">
+                <input
+                  id="coachAck"
+                  type="checkbox"
+                  checked={coachNoticeAccepted}
+                  onChange={(e) => setCoachNoticeAccepted(e.target.checked)}
+                />
+                <label htmlFor="coachAck" className="text-sm text-gray-700">
+                  위 내용을 확인했습니다.
+                </label>
+              </div>
+
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  className="flex-1 border rounded-lg px-4 py-2 text-gray-700 hover:bg-gray-50"
+                  onClick={() => {
+                    setCoachNoticeOpen(false);
+                    setPendingService("");
+                    setCoachNoticeAccepted(false);
+                    if (noticeFromCard) {
+                      // ✅ 카드에서 오프라인 선택을 취소한 경우 → 예약 모달도 같이 종료
+                      setModalOpen(false);
+                      setSelectedService(null);
+                      setFormDataInit();
+                    }
+                    setNoticeFromCard(false)
+                  }}
+                >
+                  취소
+                </button>
+
+                <button
+                  type="button"
+                  className="flex-1 bg-pink-500 text-white rounded-lg px-4 py-2 font-bold disabled:opacity-40"
+                  disabled={!coachNoticeAccepted}
+                  onClick={() => {
+                    setCoachNoticeComplete(true);
+                  
+                    // ✅ 강제 적용으로 바로 form.service 세팅 (유저 추가 클릭 없음)
+                    pickService(pendingService, true);
+                  
+                    setCoachNoticeOpen(false);
+                    setPendingService("");
+                    setCoachNoticeAccepted(false); // 다음번 모달 열릴 때 초기화 원하면
+                  }}
+                >
+                  확인하고 진행
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     )}
     </div>

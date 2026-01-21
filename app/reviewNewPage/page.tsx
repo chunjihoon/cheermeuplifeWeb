@@ -5,8 +5,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function ReviewForm() {
-  const [form, setForm] = useState({ name: "", date: "", count: "", content: "" });
-  const [focus, setFocus] = useState({ name: false, date: false, count: false, content: false });
+  const [form, setForm] = useState({ name: "", date: "", count: "", teacher: "", content: "" });
+  const [focus, setFocus] = useState({ name: false, date: false, count: false, teacher: false, content: false });
   const router = useRouter();
 
   const handleChange = (
@@ -31,7 +31,7 @@ export default function ReviewForm() {
     }
 
     alert("정성스러운 리뷰 작성 감사드립니다. 승인 후 게시됩니다.");
-    setForm({ name: "", date: "", count: "", content: "" });
+    setForm({ name: "", date: "", count: "", teacher: "", content: "" });
     router.push("/");
   };
 
@@ -58,6 +58,7 @@ export default function ReviewForm() {
       {[
         { name: "name", label: "리뷰작성자", type: "text" },
         { name: "song", label: "레슨곡", type: "text" },
+        { name: "teacher", label: "담당선생님", type: "text" }, 
       ].map(f => (
         <div key={f.name} className="relative">
           <input
