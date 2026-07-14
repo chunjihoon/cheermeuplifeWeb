@@ -1,19 +1,5 @@
 import type { Metadata } from "next";
-import { Black_Han_Sans, Jua, Noto_Sans_KR } from "next/font/google";
-
-const blackHanSans = Black_Han_Sans({
-  weight: "400",
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-black-han",
-});
-
-const jua = Jua({
-  weight: "400",
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-jua",
-});
+import { Noto_Sans_KR } from "next/font/google";
 
 const notoSansKr = Noto_Sans_KR({
   subsets: ["latin"],
@@ -34,7 +20,7 @@ export default function VodTutorialLayout({
 }>) {
   return (
     <div
-      className={`${blackHanSans.variable} ${jua.variable} ${notoSansKr.variable}`}
+      className={notoSansKr.variable}
     >
       {children}
     </div>

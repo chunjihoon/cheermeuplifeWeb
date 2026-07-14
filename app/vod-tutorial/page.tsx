@@ -358,23 +358,23 @@ export default function CheerVodLandingPage() {
           <div className="vod-hero-content">
             <p className="vod-eyebrow hero-eyebrow">학교 축제 · 행사 · 축하공연 준비를 위한 온라인 클래스</p>
             <h1 className="hero-title">
-              <span className="hero-product-title">질풍가도 치어리딩</span>
+              <span className="hero-product-title"><em>질풍가도</em> 치어리딩</span>
               <span className="hero-product-subtitle">전체 안무 튜토리얼</span>
             </h1>
             <p className="vod-headline"><b>구간별로 배우며 직접 무대를 완성해보세요.</b></p>
             <div className="vod-facts" aria-label="상품 핵심 정보">
               <span><i className="vod-fact-icon" aria-hidden="true">▶</i>총 9개 영상</span>
               <span><i className="vod-fact-icon" aria-hidden="true">◷</i>1시간 58분</span>
-              <span><i className="vod-fact-icon" aria-hidden="true">∞</i>기간 제한 없음</span>
+              <span><i className="vod-fact-icon" aria-hidden="true">∞</i>평생 소장</span>
             </div>
             <div className="vod-price"><span>전체 강의</span><strong>39,000원</strong></div>
             <div className="vod-actions">
-              <button className="vod-button vod-primary" type="button" onClick={scrollToPurchase}>구매하러가기</button>
+              <button className="vod-button vod-primary" type="button" onClick={scrollToPurchase}>계좌이체로 구매하기</button>
               <button className="vod-button vod-secondary" type="button" onClick={scrollToPreview}>강의 맛보기</button>
             </div>
-            <p className="vod-taling-note">탈잉 구매는 준비 중입니다.</p>
-            <p className="vod-microcopy">계좌이체 구매는 입금 확인 후 Google Drive 이용 권한을 보내드립니다.</p>
-            <p className="vod-hero-compact-note">입금 확인 후 Google Drive 이용 권한 제공</p>
+            {/* <p className="vod-taling-note">탈잉 구매는 준비 중입니다.</p> */}
+            {/* <p className="vod-microcopy">계좌이체 구매는 입금 확인 후 Google Drive 이용 권한을 보내드립니다.</p> */}
+            <p className="vod-hero-compact-note"><span aria-hidden="true">✓</span> 입금 확인 후 Gmail로 Google Drive 이용 권한 제공</p>
           </div>
         </div>
       </section>
@@ -492,7 +492,7 @@ export default function CheerVodLandingPage() {
       <section className="vod-section vod-white">
         <div className="vod-container vod-narrow vod-centered">
           <div className="vod-heading"><p className="vod-eyebrow">PRODUCT DETAILS</p><h2>상품 정보</h2></div>
-          <dl className="vod-product-table">{[["상품명", "질풍가도 치어리딩 전체 안무 튜토리얼 VOD"], ["판매가", "39,000원"], ["영상 수", "총 9개"], ["총 재생시간", "1시간 58분 37초"], ["난이도", "치어리딩 입문·초급"], ["이용 기간", "기간 제한 없음"], ["지원 기기", "PC·태블릿·모바일"], ["직접 구매 결제", "계좌이체"], ["이용 방식", "Gmail 계정으로 Google Drive 초대"], ["음원", "제공하지 않음"], ["공연 활용", "가능"], ["파일·링크 공유", "불가"]].map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+          <dl className="vod-product-table">{[["상품명", "질풍가도 치어리딩 전체 안무 튜토리얼 VOD"], ["판매가", "39,000원"], ["영상 수", "총 9개"], ["총 재생시간", "1시간 58분 37초"], ["난이도", "치어리딩 입문·초급"], ["이용 기간", "평생 소장"], ["지원 기기", "PC·태블릿·모바일"], ["직접 구매 결제", "계좌이체"], ["이용 방식", "Gmail 계정으로 Google Drive 초대"], ["음원", "제공하지 않음"], ["공연 활용", "가능"], ["파일·링크 공유", "불가"]].map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
         </div>
       </section>
 
