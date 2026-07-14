@@ -342,7 +342,7 @@ export default function CheerMeUpLifeMain() {
         </div>
         {/* 내용: 좌측 정렬 */}
         <div className="flex flex-col items-start mt-2">
-          <h3 className="font-gotgam text-4xl font-bold text-yellow-600 mb-1">홍수관 강사</h3>
+          <h3 className="font-gotgam text-4xl font-bold text-yellow-600 mb-1">홍수관 코치</h3>
           <p className="text-xl text-gray-800 font-semibold mb-3">치어리딩 경력 15년, 진짜 &quot;고수&quot;</p>
           <ul className="text-base text-gray-700 space-y-1 mb-2 list-disc ml-4">
             <li>Rainbow Ent. 소속 &quot;Rainbow Cheer Team&quot; 활동</li>
@@ -793,12 +793,13 @@ export default function CheerMeUpLifeMain() {
               aria-modal="true"
             >
               <h4 className="font-gotgam text-xl font-bold text-pink-500 mb-3">
-                오프라인 수업 안내
+                오프라인 레슨 강사 배정 안내
               </h4>
 
               <p className="text-gray-800 leading-relaxed mb-4">
-                오프라인 수업은 천지훈 강사의 장기 해외 체류 일정으로 인해 <b>다른 강사가 배정</b>될 수 있습니다.
-                레슨 예약 시 참고 부탁드립니다.
+                모든 수업은 취미로운응원생활의 커리큘럼과 운영 기준에 따라 진행되며,
+                일정상 <b>취미로운응원생활의 커리큘럼을 이수한 다른 강사</b>가 진행할 수 있습니다.
+                수업 품질과 운영 기준은 동일하게 유지되오니 참고 부탁드립니다!
               </p>
 
               <div className="flex items-center gap-2 mb-5">
@@ -809,7 +810,7 @@ export default function CheerMeUpLifeMain() {
                   onChange={(e) => setCoachNoticeAccepted(e.target.checked)}
                 />
                 <label htmlFor="coachAck" className="text-sm text-gray-700">
-                  위 내용을 확인했습니다.
+                  강사 배정 안내를 확인했습니다.
                 </label>
               </div>
 
@@ -831,7 +832,7 @@ export default function CheerMeUpLifeMain() {
                     setNoticeFromCard(false)
                   }}
                 >
-                  취소
+                  다음에 할게요
                 </button>
 
                 <button
@@ -850,7 +851,7 @@ export default function CheerMeUpLifeMain() {
                     setCoachNoticeAccepted(false); // 다음번 모달 열릴 때 초기화 원하면
                   }}
                 >
-                  확인하고 진행
+                  확인하고 계속
                 </button>
               </div>
             </div>
