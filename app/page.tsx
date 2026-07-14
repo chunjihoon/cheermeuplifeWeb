@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getApprovedReviews, Review } from "@/lib/getApprovedReviews";
 import { useRouter } from "next/navigation";
 import { track } from "@/lib/analytics";
@@ -116,6 +116,20 @@ export default function CheerMeUpLifeMain() {
 
   const [, setFocus] = useState({ name: false, date: false, count: false, content: false });
   const router = useRouter();
+
+  useEffect(() => {
+    const requestedService = new URLSearchParams(window.location.search).get("service");
+
+    if (requestedService !== "질풍가도 VOD 튜토리얼") return;
+
+    setSelectedService(requestedService);
+    setForm((current) => ({ ...current, service: requestedService }));
+    setModalOpen(true);
+    track("reserve_modal_open", {
+      location: "vod_detail",
+      service: requestedService,
+    });
+  }, []);
 
   const handleFocus = (field: string, val: boolean) => setFocus(prev => ({ ...prev, [field]: val }));
 
@@ -449,6 +463,11 @@ export default function CheerMeUpLifeMain() {
               <button
                 className="bg-gradient-to-r from-yellow-300 to-pink-400 text-white text-lg font-bold px-8 py-3 rounded-full shadow-md hover:scale-105 transition-all"
                 onClick={() => {
+                  if (p.name === "질풍가도 VOD 튜토리얼") {
+                    track("vod_detail_open", { location: "product_card" });
+                    router.push("/vod-tutorial");
+                    return;
+                  }
                   setSelectedService(p.name); // 상품명 저장
                   //setForm(f => ({ ...f, service: p.name }));   // form.service 동기화
                   setModalOpen(true);
