@@ -27,8 +27,6 @@
 .vod-heading { margin-bottom: 42px; }
 .vod-heading > p:last-child { margin: 14px 0 0; color: var(--vod-muted); }
 .vod-eyebrow { margin: 0 0 12px; color: var(--vod-primary); font-size: .78rem; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
-.vod-nav { position: absolute; top: 0; left: 0; z-index: 10; width: 100%; padding: 22px max(20px, calc((100vw - 1160px) / 2)); }
-.vod-nav a { display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; border: 1px solid rgba(255,255,255,.28); border-radius: 999px; color: #fff; background: rgba(20,14,20,.28); backdrop-filter: blur(10px); font-family: var(--font-noto-sans-kr), sans-serif; font-weight: 700; text-decoration: none; }
 
 .vod-hero { position: relative; display: flex; align-items: center; min-height: 760px; overflow: hidden; padding: 120px 0 88px; color: #fff; background: #241d24; isolation: isolate; }
 .vod-hero-media { position: absolute; inset: 0; z-index: -1; overflow: hidden; background: #241d24; }
@@ -189,9 +187,12 @@
 .vod-order-summary dt { color: #766a73; background: #f8f6f7; font-weight: 700; }
 .vod-order-summary dd b { color: #a66d00; }
 .vod-order-confirm { width: min(260px,100%); margin-top: 22px; }
-.vod-legal { background: #fffaf0; }.vod-legal-card { padding: 34px; border: 1px solid rgba(178,126,32,.16); border-radius: 18px; background: #fff; }.vod-legal-card + .vod-legal-card { margin-top: 16px; }.vod-legal-card h2 { font-size: 1.45rem; }.vod-legal-card p, .vod-legal-card li { color: var(--vod-muted); }.vod-legal-note { font-size: .82rem; }
+.vod-legal { background: #fffaf0; }.vod-legal-card { padding: 34px; border: 1px solid rgba(178,126,32,.16); border-radius: 18px; background: #fff; }.vod-legal-card + .vod-legal-card { margin-top: 16px; }.vod-legal-card h2 { font-size: 1.45rem; }.vod-legal-card p, .vod-legal-card li { color: var(--vod-muted); }.vod-legal-card ul { display: grid; gap: 8px; margin: 18px 0 0; padding: 0; list-style: none; }.vod-legal-card li { position: relative; padding-left: 28px; }.vod-legal-card li::before { position: absolute; top: .08em; left: 0; color: var(--vod-primary); font-weight: 900; content: "✓"; }.vod-legal-note { font-size: .82rem; }
 .vod-faq-list { border-top: 1px solid var(--vod-line); }.vod-faq { border-bottom: 1px solid var(--vod-line); }.vod-faq button { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; min-height: 74px; padding: 18px 4px; border: 0; color: var(--vod-text); background: transparent; font: inherit; font-weight: 800; text-align: left; cursor: pointer; }.vod-faq button span:last-child { color: var(--vod-primary); font-size: 1.5rem; }.vod-faq > p { padding: 0 4px 24px; color: var(--vod-muted); }
 .vod-final { padding: 72px 0; color: #fff; background: linear-gradient(90deg,#eab308,#ec4899); }.vod-final .vod-eyebrow { color: #fff7c2; }.vod-final-inner { display: flex; align-items: center; justify-content: space-between; gap: 30px; }.vod-final h2 { margin: 0; font-size: clamp(1.8rem,3vw,2.8rem); }.vod-final p:last-child { color: rgba(255,255,255,.86); }
+.vod-share-section { padding: 4px 0; background: linear-gradient(180deg,var(--vod-bg),#fff8eb); }
+.vod-share-section .share-prompt { margin-top: 42px; margin-bottom: 42px; font-family: var(--font-noto-sans-kr),sans-serif; }
+.vod-share-section .share-prompt-vod { border-color: #f5cbdc; background: radial-gradient(circle at 92% 15%,rgba(255,196,30,.28),transparent 30%),linear-gradient(125deg,#fff,#fff2f8); }
 
 @media (max-width: 1020px) {
   .vod-hero-grid { grid-template-columns: 1fr; }
@@ -207,8 +208,6 @@
   .vod-container, .vod-narrow { width: min(100% - 28px,1160px); }
   .vod-page { word-break: normal; }
   .vod-section { padding: 44px 0; }
-  .vod-nav { padding-top: 16px; }
-  .vod-nav a { gap: 4px; padding: 5px 9px; font-size: .76rem; }
   .vod-order-backdrop { align-items: flex-end; padding: 0; }
   .vod-order-modal { width: 100%; max-height: 94dvh; border-width: 1px 0 0; border-radius: 20px 20px 0 0; }
   .vod-order-header { min-height: 70px; padding: 12px 16px; }
@@ -309,6 +308,8 @@
   .vod-agreements { margin: 16px 0; padding: 14px; }
   .vod-faq button { min-height: 62px; padding: 14px 4px; }
   .vod-final-inner { display: block; }.vod-final .vod-button { margin-top: 24px; }
+  .vod-share-section { padding: 1px 0; }
+  .vod-share-section .share-prompt { margin-top: 28px; margin-bottom: 28px; }
 }
 
 @media (min-width: 1021px) {

@@ -3,6 +3,7 @@
 //import router from "next/router";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function ReviewForm() {
   const [form, setForm] = useState({ name: "", date: "", count: "", teacher: "", content: "" });
@@ -42,8 +43,11 @@ export default function ReviewForm() {
       style={{ boxShadow: "0 8px 36px 0 rgba(255,152,203,0.12), 0 1.5px 8px 0 rgba(255,180,80,0.10)" }}
     >
       <div>
-        <img
+        <Image
           src="/cheermeuplife_logo.jpg"
+          alt="취미로운응원생활 로고"
+          width={600}
+          height={600}
           className="
             w-[30vw] max-w-[200px] 
             object-contain rounded-[3rem] 
@@ -205,4 +209,3 @@ export default function ReviewForm() {
     </form>
   );
 }
-

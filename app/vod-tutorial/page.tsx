@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import { track } from "@/lib/analytics";
+import { SharePrompt } from "@/components/share-prompt";
 import "./vod-tutorial.css";
 
 type CurriculumItem = {
@@ -321,12 +321,6 @@ export default function CheerVodLandingPage() {
 
   return (
     <main className="vod-page">
-      <nav className="vod-nav" aria-label="상품 페이지 이동">
-        <Link href="/" replace onClick={() => track("vod_home_click")}>
-          <span aria-hidden="true">⌂</span> 취미로운응원생활 홈으로 가기
-        </Link>
-      </nav>
-
       <section className="vod-section vod-hero">
         <div className="vod-hero-media">
           <video
@@ -405,7 +399,7 @@ export default function CheerVodLandingPage() {
           <div className="vod-pain-visual">
             <Image
               src="/image-section-painpoint.png"
-              alt="완성 안무 영상을 보며 질풍가도 동작을 연습하는 모습"
+              alt="완성 안무 영상을 보며 막막해 하는 모습"
               width={1672}
               height={941}
               sizes="(max-width: 760px) calc(100vw - 28px), 920px"
@@ -480,6 +474,20 @@ export default function CheerVodLandingPage() {
             <div className="vod-curriculum-list">{group.items.map((item) => <CurriculumCard item={item} key={item.id} />)}</div>
           </div>)}
         </div>
+      </section>
+
+      <section className="vod-share-section" aria-label="친구와 튜토리얼 공유하기">
+        <SharePrompt
+          variant="vod"
+          eyebrow="PRACTICE TOGETHER"
+          title="혼자라서 망설여지신다면? 친구와 함께 연습해보세요"
+          description="학교 축제나 공연을 같이 준비하는 친구에게 보내고, 이 커리큘럼으로 함께 연습할지 편하게 의논해보세요."
+          buttonLabel="친구에게 공유하기"
+          shareTitle="질풍가도 치어리딩 전체 안무 튜토리얼"
+          shareText="질풍가도 안무를 구간별로 배우고 배속별로 함께 연습할 수 있는 튜토리얼이에요. 같이 연습해볼래요?"
+          sharePath="/vod-tutorial"
+          location="vod_after_curriculum"
+        />
       </section>
 
       <section className="vod-section">

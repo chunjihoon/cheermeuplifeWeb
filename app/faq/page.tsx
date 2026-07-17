@@ -1,0 +1,34 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { JsonLd } from "@/components/json-ld";
+import { PageHero } from "@/components/page-hero";
+import { ContentCta } from "@/components/content-cta";
+import { createMetadata } from "@/lib/seo";
+
+export const metadata: Metadata = createMetadata({ title: "자주 묻는 질문", description: "치어리딩 레슨과 질풍가도 VOD, 결제·환불·공연 문의에 관해 자주 묻는 질문을 확인하세요.", path: "/faq" });
+
+const faqItems = [
+  { question: "치어리딩을 처음 배우는데도 레슨을 받을 수 있나요?", answer: "네. 치어리딩이나 춤 경험이 없는 분도 참여할 수 있습니다. 현재 수준과 목표에 맞춰 기본 동작과 카운트부터 안내합니다." },
+  { question: "개인과 단체 레슨이 모두 가능한가요?", answer: "개인·소규모 레슨과 학교, 동아리, 행사 준비를 위한 단체 레슨을 운영합니다. 인원과 목적에 따라 수업 구성이 달라질 수 있습니다.", cta: { href: "/#products", label: "예약 문의하러 가기" } },
+  { question: "온라인 레슨은 어떻게 진행되나요?", answer: "화상 수업으로 지도하고, 동작을 확인하고 피드백을 제공합니다. 구체적인 진행 방식과 준비물은 예약 과정에서 안내합니다." },
+  { question: "오프라인 레슨은 어느 지역에서 진행하나요?", answer: "희망 지역과 일정에 따라 협의합니다. 예약 신청 시 희망지역, 날짜, 시간을 남겨주시면 강사님 일정과 조율 후에 연락드립니다." },
+  { question: "원하는 곡으로 안무 레슨을 받을 수 있나요?", answer: "네. 어떤 곡이든지 원하시는 수준의 안무를 레슨해드립니다. 단 난이도가 높을 경우 권장 수업의 횟수가 늘어날 수 있습니다." },
+  { question: "질풍가도 VOD에는 무엇이 포함되나요?", answer: "파트별 동작 튜토리얼과 0.3·0.5·0.7·1배속 완곡 연습을 포함한 총 9개 영상 (약 1시간 58분) 분량으로 구성되어 있습니다." },
+  { question: "VOD는 어떻게 시청하나요?", answer: "계좌이체 방식의 경우 입금 확인 후 구매 시 입력한 Gmail 계정으로 Google Drive 폴더 이용 권한을 보내드립니다. 탈잉이나 리틀리에서 결제하실 경우 해당 플랫폼에서 바로 결제하고 시청하실 수 있습니다." },
+  { question: "VOD 이용 기간이 있나요?", answer: "탈잉에서 결제하실 경우 12개월 이용 가능하고 계좌이체 또는 리틀리에서 결제하실 경우 평생소장입니다." },
+  { question: "VOD 영상이나 링크를 팀원에게 공유해도 되나요?", answer: "아니요. 영상 파일과 Google Drive 링크는 구매자 본인만 이용할 수 있으며 공유·복제·재판매·재배포할 수 없습니다." },
+  { question: "VOD 결제 후 환불할 수 있나요?", answer: "Google Drive 이용 권한 제공 전에는 환불을 요청할 수 있습니다. 제공 이후에는 디지털 콘텐츠 특성상 단순 변심 환불이 제한될 수 있으며, 자세한 내용은 이용약관을 확인해주세요." },
+  { question: "온/오프라인 레슨 결제 후 환불할 수 있나요?", answer: "약속시간 12시간 이전에 취소하시는 경우 환불해드립니다. 12시간 이후에 취소를 원하시는 경우 당일 수업은 취소하고 추후 다른 날짜로 다시 조정하여 수업을 진행합니다." },
+  { question: "학교 축제나 기업 행사도 문의할 수 있나요?", answer: "네. 학교 축제, 체육대회, 기업 행사와 축하공연 등 목적과 일정, 인원을 알려주시면 가능한 진행 방식을 안내합니다.", cta: { href: "/contact", label: "학교 축제·기업 행사 문의하기" } },
+];
+
+export default function FaqPage() {
+  return (
+    <main className="content-page">
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqItems.map(({ question, answer }) => ({ "@type": "Question", name: question, acceptedAnswer: { "@type": "Answer", text: answer } })) }} />
+      <PageHero eyebrow="FAQ" title="자주 묻는 질문" description="레슨과 VOD 이용 전 궁금한 내용을 모았습니다. 필요한 답변을 찾지 못했다면 문의 페이지를 이용해주세요." breadcrumbs={[{ label: "FAQ" }]} />
+      <section className="content-section content-section-white"><div className="content-narrow faq-list">{faqItems.map(({ question, answer, cta }) => <details className="faq-item" key={question}><summary>{question}</summary><p>{answer}</p>{cta && <div className="faq-item-action"><Link className="content-button content-button-primary" href={cta.href}>{cta.label}</Link></div>}</details>)}</div></section>
+      <ContentCta title="답변을 찾지 못하셨나요?" description="준비 중인 레슨이나 공연 상황을 알려주시면 확인 후 안내해드리겠습니다." primaryHref="/contact" primaryLabel="문의 방법 확인" secondaryHref="/vod-tutorial" secondaryLabel="VOD 살펴보기" />
+    </main>
+  );
+}
