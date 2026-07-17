@@ -44,7 +44,7 @@ export default function ReviewForm() {
     >
       <div>
         <Image
-          src="/cheermeuplife_logo.jpg"
+          src="/cheermeuplife_logo.png"
           alt="취미로운응원생활 로고"
           width={600}
           height={600}

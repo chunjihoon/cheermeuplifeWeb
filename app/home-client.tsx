@@ -42,10 +42,10 @@ const products = [
     cta: "신청하기"
   },
   {
-    name: "질풍가도 VOD 튜토리얼",
+    name: "질풍가도 완전정복 클래스",
     price: "₩39,000",
     desc: "치어리딩 희대의 명곡 ‘질풍가도’ 풀곡 DIY 트레이닝 패키지",
-    features: ["언제 어디서나 반복 트레이닝 가능한 평생소장 패키지", "기본 동작부터, 배속별/구간별 반복연습", "왕초보도 쉽게 독학 가능", "다이어트에 효과적", "VOD 구매 시 온라인 클래스 할인권 제공",],
+    features: ["언제 어디서나 반복 트레이닝 가능한 평생소장 패키지", "기본 동작부터, 배속별/구간별 반복연습", "왕초보도 쉽게 독학 가능", "다이어트에 효과적", "클래스 구매 시 온라인 레슨 할인권 제공",],
     cta: "신청하기"
   },
   {
@@ -132,7 +132,7 @@ export default function CheerMeUpLifeMain() {
   useEffect(() => {
     const requestedService = new URLSearchParams(window.location.search).get("service");
 
-    if (requestedService !== "질풍가도 VOD 튜토리얼") return;
+    if (requestedService !== "질풍가도 완전정복 클래스") return;
 
     setSelectedService(requestedService);
     setForm((current) => ({ ...current, service: requestedService }));
@@ -212,7 +212,7 @@ export default function CheerMeUpLifeMain() {
     >
       <div>
         <Image
-          src="/cheermeuplife_logo.jpg"
+          src="/cheermeuplife_logo.png"
           alt="취미로운응원생활 로고"
           width={600}
           height={600}
@@ -487,7 +487,7 @@ export default function CheerMeUpLifeMain() {
               <button
                 className="bg-gradient-to-r from-yellow-300 to-pink-400 text-white text-lg font-bold px-8 py-3 rounded-full shadow-md hover:scale-105 transition-all"
                 onClick={() => {
-                  if (p.name === "질풍가도 VOD 튜토리얼") {
+                  if (p.name === "질풍가도 완전정복 클래스") {
                     track("vod_detail_open", { location: "product_card" });
                     router.push("/vod-tutorial");
                     return;
@@ -747,7 +747,7 @@ export default function CheerMeUpLifeMain() {
                   <option value="입문반 클래스 (1~3인)">입문반 클래스 (1~3인)</option>
                   <option value="입문반 클래스 (4인 이상)">입문반 클래스 (4인 이상)</option>
                   <option value="온라인 30분 클래스">온라인 30분 클래스</option>
-                  <option value="질풍가도 VOD 튜토리얼">질풍가도 VOD 튜토리얼</option>
+                  <option value="질풍가도 완전정복 클래스">질풍가도 완전정복 클래스</option>
                   <option value="결혼식 축하공연 상담">결혼식 축하공연 상담</option>
                 </select>
             )}

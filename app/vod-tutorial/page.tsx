@@ -52,7 +52,7 @@ const curriculumGroups: Array<{
 }> = [
   {
     id: "tutorial",
-    title: "튜토리얼 영상",
+    title: "파트별 동작 강의",
     description: "안무를 파트별로 나누어 동작과 카운트를 차근차근 학습합니다.",
     items: [
       { id: 1, title: "질풍가도 1번+2번동작", duration: "41분 47초", description: "1번 및 2번 파트 동작 학습", thumbnail: "/Thumbnail-video1.png" },
@@ -353,7 +353,7 @@ export default function CheerVodLandingPage() {
             <p className="vod-eyebrow hero-eyebrow">학교 축제 · 행사 · 축하공연 준비를 위한 온라인 클래스</p>
             <h1 className="hero-title">
               <span className="hero-product-title"><em>질풍가도</em> 치어리딩</span>
-              <span className="hero-product-subtitle">전체 안무 튜토리얼</span>
+              <span className="hero-product-subtitle">완전정복 클래스</span>
             </h1>
             <p className="vod-headline"><b>구간별로 배우며 직접 무대를 완성해보세요.</b></p>
             <div className="vod-facts" aria-label="상품 핵심 정보">
@@ -379,13 +379,13 @@ export default function CheerVodLandingPage() {
           <div className="vod-preview">
             <iframe
               src="https://www.youtube-nocookie.com/embed/rmNImGLrTfQ?autoplay=1&mute=1&playsinline=1&rel=0&start=44"
-              title="질풍가도 치어리딩 VOD 강의 미리보기"
+              title="질풍가도 치어리딩 완전정복 클래스 미리보기"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"
               allowFullScreen
             />
           </div>
-          <p className="vod-note">무료 영상에서는 완성된 안무를 확인할 수 있고, VOD에서는 각 동작을 카운트별로 나누어 천천히 배우고 반복할 수 있습니다.</p>
+          <p className="vod-note">무료 영상에서는 완성된 안무를 확인할 수 있고, 완전정복 클래스에서는 각 동작을 카운트별로 나누어 천천히 배우고 반복할 수 있습니다.</p>
           <div className="vod-next-section-notices">
             <p>계좌이체 구매는 입금 확인 후 Gmail 계정으로 Google Drive 이용 권한을 보내드립니다.</p>
             <p>탈잉 구매는 준비 중입니다.</p>
@@ -418,7 +418,7 @@ export default function CheerVodLandingPage() {
             ))}
           </div>
           <div className="vod-highlight">
-            <strong>질풍가도 튜토리얼은 완성 영상을 단순히 느리게 재생한 영상이 아닙니다.</strong>
+            <strong>질풍가도 치어리딩 완전정복 클래스는 완성 영상을 단순히 느리게 재생한 영상이 아닙니다.</strong>
             <Image
               className="vod-highlight-image vod-highlight-image-slow"
               src="/image-slow.png"
@@ -431,7 +431,7 @@ export default function CheerVodLandingPage() {
             <Image
               className="vod-highlight-image vod-highlight-image-tutorial"
               src="/image-tutorial.png"
-              alt="파트별 설명과 반복 연습으로 안무를 배우는 튜토리얼"
+              alt="파트별 설명과 반복 연습으로 안무를 배우는 강의"
               width={1122}
               height={1402}
               sizes="(max-width: 760px) calc(100vw - 64px), 560px"
@@ -457,9 +457,9 @@ export default function CheerVodLandingPage() {
 
       <section className="vod-section vod-white">
         <div className="vod-container vod-narrow vod-centered">
-          <div className="vod-heading"><p className="vod-eyebrow">FREE VS VOD</p><h2>무료 영상과 유료 튜토리얼은 이렇게 다릅니다</h2></div>
+          <div className="vod-heading"><p className="vod-eyebrow">FREE VS CLASS</p><h2>무료 영상과 완전정복 클래스는 이렇게 다릅니다</h2></div>
           <div className="vod-comparison">
-            <div className="vod-comparison-head"><b>무료 완성 안무 영상</b><b>질풍가도 튜토리얼 VOD</b></div>
+            <div className="vod-comparison-head"><b>무료 완성 안무 영상</b><b>질풍가도 치어리딩 완전정복 클래스</b></div>
             {[["전체 안무 확인", "파트별 동작 학습"], ["원곡 속도 중심", "느린 속도부터 단계별 연습"], ["공연 흐름 중심", "팔·발·방향 등 세부 설명"], ["반복 재생하며 직접 분석", "카운트에 맞춘 반복 연습"], ["안무 감상·참고", "실제 학습과 공연 준비"]].map(([free, paid]) => <div key={free}><span>{free}</span><strong>{paid}</strong></div>)}
           </div>
           <p className="vod-note">완성 안무를 확인하는 영상에서 한 단계 더 나아가, 실제로 몸에 익힐 수 있도록 만든 수업입니다.</p>
@@ -476,15 +476,15 @@ export default function CheerVodLandingPage() {
         </div>
       </section>
 
-      <section className="vod-share-section" aria-label="친구와 튜토리얼 공유하기">
+      <section className="vod-share-section" aria-label="친구와 완전정복 클래스 공유하기">
         <SharePrompt
           variant="vod"
           eyebrow="PRACTICE TOGETHER"
           title="혼자라서 망설여지신다면? 친구와 함께 연습해보세요"
           description="학교 축제나 공연을 같이 준비하는 친구에게 보내고, 이 커리큘럼으로 함께 연습할지 편하게 의논해보세요."
           buttonLabel="친구에게 공유하기"
-          shareTitle="질풍가도 치어리딩 전체 안무 튜토리얼"
-          shareText="질풍가도 안무를 구간별로 배우고 배속별로 함께 연습할 수 있는 튜토리얼이에요. 같이 연습해볼래요?"
+          shareTitle="질풍가도 치어리딩 완전정복 클래스"
+          shareText="질풍가도 안무를 구간별로 배우고 배속별로 함께 연습할 수 있는 클래스예요. 같이 연습해볼래요?"
           sharePath="/vod-tutorial"
           location="vod_after_curriculum"
         />
@@ -500,7 +500,7 @@ export default function CheerVodLandingPage() {
       <section className="vod-section vod-white">
         <div className="vod-container vod-narrow vod-centered">
           <div className="vod-heading"><p className="vod-eyebrow">PRODUCT DETAILS</p><h2>상품 정보</h2></div>
-          <dl className="vod-product-table">{[["상품명", "질풍가도 치어리딩 전체 안무 튜토리얼 VOD"], ["판매가", "39,000원"], ["영상 수", "총 9개"], ["총 재생시간", "1시간 58분 37초"], ["난이도", "치어리딩 입문·초급"], ["이용 기간", "평생 소장"], ["지원 기기", "PC·태블릿·모바일"], ["직접 구매 결제", "계좌이체"], ["이용 방식", "Gmail 계정으로 Google Drive 초대"], ["음원", "제공하지 않음"], ["공연 활용", "가능"], ["파일·링크 공유", "불가"]].map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+          <dl className="vod-product-table">{[["상품명", "질풍가도 치어리딩 완전정복 클래스"], ["판매가", "39,000원"], ["영상 수", "총 9개"], ["총 재생시간", "1시간 58분 37초"], ["난이도", "치어리딩 입문·초급"], ["이용 기간", "평생 소장"], ["지원 기기", "PC·태블릿·모바일"], ["직접 구매 결제", "계좌이체"], ["이용 방식", "Gmail 계정으로 Google Drive 초대"], ["음원", "제공하지 않음"], ["공연 활용", "가능"], ["파일·링크 공유", "불가"]].map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
         </div>
       </section>
 
@@ -558,7 +558,7 @@ export default function CheerVodLandingPage() {
                 <p>매일 한국 시간 오전 10시와 오후 10시에 입금을 확인합니다. 입금 확인 후 입력하신 Gmail 계정으로 Google Drive 이용 권한을 보내드립니다.</p>
                 <dl className="vod-order-summary">
                   <div><dt>주문번호</dt><dd>{completedOrderId}</dd></div>
-                  <div><dt>상품</dt><dd>질풍가도 치어리딩 전체 안무 튜토리얼</dd></div>
+                  <div><dt>상품</dt><dd>질풍가도 치어리딩 완전정복 클래스</dd></div>
                   <div><dt>결제 금액</dt><dd>39,000원</dd></div>
                   <div><dt>입금자명</dt><dd>{purchaseForm.depositorName.trim()}</dd></div>
                   <div><dt>초대 Gmail</dt><dd>{normalizedGmail}</dd></div>
@@ -574,7 +574,7 @@ export default function CheerVodLandingPage() {
                   <section className="vod-order-product" aria-labelledby="vod-order-product-title">
                     <div>
                       <span>주문 상품</span>
-                      <h3 id="vod-order-product-title">질풍가도 치어리딩 전체 안무 튜토리얼</h3>
+                      <h3 id="vod-order-product-title">질풍가도 치어리딩 완전정복 클래스</h3>
                       <p>총 9개 영상 · 1시간 58분 · 기간 제한 없이 이용</p>
                     </div>
                     <strong>39,000원</strong>
@@ -616,7 +616,7 @@ export default function CheerVodLandingPage() {
                           required
                         />
                         {purchaseForm.gmail.length > 0 && !isGmailValid && <small className="vod-field-error">@gmail.com으로 끝나는 Gmail 주소를 입력해주세요.</small>}
-                        <small>입력하신 Gmail 계정으로 튜토리얼 폴더 이용 권한을 보내드립니다.</small>
+                        <small>입력하신 Gmail 계정으로 클래스 폴더 이용 권한을 보내드립니다.</small>
                       </label>
                       <label>
                         <span>Gmail 주소 다시 입력 <b>*</b></span>

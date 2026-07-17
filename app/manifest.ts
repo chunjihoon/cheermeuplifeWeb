@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "취미로운응원생활",
     short_name: "취미로운응원생활",
-    description: "치어리딩 안무와 응원가 정보, 레슨과 온라인 VOD를 제공하는 응원문화 플랫폼",
+    description: "치어리딩 안무와 응원가 정보, 레슨과 온라인 클래스를 제공하는 응원문화 플랫폼",
     start_url: "/",
     display: "standalone",
     background_color: "#fff7ed",
@@ -12,7 +12,7 @@ export default function manifest(): MetadataRoute.Manifest {
     lang: "ko-KR",
     icons: [
       {
-        src: "/cheermeuplife_logo.jpg",
+        src: "/cheermeuplife_logo.png",
         sizes: "600x600",
         type: "image/jpeg",
       },

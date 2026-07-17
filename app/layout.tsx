@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { AnalyticsTracker } from "@/components/analytics-tracker";
 import { JsonLd } from "@/components/json-ld";
 import { SiteChrome } from "@/components/site-chrome";
 import { absoluteUrl, siteConfig } from "@/lib/site-config";
@@ -60,6 +61,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-pink-50`}
       >
+        <AnalyticsTracker />
         <JsonLd data={[
           {
             "@context": "https://schema.org",

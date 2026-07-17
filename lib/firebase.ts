@@ -2,7 +2,7 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
-import { getAnalytics, isSupported, type Analytics } from "firebase/analytics";
+import { initializeAnalytics, isSupported, type Analytics } from "firebase/analytics";
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -17,7 +17,7 @@ const firebaseConfig = {
   storageBucket: "cheermeuplife.firebasestorage.app",
   messagingSenderId: "37973921470",
   appId: "1:37973921470:web:74e63c7cd1811538eed8ef",
-  measurementId: "G-XYCD9H6Y5D"
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID ?? "G-XYCD9H6Y5D"
 };
 
 export const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
@@ -27,4 +27,8 @@ export const db = getFirestore(app);
 export const analyticsPromise: Promise<Analytics | null> =
   typeof window === "undefined"
     ? Promise.resolve(null)
-    : isSupported().then((ok) => (ok ? getAnalytics(app) : null));
+    : isSupported()
+        .then((ok) => ok
+          ? initializeAnalytics(app, { config: { send_page_view: false } })
+          : null)
+        .catch(() => null);

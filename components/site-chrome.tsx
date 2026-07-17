@@ -17,7 +17,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       <header className={`site-header ${isOverlay ? "site-header-overlay" : "site-header-solid"} ${isVod ? "site-header-on-dark" : ""}`}>
         <div className="site-header-inner">
           <Link className="site-brand" href="/" aria-label="취미로운응원생활 홈">
-            <Image src="/cheermeuplife_logo.jpg" alt="" width={42} height={42} priority={pathname === "/"} />
+            <Image src="/cheermeuplife_logo.png" alt="" width={42} height={42} priority={pathname === "/"} />
             <span>{siteConfig.name}</span>
           </Link>
           <button className="site-menu-button" type="button" aria-expanded={menuOpen} aria-controls="site-navigation" onClick={() => setMenuOpen((open) => !open)}>
@@ -36,7 +36,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
         <div className="site-footer-inner">
           <div>
             <Link className="site-footer-brand" href="/">{siteConfig.name}</Link>
-            <p>치어리딩 안무·응원가 정보부터 레슨과 온라인 VOD까지, 응원문화를 취미롭게 만나는 공간입니다.</p>
+            <p>치어리딩 안무·응원가 정보부터 레슨과 온라인 클래스까지, 응원문화를 취미롭게 만나는 공간입니다.</p>
             <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
           </div>
           <nav aria-label="푸터 메뉴">

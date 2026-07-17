@@ -11,17 +11,17 @@ const notoSansKr = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = createMetadata({
-  title: "질풍가도 치어리딩 전체 안무 VOD 튜토리얼",
+  title: "질풍가도 치어리딩 완전정복 클래스",
   description:
-    "파트별 동작 학습부터 배속별 완곡 연습까지 담은 질풍가도 치어리딩 전체 안무 튜토리얼입니다.",
+    "파트별 동작 학습부터 배속별 완곡 연습까지 담은 질풍가도 치어리딩 완전정복 클래스입니다.",
   path: "/vod-tutorial",
   image: "/vod-hero-poster.jpg",
   keywords: [
     "질풍가도 치어리딩",
     "질풍가도 안무",
-    "치어리딩 VOD",
+    "치어리딩 온라인 클래스",
     "학교 축제 안무",
-    "치어리딩 튜토리얼",
+    "치어리딩 강의",
   ],
 });
 
@@ -36,9 +36,9 @@ export default function VodTutorialLayout({
         data={{
           "@context": "https://schema.org",
           "@type": "Product",
-          name: "질풍가도 치어리딩 전체 안무 튜토리얼",
+          name: "질풍가도 치어리딩 완전정복 클래스",
           description:
-            "기본 동작과 파트별 안무, 속도별 반복 연습, 전체 연결 연습으로 구성된 질풍가도 치어리딩 VOD입니다.",
+            "기본 동작과 파트별 안무, 속도별 반복 연습, 전체 연결 연습으로 구성된 질풍가도 치어리딩 완전정복 클래스입니다.",
           image: absoluteUrl("/vod-hero-poster.jpg"),
           sku: "JFG-VOD-001",
           brand: {

@@ -121,7 +121,7 @@ const legacyPosts: Post[] = [
       { type: "paragraph", text: "취미로운응원생활에서는 초보자도 쉽게 따라 할 수 있는 치어리딩 안무 영상과 단계별 학습 콘텐츠를 제공합니다." },
       { type: "links", items: [
         { label: "치어리딩 레슨 예약하기", href: "/#products" },
-        { label: "질풍가도 안무 VOD 살펴보기", href: "/vod-tutorial" },
+        { label: "질풍가도 완전정복 클래스 살펴보기", href: "/vod-tutorial" },
         { label: "취미로운응원생활 유튜브에서 거울모드 영상 보기", href: "https://www.youtube.com/@cheermeuplife" },
       ] },
     ],
@@ -144,7 +144,7 @@ const legacyPosts: Post[] = [
       { type: "paragraph", text: "질풍가도는 학교 축제와 체육대회, 응원 공연에서 자주 선택되는 곡입니다. 에너지가 크고 동작 전환이 빠르기 때문에 완성 영상만 보고 한 번에 따라 하려 하면 팔과 발의 순서가 쉽게 섞일 수 있습니다." },
       { type: "heading", text: "먼저 전체 흐름을 확인하세요" },
       { type: "paragraph", text: "처음부터 모든 동작을 정확하게 따라 하기보다 곡의 어느 부분에서 안무가 바뀌는지 확인합니다. 인트로, 주요 파트, 브리지와 엔딩처럼 큰 구간을 먼저 구분하면 연습 순서를 잡기 쉽습니다." },
-      { type: "image", src: "/image-tutorial.png", alt: "질풍가도 치어리딩 튜토리얼의 구간별 학습 구성", width: 1122, height: 1402 },
+      { type: "image", src: "/image-tutorial.png", alt: "질풍가도 완전정복 클래스의 구간별 학습 구성", width: 1122, height: 1402 },
       { type: "heading", text: "동작은 카운트와 방향으로 나눕니다" },
       { type: "list", items: ["팔 동작만 먼저 확인하기", "발의 이동 방향과 무게 중심 확인하기", "8카운트 단위로 팔과 발 연결하기", "동작 전환 시 시선과 몸의 방향 확인하기"] },
       { type: "quote", text: "빠른 안무일수록 느리게 보는 것보다 정확한 기준으로 나누어 연습하는 과정이 중요합니다." },

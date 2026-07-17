@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
     }
 
     if (!process.env.EMAIL_HOST || !process.env.EMAIL_USER || !process.env.EMAIL_PASS || !process.env.EMAIL_RECEIVER) {
-      console.error("VOD order email configuration is missing");
+      console.error("Class order email configuration is missing");
       return NextResponse.json(
         { ok: false, error: "주문 알림 설정을 확인할 수 없습니다. 잠시 후 다시 시도해주세요." },
         { status: 500 },
@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
     await addDoc(collection(db, "vodOrders"), {
       orderId,
       productCode: "JFG-VOD-001",
-      productName: "질풍가도 치어리딩 전체 안무 튜토리얼",
+      productName: "질풍가도 치어리딩 완전정복 클래스",
       amount: 39000,
       depositorName,
       gmail,
@@ -77,12 +77,12 @@ export async function POST(request: NextRequest) {
     });
 
     await transporter.sendMail({
-      from: `"취미로운응원생활 VOD 주문" <${process.env.EMAIL_USER}>`,
+      from: `"취미로운응원생활 클래스 주문" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_RECEIVER,
-      subject: `[질풍가도 VOD] 입금 확인 요청 ${orderId}`,
+      subject: `[질풍가도 치어리딩 완전정복 클래스] 입금 확인 요청 ${orderId}`,
       html: `
         <div>
-          <h2>질풍가도 VOD 입금 정보가 접수되었습니다.</h2>
+          <h2>질풍가도 치어리딩 완전정복 클래스 입금 정보가 접수되었습니다.</h2>
           <ul>
             <li><b>주문번호:</b> ${escapeHtml(orderId)}</li>
             <li><b>입금자명:</b> ${escapeHtml(depositorName)}</li>
@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ ok: true, orderId });
   } catch (error) {
-    console.error("VOD order submission failed", error);
+    console.error("Class order submission failed", error);
     return NextResponse.json(
       { ok: false, error: "주문 접수 중 오류가 발생했습니다. 오류가 지속 될 경우 guatemala3081@gmail.com 으로 문의 부탁드리겠습니다." },
       { status: 500 },
