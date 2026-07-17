@@ -10,7 +10,7 @@ export type PostBlock =
   | { type: "quote"; text: string }
   | { type: "image"; src: string; alt: string; caption?: string; width: number; height: number }
   | { type: "imagePlaceholder"; label: string }
-  | { type: "moveCards"; items: Array<{ order: number; title: string; summary: string; feature: string; href: string; imageLabel?: string }> }
+  | { type: "moveCards"; items: Array<{ order: number; title: string; summary: string; feature: string; href: string; image?: { src: string; alt: string } }> }
   | { type: "youtube"; id: string; title: string; start?: number; end?: number };
 
 export type Post = {

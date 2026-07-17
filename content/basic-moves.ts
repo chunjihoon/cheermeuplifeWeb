@@ -72,6 +72,15 @@ function buildBody(
 const parentPost = { slug: HUB_SLUG, title: "치어리딩 기본동작 7가지" };
 const hubLink = { href: `/posts/${HUB_SLUG}`, label: "기본동작 7가지 전체 보기" };
 
+const detailCoverImages: Record<string, string> = {
+  "cheerleading-pull-kick-step": "/posts-basic7-1.png",
+  "cheerleading-side-step": "/posts-basic7-3.png",
+  "cheerleading-clap": "/posts-basic7-4.png",
+  "cheerleading-fighting-move": "/posts-basic7-5.png",
+  "cheerleading-arm-circle": "/posts-basic7-6.png",
+  "cheerleading-jump-move": "/posts-basic7-7.png",
+};
+
 const hub: Post = {
   slug: HUB_SLUG,
   title: "치어리딩 기본동작 7가지｜초보자 연습 순서",
@@ -82,7 +91,8 @@ const hub: Post = {
   status: "published",
   publishedAt,
   updatedAt: publishedAt,
-  coverImage: { src: "/youtubeCapture1.png", alt: "치어리딩 기본동작 7가지를 시범 보이는 강사", width: 547, height: 294 },
+  coverImage: { src: "/posts-basic7-1.png", alt: "치어리딩 끌기와 차기 기본동작", width: 938, height: 712 },
+  showCoverImage: false,
   seoTitle: "치어리딩 기본동작 7가지｜초보자 연습 순서",
   seoDescription: "치어리딩 초보자가 먼저 익히면 좋은 끌기, 차기, 좌우 이동, 박수, 화이팅, 팔 돌리기, 점프 동작을 소개합니다. 거울모드 영상과 동작별 상세 설명을 확인해보세요.",
   relatedSlugs: ["cheerleading-beginner-common-mistakes", "jilpunggadu-cheerleading-beginner-guide"],
@@ -95,13 +105,13 @@ const hub: Post = {
     { type: "youtube", id: VIDEO_ID, title: "치어리딩 기본동작 7가지 전체 거울모드 영상", start: 0 },
     { type: "heading", text: "치어리딩 기본동작 7가지" },
     { type: "moveCards", items: [
-      { order: 1, title: "끌기 동작", summary: "양발의 앞부분으로 바닥을 스치며 두 발을 동시에 가운데로 모았다가 원래 위치로 돌아갑니다.", feature: "핵심 · 양발을 동시에 움직이기", href: "/posts/cheerleading-pull-kick-step#pull-step", imageLabel: "여기에 끌기 동작 대표 이미지를 삽입해주세요." },
-      { order: 2, title: "차기 동작", summary: "오른발을 가운데로 끌어오면서 왼발을 엉덩이 방향으로 뒤로 차는 동작입니다.", feature: "핵심 · 끌기와 차기를 동시에", href: "/posts/cheerleading-pull-kick-step#kick-step", imageLabel: "여기에 차기 동작 대표 이미지를 삽입해주세요." },
-      { order: 3, title: "좌우 이동 스텝", summary: "이동하는 발은 바닥을 스치고 반대쪽 발은 뒤로 차며 좌우로 번갈아 움직입니다.", feature: "핵심 · 좌우 중심 유지", href: "/posts/cheerleading-side-step", imageLabel: "여기에 좌우 이동 스텝 대표 이미지를 삽입해주세요." },
-      { order: 4, title: "박수 동작", summary: "양팔을 수평으로 펼쳤다가 머리 위에서 박수를 치며 차기 동작을 연결합니다.", feature: "핵심 · 팔꿈치를 곧게 펴기", href: "/posts/cheerleading-clap", imageLabel: "여기에 박수 동작 대표 이미지를 삽입해주세요." },
-      { order: 5, title: "화이팅 동작", summary: "오른팔을 힘차게 뻗으며 왼발 끌기와 오른발 뒤로 차기를 동시에 수행합니다.", feature: "핵심 · 팔과 다리 동시 연결", href: "/posts/cheerleading-fighting-move", imageLabel: "여기에 화이팅 동작 대표 이미지를 삽입해주세요." },
-      { order: 6, title: "팔 돌리기 동작", summary: "왼팔을 사선 위로 고정하고 오른팔을 크게 회전한 뒤 목표 지점까지 찌릅니다.", feature: "핵심 · 어깨 중심으로 큰 원", href: "/posts/cheerleading-arm-circle", imageLabel: "여기에 팔 돌리기 동작 대표 이미지를 삽입해주세요." },
-      { order: 7, title: "점프 동작", summary: "팔을 위·가운데·아래로 움직이며 가벼운 점프와 앉는 자세를 3박자로 연결합니다.", feature: "핵심 · 높이보다 정확한 타이밍", href: "/posts/cheerleading-jump-move", imageLabel: "여기에 점프 동작 대표 이미지를 삽입해주세요." },
+      { order: 1, title: "끌기 동작", summary: "양발의 앞부분으로 바닥을 스치며 두 발을 동시에 가운데로 모았다가 원래 위치로 돌아갑니다.", feature: "핵심 · 양발을 동시에 움직이기", href: "/posts/cheerleading-pull-kick-step#pull-step", image: { src: "/posts-basic7-1.png", alt: "치어리딩 끌기 동작" } },
+      { order: 2, title: "차기 동작", summary: "오른발을 가운데로 끌어오면서 왼발을 엉덩이 방향으로 뒤로 차는 동작입니다.", feature: "핵심 · 끌기와 차기를 동시에", href: "/posts/cheerleading-pull-kick-step#kick-step", image: { src: "/posts-basic7-1.png", alt: "치어리딩 차기 동작" } },
+      { order: 3, title: "좌우 이동 스텝", summary: "이동하는 발은 바닥을 스치고 반대쪽 발은 뒤로 차며 좌우로 번갈아 움직입니다.", feature: "핵심 · 좌우 중심 유지", href: "/posts/cheerleading-side-step", image: { src: "/posts-basic7-3.png", alt: "치어리딩 좌우 이동 스텝" } },
+      { order: 4, title: "박수 동작", summary: "양팔을 수평으로 펼쳤다가 머리 위에서 박수를 치며 차기 동작을 연결합니다.", feature: "핵심 · 팔꿈치를 곧게 펴기", href: "/posts/cheerleading-clap", image: { src: "/posts-basic7-4.png", alt: "치어리딩 박수 동작" } },
+      { order: 5, title: "화이팅 동작", summary: "오른팔을 힘차게 뻗으며 왼발 끌기와 오른발 뒤로 차기를 동시에 수행합니다.", feature: "핵심 · 팔과 다리 동시 연결", href: "/posts/cheerleading-fighting-move", image: { src: "/posts-basic7-5.png", alt: "치어리딩 화이팅 동작" } },
+      { order: 6, title: "팔 돌리기 동작", summary: "왼팔을 사선 위로 고정하고 오른팔을 크게 회전한 뒤 목표 지점까지 찌릅니다.", feature: "핵심 · 어깨 중심으로 큰 원", href: "/posts/cheerleading-arm-circle", image: { src: "/posts-basic7-6.png", alt: "치어리딩 팔 돌리기 동작" } },
+      { order: 7, title: "점프 동작", summary: "팔을 위·가운데·아래로 움직이며 가벼운 점프와 앉는 자세를 3박자로 연결합니다.", feature: "핵심 · 높이보다 정확한 타이밍", href: "/posts/cheerleading-jump-move", image: { src: "/posts-basic7-7.png", alt: "치어리딩 점프 동작" } },
     ] },
     { type: "heading", text: "추천 연습 순서" },
     { type: "orderedList", items: ["끌기", "차기", "좌우 이동", "박수", "화이팅", "팔 돌리기", "점프"] },
@@ -133,7 +143,7 @@ function detailPost(options: Omit<Post, "category" | "author" | "status" | "publ
     status: "published",
     publishedAt,
     updatedAt: publishedAt,
-    coverImage: { src: "/youtubeCapture1.png", alt: `${options.title} 시범 영상`, width: 547, height: 294 },
+    coverImage: { src: detailCoverImages[options.slug], alt: `${options.title} 대표 이미지`, width: 938, height: 712 },
     showCoverImage: false,
     parentPost,
   };

@@ -41,7 +41,8 @@
 .post-image-placeholder strong { margin-top: 9px; color: #665962; line-height: 1.6; }
 .basic-move-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; margin: 30px 0 42px; }
 .basic-move-card { display: flex; flex-direction: column; padding: 24px; border: 1px solid #efd9e3; border-radius: 18px; background: #fff; box-shadow: 0 10px 26px rgba(85,48,70,.06); }
-.basic-move-card-image { display: grid; place-items: center; min-height: 130px; margin: -10px -10px 18px; padding: 18px; border: 1px dashed #edbfd3; border-radius: 13px; color: #9c5576; text-align: center; background: linear-gradient(135deg,#fffbea,#fff4f9); font-size: .78rem; font-weight: 800; }
+.basic-move-card-image { position: relative; aspect-ratio: 938 / 712; margin: -10px -10px 18px; overflow: hidden; border-radius: 13px; background: #fff4f9; }
+.basic-move-card-image img { object-fit: cover; }
 .basic-move-card > span { color: #ec4899; font-size: .72rem; font-weight: 900; letter-spacing: .1em; }
 .basic-move-card h3 { margin: 9px 0 0; font-family: "SANJUGotgam",Arial,sans-serif; font-size: 1.3rem; }
 .basic-move-card p { margin: 10px 0; color: #685d65; line-height: 1.7; }
