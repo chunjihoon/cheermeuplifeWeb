@@ -1,4 +1,5 @@
 import { basicMovePosts } from "@/content/basic-moves";
+import { wiki20260718Post } from "@/content/wiki-20260718";
 
 export type PostBlock =
   | { type: "heading"; text: string; id?: string }
@@ -8,7 +9,7 @@ export type PostBlock =
   | { type: "orderedList"; items: string[] }
   | { type: "links"; items: Array<{ label: string; href: string }> }
   | { type: "quote"; text: string }
-  | { type: "image"; src: string; alt: string; caption?: string; width: number; height: number }
+  | { type: "image"; src: string; alt: string; caption?: string; width: number; height: number; maxWidth?: number }
   | { type: "imagePlaceholder"; label: string }
   | { type: "moveCards"; items: Array<{ order: number; title: string; summary: string; feature: string; href: string; image?: { src: string; alt: string } }> }
   | { type: "youtube"; id: string; title: string; start?: number; end?: number };
@@ -210,6 +211,7 @@ const replacedBasicMoveSlug = "cheerleading-basic-cheer-moves-7";
 const basicMoveHubSlug = "cheerleading-basic-moves";
 
 export const posts: Post[] = [
+  wiki20260718Post,
   ...basicMovePosts,
   ...legacyPosts
     .filter((post) => post.slug !== replacedBasicMoveSlug)

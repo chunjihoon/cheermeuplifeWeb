@@ -81,9 +81,18 @@ export default function CheerMeUpLifeMain() {
   type ReserveForm = {
     service: string;
     name: string;
+    email: string;
+    emailConfirm: string;
     contact: string;
-    date: string;
-    time: string;
+    date1: string;
+    timePeriod1: string;
+    timeHour1: string;
+    date2: string;
+    timePeriod2: string;
+    timeHour2: string;
+    date3: string;
+    timePeriod3: string;
+    timeHour3: string;
     region: string;
     people: string;
     request: string;
@@ -92,13 +101,26 @@ export default function CheerMeUpLifeMain() {
   const [form, setForm] = useState<ReserveForm>({
     service: "",
     name: "",
+    email: "",
+    emailConfirm: "",
     contact: "",
-    date: "",
-    time: "",
+    date1: "",
+    timePeriod1: "",
+    timeHour1: "",
+    date2: "",
+    timePeriod2: "",
+    timeHour2: "",
+    date3: "",
+    timePeriod3: "",
+    timeHour3: "",
     region: "",
     people: "",
     request: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [emailConfirmTouched, setEmailConfirmTouched] = useState(false);
+  const emailsMatch = form.email.trim() === form.emailConfirm.trim();
+  const showEmailMismatch = emailConfirmTouched && !emailsMatch;
 
   // 오프라인(대면)으로 간주할 서비스 목록
   const OFFLINE_SERVICES = new Set([
@@ -130,7 +152,17 @@ export default function CheerMeUpLifeMain() {
   const router = useRouter();
 
   useEffect(() => {
-    const requestedService = new URLSearchParams(window.location.search).get("service");
+    const searchParams = new URLSearchParams(window.location.search);
+    const requestedService = searchParams.get("service");
+
+    if (searchParams.get("reserve") === "1") {
+      setSelectedService(null);
+      setModalOpen(true);
+      track("reserve_modal_open", {
+        location: "wiki_conversion_prompt",
+      });
+      return;
+    }
 
     if (requestedService !== "질풍가도 완전정복 클래스") return;
 
@@ -147,36 +179,60 @@ export default function CheerMeUpLifeMain() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(form);  // service 포함 모든 값이 채워졌는지 확인
-    const res = await fetch("/api/reserve-submit", {
-      method: "POST",
-      body: JSON.stringify(form),
-      headers: { "Content-Type": "application/json" }
-    });
+    if (isSubmitting) return;
 
-    if (!res.ok) {
-      track("reserve_submit_fail");
-      alert("잠시 후 다시 시도해주세요. 오류가 지속될 경우 제 개인연락처 (010-3343-7576) 으로 연락 부탁드립니다.");
+    setEmailConfirmTouched(true);
+    if (!emailsMatch) {
+      document.getElementById("reserve-email-confirm")?.focus();
       return;
     }
 
-    track("reserve_submit_success", { service: form.service });
-    alert("예약이 접수되었습니다! 남겨주신 연락처로 빠르게 연락드리도록 하겠습니다.");
-    setModalOpen(false);
-    setFormDataInit();
-    router.push("/");
+    setIsSubmitting(true);
+    try {
+      const res = await fetch("/api/reserve-submit", {
+        method: "POST",
+        body: JSON.stringify(form),
+        headers: { "Content-Type": "application/json" }
+      });
+
+      if (!res.ok) {
+        throw new Error(`Reservation failed: ${res.status}`);
+      }
+
+      track("reserve_submit_success", { service: form.service });
+      alert("예약이 접수되었습니다! 입력하신 이메일로 빠르게 연락드리겠습니다.");
+      setModalOpen(false);
+      setFormDataInit();
+      router.push("/");
+    } catch (error) {
+      console.error("예약 접수 실패", error);
+      track("reserve_submit_fail", { service: form.service });
+      alert("잠시 후 다시 시도해주세요. 오류가 지속되면 문의 페이지를 이용해주세요.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   function setFormDataInit(){
     setForm({     
       service: "",
       name: "",
+      email: "",
+      emailConfirm: "",
       contact: "",
-      date: "",
-      time: "",
+      date1: "",
+      timePeriod1: "",
+      timeHour1: "",
+      date2: "",
+      timePeriod2: "",
+      timeHour2: "",
+      date3: "",
+      timePeriod3: "",
+      timeHour3: "",
       region: "",
       people: "",
       request: "", });
+    setEmailConfirmTouched(false);
   }
 
   
@@ -713,10 +769,12 @@ export default function CheerMeUpLifeMain() {
     {/* 예약/문의 모달 */}
     {modalOpen && (
       <div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center">
-        <div className="bg-white rounded-3xl shadow-2xl p-10 max-w-md w-full relative animate-fade-in">
+        <div className="bg-white rounded-3xl shadow-2xl p-6 sm:p-10 max-w-md w-[calc(100%_-_2rem)] max-h-[90vh] overflow-y-auto relative animate-fade-in">
           <button
             className="absolute top-4 right-4 text-gray-400 text-2xl hover:text-pink-400"
             onClick={() => {setModalOpen(false); setFormDataInit();}}
+            disabled={isSubmitting}
+            aria-label="예약 신청 창 닫기"
           >×</button>
           <h3 className="font-gotgam text-2xl font-bold mb-4 text-pink-500">레슨 예약 신청</h3>
           <form
@@ -761,49 +819,121 @@ export default function CheerMeUpLifeMain() {
               className="text-gray-900 border rounded-lg px-4 py-2"
             />
 
-            {/* 3) 연락처 */}
+            {/* 3) 이메일 */}
+            <div className="flex flex-col gap-1">
+              <label htmlFor="reserve-email" className="text-sm font-bold text-pink-400 ml-1">
+                이메일 (필수)
+              </label>
+              <input
+                id="reserve-email"
+                name="email"
+                type="email"
+                autoComplete="email"
+                value={form.email}
+                onChange={handleChange}
+                placeholder="example@email.com"
+                required
+                className="text-gray-900 border rounded-lg px-4 py-2"
+              />
+              <p className="text-xs text-gray-500 ml-1">예약 확인과 일정 안내를 받을 주 연락 수단입니다.</p>
+              <label htmlFor="reserve-email-confirm" className="text-sm font-bold text-pink-400 ml-1 mt-1">
+                이메일 확인 (필수)
+              </label>
+              <input
+                id="reserve-email-confirm"
+                name="emailConfirm"
+                type="email"
+                autoComplete="off"
+                value={form.emailConfirm}
+                onChange={handleChange}
+                onBlur={() => setEmailConfirmTouched(true)}
+                placeholder="이메일을 한 번 더 입력해주세요"
+                required
+                aria-invalid={showEmailMismatch}
+                aria-describedby={showEmailMismatch ? "reserve-email-mismatch" : undefined}
+                className={`text-gray-900 border rounded-lg px-4 py-2 ${showEmailMismatch ? "border-red-500 bg-red-50" : ""}`}
+              />
+              {showEmailMismatch && (
+                <p id="reserve-email-mismatch" role="alert" className="text-xs font-bold text-red-600 ml-1">
+                  입력한 이메일 주소가 일치하지 않습니다. 다시 확인해주세요.
+                </p>
+              )}
+            </div>
+
+            {/* 4) 연락처 */}
             <input
               name="contact"
+              type="tel"
+              autoComplete="tel"
               value={form.contact}
               onChange={handleChange}
-              placeholder="연락처/카카오톡"
+              placeholder="연락처/카카오톡 (필수)"
               required
               className="text-gray-900 border rounded-lg px-4 py-2"
             />
-            <div className="flex gap-2">
-              <div className="flex flex-col flex-1">
-                <label htmlFor="date" className="text-sm font-bold text-pink-400 mb-1 ml-1">
-                  희망 날짜
-                </label>
-                <input
-                  type="date"
-                  name="date"
-                  id="date"
-                  className="text-gray-900 border rounded-lg px-4 py-2"
-                  value={form.date}
-                  required
-                  onChange={handleChange}
-                  onFocus={() => handleFocus("date", true)}
-                  onBlur={() => handleFocus("date", false)}
-                />
-              </div>
-              <div className="flex flex-col flex-1">
-                <label htmlFor="time" className="text-sm font-bold text-pink-400 mb-1 ml-1">
-                  희망 시간
-                </label>
-                <input
-                  type="time"
-                  name="time"
-                  id="time"
-                  className="text-gray-900 border rounded-lg px-4 py-2"
-                  value={form.time}
-                  required
-                  onChange={handleChange}
-                  onFocus={() => handleFocus("time", true)}
-                  onBlur={() => handleFocus("time", false)}
-                />
-              </div>
-            </div>
+
+            <fieldset className="flex flex-col gap-2">
+              <legend className="text-sm font-bold text-pink-400 mb-1 ml-1">
+                희망 일정 3개 (모두 필수)
+              </legend>
+              {([1, 2, 3] as const).map((order) => {
+                const dateName = `date${order}` as const;
+                const timePeriodName = `timePeriod${order}` as const;
+                const timeHourName = `timeHour${order}` as const;
+                return (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2" key={order}>
+                    <div className="flex flex-col flex-1 min-w-0">
+                      <label htmlFor={dateName} className="text-xs text-gray-600 mb-1 ml-1">
+                        {order}순위 날짜
+                      </label>
+                      <input
+                        type="date"
+                        name={dateName}
+                        id={dateName}
+                        className="text-gray-900 border rounded-lg px-2 sm:px-4 py-2 min-w-0"
+                        value={form[dateName]}
+                        required
+                        onChange={handleChange}
+                        onFocus={() => handleFocus("date", true)}
+                        onBlur={() => handleFocus("date", false)}
+                      />
+                    </div>
+                    <div className="flex flex-col flex-1 min-w-0">
+                      <span className="text-xs text-gray-600 mb-1 ml-1">
+                        {order}순위 시간
+                      </span>
+                      <div className="grid grid-cols-2 gap-2">
+                        <select
+                          name={timePeriodName}
+                          aria-label={`${order}순위 오전 또는 오후`}
+                          className="text-gray-900 border rounded-lg px-2 py-2 min-w-0"
+                          value={form[timePeriodName]}
+                          required
+                          onChange={handleChange}
+                        >
+                          <option value="">AM/PM</option>
+                          <option value="AM">AM</option>
+                          <option value="PM">PM</option>
+                        </select>
+                        <select
+                          name={timeHourName}
+                          aria-label={`${order}순위 시간`}
+                          className="text-gray-900 border rounded-lg px-2 py-2 min-w-0"
+                          value={form[timeHourName]}
+                          required
+                          onChange={handleChange}
+                        >
+                          <option value="">시간</option>
+                          {Array.from({ length: 12 }, (_, index) => index + 1).map((hour) => (
+                            <option value={String(hour)} key={hour}>{hour}시</option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </fieldset>
             {/* 5) 희망지역 */}
             <input
               name="region"
@@ -817,10 +947,14 @@ export default function CheerMeUpLifeMain() {
             {/* 6) 인원수 */}
             <input
               name="people"
-              type="number"
-              min={1}
+              type="text"
+              inputMode="numeric"
+              pattern="[1-9][0-9]*"
               value={form.people}
-              onChange={handleChange}
+              onChange={(event) => {
+                const people = event.target.value.replace(/[^0-9]/g, "");
+                setForm((current) => ({ ...current, people }));
+              }}
               placeholder="인원수 (숫자만)"
               required
               className="text-gray-900 border rounded-lg px-4 py-2"
@@ -834,8 +968,13 @@ export default function CheerMeUpLifeMain() {
               placeholder="요청사항"
               className="text-gray-900 border rounded-lg px-4 py-2"
             />
-            <button type="submit" className="font-gotgam bg-pink-400 hover:bg-yellow-400 text-white rounded-lg px-6 py-3 font-bold text-lg mt-3">
-              예약 신청하기
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              aria-busy={isSubmitting}
+              className="font-gotgam bg-pink-400 hover:bg-yellow-400 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-lg px-6 py-3 font-bold text-lg mt-3"
+            >
+              {isSubmitting ? "처리 중…" : "예약 신청하기"}
             </button>
           </form>
         </div>

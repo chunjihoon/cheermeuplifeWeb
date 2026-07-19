@@ -7,6 +7,7 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { ContentCta } from "@/components/content-cta";
 import { JsonLd } from "@/components/json-ld";
 import { SharePrompt } from "@/components/share-prompt";
+import { WikiConversionPrompt } from "@/components/wiki-conversion-prompt";
 import { getAllPostSlugs, getPostBySlug, getRelatedPosts } from "@/lib/posts";
 import { createMetadata } from "@/lib/seo";
 import { absoluteUrl, siteConfig } from "@/lib/site-config";
@@ -62,11 +63,12 @@ export default async function PostDetailPage({ params }: { params: Promise<{ slu
         if (block.type === "orderedList") return <ol key={index}>{block.items.map((item) => <li key={item}>{renderInline(item)}</li>)}</ol>;
         if (block.type === "links") return <ul className="post-link-list" key={index}>{block.items.map((item) => <li key={item.href}><a href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined}>{item.label} →</a></li>)}</ul>;
         if (block.type === "quote") return <blockquote key={index}>{renderInline(block.text)}</blockquote>;
-        if (block.type === "image") return <figure className="post-body-image" key={index}><Image src={block.src} alt={block.alt} width={block.width} height={block.height} sizes="(max-width: 800px) calc(100vw - 28px), 760px" />{block.caption && <figcaption>{block.caption}</figcaption>}</figure>;
+        if (block.type === "image") return <figure className="post-body-image" key={index} style={block.maxWidth ? { maxWidth: block.maxWidth, marginLeft: "auto", marginRight: "auto" } : undefined}><Image src={block.src} alt={block.alt} width={block.width} height={block.height} sizes={block.maxWidth ? `(max-width: ${block.maxWidth}px) calc(100vw - 28px), ${block.maxWidth}px` : "(max-width: 800px) calc(100vw - 28px), 760px"} />{block.caption && <figcaption>{block.caption}</figcaption>}</figure>;
         if (block.type === "imagePlaceholder") return <div className="post-image-placeholder" role="note" key={index}><span>IMAGE PLACEHOLDER</span><strong>{block.label}</strong></div>;
         if (block.type === "moveCards") return <div className="basic-move-grid" key={index}>{block.items.map((item) => <article className="basic-move-card" key={`${item.order}-${item.title}`}>{item.image && <div className="basic-move-card-image"><Image src={item.image.src} alt={item.image.alt} fill sizes="(max-width: 620px) calc(100vw - 76px), 220px" /></div>}<span>{String(item.order).padStart(2, "0")}</span><h3>{item.title}</h3><p>{item.summary}</p><small>{item.feature}</small><Link href={item.href}>자세히 배우기 →</Link></article>)}</div>;
         return <div className="post-youtube" key={index}><iframe src={youtubeEmbedUrl(block.id, block.start, block.end)} title={block.title} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen /></div>;
       })}{post.learningNavigation && <nav className="learning-navigation" aria-label="기본동작 학습 순서"><div>{post.learningNavigation.previous && <Link href={post.learningNavigation.previous.href}>← {post.learningNavigation.previous.label}</Link>}</div><Link className="learning-navigation-hub" href={post.learningNavigation.hub.href}>{post.learningNavigation.hub.label}</Link><div>{post.learningNavigation.next && <Link href={post.learningNavigation.next.href}>{post.learningNavigation.next.label} →</Link>}</div></nav>}</article><aside className="post-aside"><strong>취미로운응원생활</strong><p>치어리딩과 응원문화를 직접 배우고 즐길 수 있도록 정보를 정리합니다.</p><Link href="/#products">레슨 알아보기 →</Link><Link href="/vod-tutorial">질풍가도 완전정복 클래스 →</Link></aside></div>
+      <WikiConversionPrompt slug={post.slug} category={post.category} />
       <SharePrompt
         variant="post"
         title="이 글이 도움이 되었다면 함께 나눠보세요"
