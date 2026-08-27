@@ -9,6 +9,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = [
     { url: absoluteUrl("/"), lastModified: new Date("2026-07-15"), changeFrequency: "weekly", priority: 1 },
     { url: absoluteUrl("/vod-tutorial"), lastModified: new Date("2026-07-15"), changeFrequency: "monthly", priority: .9 },
+    { url: absoluteUrl("/performance"), lastModified: new Date("2026-08-26"), changeFrequency: "monthly", priority: .9 },
     { url: absoluteUrl("/about"), lastModified: new Date("2026-07-15"), changeFrequency: "monthly", priority: .7 },
     { url: absoluteUrl("/posts"), lastModified: new Date("2026-07-15"), changeFrequency: "weekly", priority: .9 },
     { url: absoluteUrl("/faq"), lastModified: new Date("2026-07-15"), changeFrequency: "monthly", priority: .6 },

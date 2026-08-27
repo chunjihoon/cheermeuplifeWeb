@@ -12,6 +12,7 @@ export const siteConfig = {
 
 export const siteNavigation = [
   { href: "/about", label: "소개" },
+  { href: "/performance", label: "공연·행사" },
   { href: "/posts", label: "치어위키" },
   { href: "/vod-tutorial", label: "질풍가도 완전정복 클래스" },
   { href: "/faq", label: "FAQ" },
@@ -20,6 +21,7 @@ export const siteNavigation = [
 
 export const footerNavigation = [
   { href: "/about", label: "취미로운응원생활 소개" },
+  { href: "/performance", label: "공연·행사 섭외" },
   { href: "/posts", label: "치어위키" },
   { href: "/privacy", label: "개인정보처리방침" },
   { href: "/terms", label: "이용약관" },
