@@ -46,9 +46,9 @@
 .vod-facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
 .vod-facts span { padding: 8px 13px; border: 1px solid rgba(255,255,255,.28); border-radius: 999px; color: #fff; background: rgba(20,14,20,.32); backdrop-filter: blur(8px); font-size: .9rem; font-weight: 700; }
 .vod-fact-icon { margin-right: 5px; font-style: normal; }
-.vod-price { display: flex; align-items: baseline; gap: 14px; margin-top: 30px; font-family: var(--font-noto-sans-kr), sans-serif; font-weight: 800; letter-spacing: -.04em; }
-.vod-price span { color: rgba(255,255,255,.72); font-weight: 700; }
-.vod-price strong { color: #fff; font-size: 2.45rem; }
+.vod-price { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 30px; font-family: var(--font-noto-sans-kr), sans-serif; font-weight: 800; letter-spacing: -.04em; }
+.vod-price span { display: inline-flex; align-items: baseline; gap: 8px; padding: 8px 13px; border: 1px solid rgba(255,255,255,.24); border-radius: 12px; color: rgba(255,255,255,.78); background: rgba(20,14,20,.28); font-weight: 700; }
+.vod-price strong { color: #fff; font-size: 1.7rem; }
 .vod-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
 .vod-button { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 22px; border: 1px solid transparent; border-radius: 12px; font-family: var(--font-noto-sans-kr), sans-serif; font-size: inherit; font-weight: 700; cursor: pointer; transition: transform .16s, background .16s, opacity .16s; }
 .vod-button:hover:not(:disabled) { transform: translateY(-2px); }
