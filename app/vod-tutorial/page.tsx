@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import { track } from "@/lib/analytics";
 import { SharePrompt } from "@/components/share-prompt";
@@ -10,7 +10,7 @@ import "./vod-tutorial.css";
 type CurriculumItem = {
   id: number;
   title: string;
-  duration: string;
+  duration?: string;
   description: string;
   thumbnail: string;
 };
@@ -24,7 +24,6 @@ type PurchaseFormData = {
   depositorName: string;
   gmail: string;
   gmailConfirm: string;
-  gmailAccepted: boolean;
   refundAccepted: boolean;
   licenseAccepted: boolean;
 };
@@ -41,7 +40,6 @@ const initialPurchaseForm: PurchaseFormData = {
   depositorName: "",
   gmail: "",
   gmailConfirm: "",
-  gmailAccepted: false,
   refundAccepted: false,
   licenseAccepted: false,
 };
@@ -61,7 +59,8 @@ const curriculumGroups: Array<{
       { id: 2, title: "질풍가도 3번동작", duration: "9분 25초", description: "3번 파트 동작 학습", thumbnail: "/Thumbnail-video2.png" },
       { id: 3, title: "질풍가도 4번동작", duration: "12분", description: "4번 파트 동작 학습", thumbnail: "/Thumbnail-video3.png" },
       { id: 4, title: "질풍가도 브릿지동작", duration: "13분 34초", description: "브릿지 구간 동작 학습", thumbnail: "/Thumbnail-video4.png" },
-      { id: 5, title: "질풍가도 5번+6번+엔딩동작", duration: "16분 30초", description: "5번, 6번 및 엔딩 파트 동작 학습", thumbnail: "/Thumbnail-video5.png" },
+      { id: 5, title: "질풍가도 5번+6번동작", description: "5번 및 6번 파트 동작 학습", thumbnail: "/Thumbnail-video5.png" },
+      { id: 6, title: "질풍가도 엔딩동작", description: "엔딩 파트 동작 학습", thumbnail: "/Thumbnail-video5.png" },
     ],
   },
   {
@@ -69,10 +68,10 @@ const curriculumGroups: Array<{
     title: "완곡 연습 배속별 따라 하기",
     description: "느린 속도부터 원곡 속도까지 단계적으로 전체 안무를 연결합니다.",
     items: [
-      { id: 6, title: "질풍가도 0.3배속 따라하기", duration: "10분 45초", description: "매우 느린 속도로 전체 동작 확인", thumbnail: "/Thumbnail-video6.png" },
-      { id: 7, title: "질풍가도 0.5배속 따라하기", duration: "6분 32초", description: "느린 속도로 전체 안무 연결", thumbnail: "/Thumbnail-video6.png" },
-      { id: 8, title: "질풍가도 0.7배속 따라하기", duration: "4분 43초", description: "원곡에 가까운 속도로 연습", thumbnail: "/Thumbnail-video6.png" },
-      { id: 9, title: "질풍가도 1배속 따라하기", duration: "3분 21초", description: "원곡 속도로 전체 안무 연습", thumbnail: "/Thumbnail-video6.png" },
+      { id: 7, title: "질풍가도 0.3배속 따라하기", duration: "10분 45초", description: "매우 느린 속도로 전체 동작 확인", thumbnail: "/Thumbnail-video6.png" },
+      { id: 8, title: "질풍가도 0.5배속 따라하기", duration: "6분 32초", description: "느린 속도로 전체 안무 연결", thumbnail: "/Thumbnail-video6.png" },
+      { id: 9, title: "질풍가도 0.7배속 따라하기", duration: "4분 43초", description: "원곡에 가까운 속도로 연습", thumbnail: "/Thumbnail-video6.png" },
+      { id: 10, title: "질풍가도 1배속 따라하기", duration: "3분 21초", description: "원곡 속도로 전체 안무 연습", thumbnail: "/Thumbnail-video6.png" },
     ],
   },
 ];
@@ -83,8 +82,12 @@ const faqItems: FaqItemData[] = [
     answer: "네. 파트별 동작 설명과 카운트 연습, 0.3배속부터 1배속까지의 반복 연습 영상으로 구성되어 있어 입문자도 순서대로 학습할 수 있습니다.",
   },
   {
-    question: "계좌이체 후 언제부터 볼 수 있나요?",
-    answer: "입금 확인 후 구매 시 입력한 Gmail 계정으로 Google Drive 이용 권한을 보내드립니다. 자세한 확인 시간은 구매 신청 시 안내해드립니다.",
+    question: "결제 후 언제부터 볼 수 있나요?",
+    answer: "리틀리 결제는 결제 완료 후 바로 수강할 수 있습니다. 계좌이체 구매는 매일 한국시간 오전 10시와 오후 10시에 입금을 확인한 후 입력하신 Gmail 계정으로 Google Drive 이용 권한을 보내드립니다.",
+  },
+  {
+    question: "39,000원과 45,000원 상품은 강의 내용이 다른가요?",
+    answer: "아닙니다. 제공되는 강의 내용은 동일합니다. 계좌이체 구매는 Google Drive로 제공되며 입금 확인 과정이 필요하고, 리틀리 구매는 카드·카카오페이·네이버페이 등의 간편결제가 가능하며 결제 완료 후 바로 수강할 수 있습니다.",
   },
   {
     question: "휴대폰에서도 볼 수 있나요?",
@@ -137,15 +140,13 @@ function CurriculumCard({ item }: { item: CurriculumItem }) {
         <small>LESSON {String(item.id).padStart(2, "0")}</small>
         <h4>{item.title}</h4>
         <p>{item.description}</p>
-        <span className="vod-duration">◷ {item.duration}</span>
+        {item.duration && <span className="vod-duration">◷ {item.duration}</span>}
       </div>
     </article>
   );
 }
 
 export default function CheerVodLandingPage() {
-  const [licenseAccepted, setLicenseAccepted] = useState(false);
-  const [refundAccepted, setRefundAccepted] = useState(false);
   const [openFaq, setOpenFaq] = useState(0);
   const [isHeroVideoPlaying, setIsHeroVideoPlaying] = useState(true);
   const [purchaseModalOpen, setPurchaseModalOpen] = useState(false);
@@ -155,10 +156,6 @@ export default function CheerVodLandingPage() {
   const [copiedAccount, setCopiedAccount] = useState(false);
   const [completedOrderId, setCompletedOrderId] = useState("");
   const heroVideoRef = useRef<HTMLVideoElement>(null);
-  const canPurchase = useMemo(
-    () => licenseAccepted && refundAccepted,
-    [licenseAccepted, refundAccepted],
-  );
   const normalizedGmail = purchaseForm.gmail.trim().toLowerCase();
   const normalizedGmailConfirm = purchaseForm.gmailConfirm.trim().toLowerCase();
   const isGmailValid = /^[^\s@]+@gmail\.com$/i.test(normalizedGmail);
@@ -167,7 +164,6 @@ export default function CheerVodLandingPage() {
     purchaseForm.depositorName.trim()
     && isGmailValid
     && isGmailMatching
-    && purchaseForm.gmailAccepted
     && purchaseForm.refundAccepted
     && purchaseForm.licenseAccepted,
   );
@@ -232,11 +228,7 @@ export default function CheerVodLandingPage() {
   }, [purchaseModalOpen, isSubmittingOrder]);
 
   const openPurchaseModal = () => {
-    setPurchaseForm({
-      ...initialPurchaseForm,
-      refundAccepted,
-      licenseAccepted,
-    });
+    setPurchaseForm({ ...initialPurchaseForm });
     setCompletedOrderId("");
     setOrderError("");
     setCopiedAccount(false);
@@ -296,7 +288,6 @@ export default function CheerVodLandingPage() {
         body: JSON.stringify({
           depositorName: purchaseForm.depositorName.trim(),
           gmail: normalizedGmail,
-          gmailAccepted: purchaseForm.gmailAccepted,
           refundAccepted: purchaseForm.refundAccepted,
           licenseAccepted: purchaseForm.licenseAccepted,
         }),
@@ -316,9 +307,34 @@ export default function CheerVodLandingPage() {
   };
 
   const handleDirectPurchase = () => {
-    if (!canPurchase) return;
+    track("checkout_start", {
+      product_id: "jilpunggado_master_class",
+      payment_method: "bank_transfer",
+      location: "purchase_card",
+      price: 39000,
+    });
     track("vod_purchase_inquiry_click", { method: "direct" });
     openPurchaseModal();
+  };
+
+  const handleLittlyPurchase = () => {
+    track("checkout_start", {
+      product_id: "jilpunggado_master_class",
+      payment_method: "littly",
+      location: "purchase_card",
+      price: 45000,
+    });
+    track("vod_purchase_littly_click", { location: "purchase_card" });
+  };
+
+  const handleFinalLittlyPurchase = () => {
+    track("checkout_start", {
+      product_id: "jilpunggado_master_class",
+      payment_method: "littly",
+      location: "final_cta",
+      price: 45000,
+    });
+    track("vod_purchase_littly_click", { location: "final_cta" });
   };
 
   return (
@@ -359,20 +375,19 @@ export default function CheerVodLandingPage() {
             </h1>
             <p className="vod-headline"><b>구간별로 배우며 직접 무대를 완성해보세요.</b></p>
             <div className="vod-facts" aria-label="상품 핵심 정보">
-              <span><i className="vod-fact-icon" aria-hidden="true">▶</i>총 9개 영상</span>
+              <span><i className="vod-fact-icon" aria-hidden="true">▶</i>총 10개 영상</span>
               <span><i className="vod-fact-icon" aria-hidden="true">◷</i>1시간 58분</span>
               <span><i className="vod-fact-icon" aria-hidden="true">∞</i>평생 소장</span>
             </div>
-            <div className="vod-price" aria-label="결제 방식별 가격">
-              <span>계좌이체 <strong>39,000원</strong></span>
-              <span>리틀리 <strong>45,000원</strong></span>
+            <div className="vod-price" aria-label="39,000원부터, 계좌이체 39,000원, 간편결제 45,000원">
+              <strong>39,000원부터</strong>
+              <small>계좌이체 39,000원 · 간편결제 45,000원</small>
             </div>
             <div className="vod-actions">
               <button className="vod-button vod-primary" type="button" onClick={scrollToPurchase}>구매 방법 선택하기</button>
               <button className="vod-button vod-secondary" type="button" onClick={scrollToPreview}>강의 맛보기</button>
             </div>
-            {/* <p className="vod-microcopy">계좌이체 구매는 입금 확인 후 Google Drive 이용 권한을 보내드립니다.</p> */}
-            <p className="vod-hero-compact-note"><span aria-hidden="true">✓</span> 입금 확인 후 Gmail로 Google Drive 이용 권한 제공</p>
+            <p className="vod-hero-purchase-note"><span aria-hidden="true">✓</span> 간편결제 시 바로 수강 · 계좌이체 구매도 가능</p>
           </div>
         </div>
       </section>
@@ -472,7 +487,7 @@ export default function CheerVodLandingPage() {
 
       <section className="vod-section vod-curriculum">
         <div className="vod-container">
-          <div className="vod-heading"><p className="vod-eyebrow">CURRICULUM</p><h2>총 9개 영상 · 1시간 58분 37초</h2><p>동작 학습부터 배속별 완곡 연습까지 한 흐름으로 구성했습니다.</p></div>
+          <div className="vod-heading"><p className="vod-eyebrow">CURRICULUM</p><h2>총 10개 영상 · 1시간 58분 37초</h2><p>동작 학습부터 배속별 완곡 연습까지 한 흐름으로 구성했습니다.</p></div>
           {curriculumGroups.map((group) => <div className="vod-curriculum-group" key={group.id}>
             <div className="vod-group-heading"><h3>{group.title}</h3><p>{group.description}</p></div>
             <div className="vod-curriculum-list">{group.items.map((item) => <CurriculumCard item={item} key={item.id} />)}</div>
@@ -504,7 +519,7 @@ export default function CheerVodLandingPage() {
       <section className="vod-section vod-white">
         <div className="vod-container vod-narrow vod-centered">
           <div className="vod-heading"><p className="vod-eyebrow">PRODUCT DETAILS</p><h2>상품 정보</h2></div>
-          <dl className="vod-product-table">{[["상품명", "질풍가도 치어리딩 완전정복 클래스"], ["계좌이체 판매가", "39,000원"], ["리틀리 판매가", "45,000원"], ["영상 수", "총 9개"], ["총 재생시간", "1시간 58분 37초"], ["난이도", "치어리딩 입문·초급"], ["이용 기간", "평생 소장"], ["지원 기기", "PC·태블릿·모바일"], ["결제 방식", "계좌이체 또는 리틀리(카드·카카오페이·네이버페이)"], ["이용 방식", "결제 방식에 따라 Google Drive 또는 리틀리 강의실 이용"], ["음원", "제공하지 않음"], ["공연 활용", "가능"], ["파일·링크 공유", "불가"]].map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+          <dl className="vod-product-table">{[["상품명", "질풍가도 치어리딩 완전정복 클래스"], ["계좌이체 판매가", "39,000원"], ["리틀리 간편결제", "45,000원"], ["영상 수", "총 10개"], ["총 재생시간", "1시간 58분 37초"], ["난이도", "치어리딩 입문·초급"], ["이용 기간", "평생 소장"], ["지원 기기", "PC·태블릿·모바일"], ["결제 방식", "계좌이체 또는 리틀리 간편결제"], ["이용 방식", "계좌이체: Google Drive / 리틀리 결제: 리틀리 강의실"], ["음원", "제공하지 않음"], ["공연 활용", "가능"], ["파일·링크 공유", "불가"]].map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
         </div>
       </section>
 
@@ -513,25 +528,20 @@ export default function CheerVodLandingPage() {
           <div className="vod-heading vod-centered"><p className="vod-eyebrow">PURCHASE</p><h2>편리한 구매 방식을 선택해주세요</h2></div>
           <div className="vod-two-grid">
             <article className="vod-purchase-card vod-featured">
-              <span className="vod-purchase-label">공식 홈페이지 직접 구매</span><h3>계좌이체 후 Google Drive 이용</h3><strong className="vod-purchase-price">39,000원</strong>
-              <ul>{["계좌이체", "입금 확인 후 Gmail 계정 초대", "별도의 시청 기한 없이 반복 이용", "PC·태블릿·모바일 지원"].map((text) => <li key={text}><CheckIcon />{text}</li>)}</ul>
-              <p className="vod-purchase-notice">입금 확인 일정과 계좌 정보는 구매 신청 후 안내해드립니다.</p>
-              <div className="vod-agreements">
-                <label><input type="checkbox" checked={licenseAccepted} onChange={(event) => setLicenseAccepted(event.target.checked)} /><span>구매자 개인의 학습 목적으로 이용하며, 영상 파일이나 시청 링크를 타인에게 공유·복제·재판매·재배포하지 않는 것에 동의합니다.</span></label>
-                <label><input type="checkbox" checked={refundAccepted} onChange={(event) => setRefundAccepted(event.target.checked)} /><span>상품 제공 방식, 이용 범위 및 환불 규정을 확인했습니다.</span></label>
-              </div>
-              <button type="button" className="vod-button vod-primary vod-full" disabled={!canPurchase} onClick={handleDirectPurchase}>계좌이체로 구매하기</button>
-              {!canPurchase && <p className="vod-disabled-hint">두 항목에 동의하면 구매 버튼이 활성화됩니다.</p>}
+              <span className="vod-purchase-label">💰 6,000원 저렴하게 구매</span><h3>계좌이체</h3><strong className="vod-purchase-price">39,000원</strong>
+              <ul>{["계좌이체", "입금 확인 후 Google Drive 이용", "매일 한국시간 오전 10시 / 오후 10시 입금 확인", "평생 반복 이용", "PC·태블릿·모바일 지원"].map((text) => <li key={text}><CheckIcon />{text}</li>)}</ul>
+              <button type="button" className="vod-button vod-primary vod-full" onClick={handleDirectPurchase}>39,000원에 계좌이체로 구매</button>
             </article>
             <article className="vod-purchase-card">
-              <span className="vod-purchase-label">결제 후 바로 수강</span>
+              <span className="vod-purchase-label">⚡ 결제 후 바로 수강</span>
               <h3>리틀리에서 결제</h3>
               <strong className="vod-purchase-price">45,000원</strong>
-              <ul>{["카드결제·카카오페이·네이버페이", "결제 후 이메일·카카오 알림톡으로 강의실 링크 즉시 전달", "별도의 시청 기한 없이 반복 이용", "리틀리의 이용·환불 정책 적용"].map((text) => <li key={text}><CheckIcon />{text}</li>)}</ul>
-              <p className="vod-purchase-notice">리틀리 결제 금액에는 플랫폼 결제 수수료가 포함되어 계좌이체 금액과 다른 점 양해 부탁드립니다.</p>
-              <a className="vod-button vod-primary vod-full" href={littlyPurchaseUrl} target="_blank" rel="noopener noreferrer" onClick={() => track("vod_purchase_littly_click", { location: "purchase_card" })}>리틀리에서 결제하고 바로 수강하기</a>
+              <ul>{["카드 · 카카오페이 · 네이버페이", "결제 완료 후 바로 수강", "리틀리 강의실 이용", "평생 반복 이용"].map((text) => <li key={text}><CheckIcon />{text}</li>)}</ul>
+              <p className="vod-purchase-notice">간편결제와 결제 후 즉시 수강을 원하시는 경우 리틀리 결제를 이용해주세요.</p>
+              <a className="vod-button vod-primary vod-full" href={littlyPurchaseUrl} target="_blank" rel="noopener noreferrer" onClick={handleLittlyPurchase}>45,000원에 결제하고 바로 수강</a>
             </article>
           </div>
+          <div className="vod-purchase-common"><strong>두 상품의 강의 내용은 동일합니다. 결제 및 수강 방식만 다릅니다.</strong><p>계좌이체 구매는 Google Drive, 리틀리 구매는 리틀리 강의실에서 이용합니다.</p></div>
         </div>
       </section>
 
@@ -549,7 +559,7 @@ export default function CheerVodLandingPage() {
         </div>
       </section>
 
-      <section className="vod-final"><div className="vod-container vod-final-inner"><div><p className="vod-eyebrow">START YOUR PRACTICE</p><h2>이제 질풍가도 안무를 직접 완성해보세요.</h2><p>리틀리에서 간편하게 결제하고 바로 수강할 수 있습니다.</p></div><a className="vod-button vod-light" href={littlyPurchaseUrl} target="_blank" rel="noopener noreferrer" onClick={() => track("vod_purchase_littly_click", { location: "final_cta" })}>결제하고 바로 수강하기</a></div></section>
+      <section className="vod-final"><div className="vod-container vod-final-inner"><div><p className="vod-eyebrow">START YOUR PRACTICE</p><h2>이제 질풍가도 안무를 직접 완성해보세요.</h2><p>간편결제로 바로 시작하거나, 계좌이체로 더 저렴하게 구매할 수 있습니다.</p></div><a className="vod-button vod-light" href={littlyPurchaseUrl} target="_blank" rel="noopener noreferrer" onClick={handleFinalLittlyPurchase}>결제하고 바로 수강하기</a></div></section>
 
       {purchaseModalOpen && (
         <div className="vod-order-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) closePurchaseModal(); }}>
@@ -586,7 +596,7 @@ export default function CheerVodLandingPage() {
                     <div>
                       <span>주문 상품</span>
                       <h3 id="vod-order-product-title">질풍가도 치어리딩 완전정복 클래스</h3>
-                      <p>총 9개 영상 · 1시간 58분 · 기간 제한 없이 이용</p>
+                      <p>총 10개 영상 · 1시간 58분 · 기간 제한 없이 이용</p>
                     </div>
                     <strong>39,000원</strong>
                   </section>
@@ -627,7 +637,6 @@ export default function CheerVodLandingPage() {
                           required
                         />
                         {purchaseForm.gmail.length > 0 && !isGmailValid && <small className="vod-field-error">@gmail.com으로 끝나는 Gmail 주소를 입력해주세요.</small>}
-                        <small>입력하신 Gmail 계정으로 클래스 폴더 이용 권한을 보내드립니다.</small>
                       </label>
                       <label>
                         <span>Gmail 주소 다시 입력 <b>*</b></span>
@@ -643,10 +652,7 @@ export default function CheerVodLandingPage() {
                         {purchaseForm.gmailConfirm.length > 0 && !isGmailMatching && <small className="vod-field-error">입력한 Gmail 주소가 서로 일치하지 않습니다.</small>}
                       </label>
                     </div>
-                    <label className="vod-order-checkbox">
-                      <input type="checkbox" checked={purchaseForm.gmailAccepted} onChange={(event) => setPurchaseForm((current) => ({ ...current, gmailAccepted: event.target.checked }))} />
-                      <span><b>입력한 주소가 Google Drive 초대에 사용할 수 있는 Gmail 계정임을 확인했습니다.</b><small>Gmail 주소를 잘못 입력하면 상품 제공이 지연될 수 있습니다.</small></span>
-                    </label>
+                    <p className="vod-order-help">입력한 Gmail 주소로 강의 이용 권한이 제공되므로 정확하게 확인해주세요.</p>
                   </section>
 
                   <section className="vod-order-section" aria-labelledby="vod-schedule-title">

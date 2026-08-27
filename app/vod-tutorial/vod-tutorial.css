@@ -46,9 +46,9 @@
 .vod-facts { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
 .vod-facts span { padding: 8px 13px; border: 1px solid rgba(255,255,255,.28); border-radius: 999px; color: #fff; background: rgba(20,14,20,.32); backdrop-filter: blur(8px); font-size: .9rem; font-weight: 700; }
 .vod-fact-icon { margin-right: 5px; font-style: normal; }
-.vod-price { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 30px; font-family: var(--font-noto-sans-kr), sans-serif; font-weight: 800; letter-spacing: -.04em; }
-.vod-price span { display: inline-flex; align-items: baseline; gap: 8px; padding: 8px 13px; border: 1px solid rgba(255,255,255,.24); border-radius: 12px; color: rgba(255,255,255,.78); background: rgba(20,14,20,.28); font-weight: 700; }
-.vod-price strong { color: #fff; font-size: 1.7rem; }
+.vod-price { display: grid; justify-items: start; gap: 2px; margin-top: 30px; font-family: var(--font-noto-sans-kr), sans-serif; font-weight: 800; letter-spacing: -.04em; }
+.vod-price strong { color: #fff; font-size: 2.45rem; line-height: 1.25; }
+.vod-price small { color: rgba(255,255,255,.78); font-size: .88rem; font-weight: 600; letter-spacing: -.02em; }
 .vod-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
 .vod-button { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 22px; border: 1px solid transparent; border-radius: 12px; font-family: var(--font-noto-sans-kr), sans-serif; font-size: inherit; font-weight: 700; cursor: pointer; transition: transform .16s, background .16s, opacity .16s; }
 .vod-button:hover:not(:disabled) { transform: translateY(-2px); }
@@ -59,10 +59,12 @@
 .vod-hero .vod-secondary { color: #fff; border-color: rgba(255,255,255,.42); background: rgba(20,14,20,.36); backdrop-filter: blur(8px); }
 .vod-light { color: var(--vod-primary-dark); background: #fff; }
 .vod-button:disabled { opacity: .45; cursor: not-allowed; }
-.vod-microcopy, .vod-disabled-hint { margin: 12px 0 0; color: var(--vod-muted); font-size: .86rem; }
+.vod-microcopy { margin: 12px 0 0; color: var(--vod-muted); font-size: .86rem; }
 .vod-hero .vod-microcopy { color: rgba(255,255,255,.7); }
 .vod-taling-note { margin: 12px 0 0; color: rgba(255,255,255,.7); font-size: .82rem; }
-.vod-hero-compact-note, .vod-next-section-notices { display: none; }
+.vod-next-section-notices { display: none; }
+.vod-hero-purchase-note { margin: 12px 0 0; color: rgba(255,255,255,.82); font-size: .86rem; font-weight: 600; }
+.vod-hero-purchase-note span { color: var(--vod-accent); font-weight: 900; }
 .vod-hero-video-control { position: absolute; right: clamp(18px,3vw,42px); bottom: clamp(18px,3vw,36px); z-index: 2; display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 1px solid rgba(255,255,255,.38); border-radius: 50%; color: #fff; background: rgba(12,9,12,.5); backdrop-filter: blur(10px); font: inherit; cursor: pointer; transition: transform .16s ease,background .16s ease; }
 .vod-hero-video-control:hover { background: rgba(12,9,12,.72); transform: scale(1.06); }
 .vod-hero-video-control:focus-visible { outline: 3px solid rgba(255,255,255,.68); outline-offset: 3px; }
@@ -120,7 +122,10 @@
 .vod-info ul, .vod-purchase-card ul { display: grid; gap: 14px; margin: 28px 0 0; padding: 0; list-style: none; }.vod-info li, .vod-purchase-card li { display: flex; align-items: flex-start; gap: 10px; }.vod-alert { display: grid; place-items: center; flex: 0 0 20px; width: 20px; height: 20px; border-radius: 50%; color: #fff; background: #b27e20; font-size: .72rem; font-weight: 900; }
 .vod-product-table { overflow: hidden; margin: 0; border: 1px solid var(--vod-line); border-radius: 18px; text-align: left; }.vod-product-table > div { display: grid; grid-template-columns: 180px 1fr; min-height: 58px; border-bottom: 1px solid var(--vod-line); }.vod-product-table > div:last-child { border-bottom: 0; }.vod-product-table dt, .vod-product-table dd { display: flex; align-items: center; margin: 0; padding: 14px 20px; }.vod-product-table dt { font-weight: 800; background: #f7f8f8; }.vod-product-table dd { color: var(--vod-muted); }
 
-.vod-purchase { background: linear-gradient(135deg,#fef3c7,#fce7f3); scroll-margin-top: 20px; }.vod-purchase-card { display: flex; flex-direction: column; padding: 36px; border: 1px solid var(--vod-line); border-radius: 28px; background: #fff; box-shadow: 0 16px 36px rgba(236,72,153,.1); }.vod-featured { border: 2px solid var(--vod-primary); }.vod-purchase-label { align-self: flex-start; padding: 6px 10px; border-radius: 999px; color: var(--vod-primary-dark); background: var(--vod-primary-soft); font-size: .75rem; font-weight: 900; }.vod-purchase-card h3 { margin: 18px 0 0; font-size: 1.45rem; }.vod-purchase-price { margin-top: 12px; color: #eab308; font-family: "SANJUGotgam", sans-serif; font-size: 2rem; }.vod-purchase-notice { margin: 24px 0 0; padding: 16px; border-radius: 12px; color: var(--vod-muted); background: #fffaf5; font-size: .9rem; }.vod-agreements { display: grid; gap: 12px; margin: 22px 0; padding: 18px; border: 1px solid var(--vod-line); border-radius: 12px; }.vod-agreements label { display: flex; align-items: flex-start; gap: 10px; color: var(--vod-muted); font-size: .87rem; cursor: pointer; }.vod-agreements input { flex: none; width: 18px; height: 18px; margin-top: 3px; accent-color: var(--vod-primary); }.vod-full { width: 100%; margin-top: auto; }
+.vod-purchase { background: linear-gradient(135deg,#fef3c7,#fce7f3); scroll-margin-top: 20px; }.vod-purchase-card { display: flex; flex-direction: column; padding: 36px; border: 1px solid var(--vod-line); border-radius: 28px; background: #fff; box-shadow: 0 16px 36px rgba(236,72,153,.1); }.vod-featured { border: 2px solid var(--vod-primary); }.vod-purchase-label { align-self: flex-start; padding: 6px 10px; border-radius: 999px; color: var(--vod-primary-dark); background: var(--vod-primary-soft); font-size: .75rem; font-weight: 900; }.vod-purchase-card h3 { margin: 18px 0 0; font-size: 1.45rem; }.vod-purchase-price { margin-top: 12px; color: #eab308; font-family: "SANJUGotgam", sans-serif; font-size: 2rem; }.vod-purchase-notice { margin: 24px 0 0; padding: 16px; border-radius: 12px; color: var(--vod-muted); background: #fffaf5; font-size: .9rem; }.vod-full { width: 100%; margin-top: auto; }
+.vod-purchase-common { margin: 24px auto 0; padding: 20px 24px; border: 1px solid rgba(236,72,153,.18); border-radius: 16px; color: var(--vod-primary-dark); background: rgba(255,255,255,.82); text-align: center; }
+.vod-purchase-common strong { display: block; font-size: 1.02rem; }
+.vod-purchase-common p { margin: 5px 0 0; color: var(--vod-muted); font-size: .86rem; }
 
 .vod-order-backdrop { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; padding: 24px; background: rgba(23,17,23,.68); backdrop-filter: blur(5px); }
 .vod-order-modal { display: flex; flex-direction: column; width: min(780px,100%); max-height: min(92dvh,940px); overflow: hidden; border: 1px solid rgba(255,255,255,.8); border-radius: 24px; color: #342f35; background: #fff; box-shadow: 0 30px 90px rgba(20,12,18,.35); font-family: var(--font-noto-sans-kr), "Noto Sans KR", sans-serif; line-height: 1.55; }
@@ -252,10 +257,9 @@
   .vod-facts span { position: relative; padding: 0; border: 0; border-radius: 0; color: inherit; background: transparent; backdrop-filter: none; font-size: clamp(.68rem,2.8vw,.78rem); font-weight: 600; white-space: nowrap; }
   .vod-facts span:not(:last-child)::after { margin: 0 6px; color: rgba(255,255,255,.55); content: "·"; }
   .vod-fact-icon { display: none; }
-  .vod-price { justify-content: flex-start; }
-  .vod-price { margin-top: 9px; }
-  .vod-price span { display: none; }
+  .vod-price { width: 50%; margin-top: 9px; text-align: left; }
   .vod-price strong { color: #fff; font-size: 2.15rem; }
+  .vod-price small { font-size: clamp(.62rem,2.6vw,.72rem); line-height: 1.35; }
   .vod-microcopy { text-align: center; }
   .vod-hero .vod-microcopy, .vod-hero .vod-taling-note { display: none; }
   .vod-hero .vod-secondary { min-height: 42px; color: rgba(255,255,255,.9); border-color: rgba(255,255,255,.4); background: transparent; box-shadow: none; backdrop-filter: none; }
@@ -264,8 +268,7 @@
   .vod-hero .vod-button { width: min(50%,220px); }
   .vod-hero .vod-primary { padding-right: 8px; padding-left: 8px; font-size: .84rem; white-space: nowrap; }
   .vod-hero .vod-secondary { width: min(42%,180px); min-height: 38px; padding: 0 14px; border-radius: 10px; font-size: .82rem; }
-  .vod-hero-compact-note { display: block; width: 50%; margin: 5px 0 0; color: rgba(255,255,255,.9); font-size: .75rem; font-weight: 600; line-height: 1.45; text-align: left; }
-  .vod-hero-compact-note span { color: var(--vod-accent); font-weight: 900; }
+  .vod-hero-purchase-note { width: 50%; margin-top: 7px; font-size: .7rem; line-height: 1.4; text-align: left; }
   .vod-next-section-notices { display: grid; gap: 5px; max-width: 680px; margin: 18px auto 0; padding: 14px 16px; border: 1px solid var(--vod-line); border-radius: 14px; color: var(--vod-muted); background: var(--vod-bg); font-size: .8rem; line-height: 1.5; text-align: center; }
   .vod-next-section-notices p { margin: 0; }
   .vod-hero-video-control { right: 14px; bottom: 14px; width: 42px; height: 42px; }
@@ -301,11 +304,11 @@
   .vod-duration { padding-top: 6px; font-size: .78rem; }
   .vod-info, .vod-purchase-card, .vod-legal-card { padding: 22px; }
   .vod-info ul, .vod-purchase-card ul { gap: 9px; margin-top: 18px; }
+  .vod-purchase-common { margin-top: 14px; padding: 16px; }
   .vod-product-table > div { grid-template-columns: 105px minmax(0,1fr); min-height: 48px; }
   .vod-product-table dt, .vod-product-table dd { padding: 11px 12px; line-height: 1.4; }
   .vod-product-table dt { padding-bottom: 11px; font-size: .88rem; }
   .vod-product-table dd { padding-top: 11px; font-size: .88rem; }
-  .vod-agreements { margin: 16px 0; padding: 14px; }
   .vod-faq button { min-height: 62px; padding: 14px 4px; }
   .vod-final-inner { display: block; }.vod-final .vod-button { margin-top: 24px; }
   .vod-share-section { padding: 1px 0; }

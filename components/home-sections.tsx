@@ -97,7 +97,7 @@ export function HomeFeaturedClass({ onDetail }: { onDetail: () => void }) {
     <section className="home-section home-featured-class" aria-labelledby="featured-class-title">
       <div className="home-container home-featured-grid">
         <Image src="/vod-hero-poster.jpg" alt="질풍가도 완전정복 클래스 강의 장면" width={1280} height={720} sizes="(max-width: 760px) calc(100vw - 28px), 50vw" />
-        <div><p className="home-eyebrow">FEATURED CLASS</p><h2 id="featured-class-title">질풍가도 완전정복 클래스</h2><p>치어리딩이 처음이어도 기본 동작부터 구간별·배속별 연습까지 순서대로 따라가며 한 곡을 완성할 수 있습니다.</p><ul><li>총 9개 영상 · 약 1시간 58분</li><li>기본 동작부터 풀곡까지 단계별 구성</li><li>0.3·0.5·0.7·1배속 반복 연습</li><li>계좌이체 구매 시 기간 제한 없이 이용</li><li>구매자 대상 온라인 레슨 할인 혜택</li></ul><Link className="home-button home-button-light" href="/vod-tutorial" onClick={onDetail}>클래스 자세히 보기</Link></div>
+        <div><p className="home-eyebrow">FEATURED CLASS</p><h2 id="featured-class-title">질풍가도 완전정복 클래스</h2><p>치어리딩이 처음이어도 기본 동작부터 구간별·배속별 연습까지 순서대로 따라가며 한 곡을 완성할 수 있습니다.</p><ul><li>총 10개 영상 · 약 1시간 58분</li><li>기본 동작부터 풀곡까지 단계별 구성</li><li>0.3·0.5·0.7·1배속 반복 연습</li><li>계좌이체 구매 시 기간 제한 없이 이용</li><li>구매자 대상 온라인 레슨 할인 혜택</li></ul><Link className="home-button home-button-light" href="/vod-tutorial" onClick={onDetail}>클래스 자세히 보기</Link></div>
       </div>
     </section>
   );

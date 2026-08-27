@@ -7,7 +7,6 @@ import { db } from "@/lib/firebase";
 type VodOrderBody = {
   depositorName?: unknown;
   gmail?: unknown;
-  gmailAccepted?: unknown;
   refundAccepted?: unknown;
   licenseAccepted?: unknown;
 };
@@ -35,8 +34,7 @@ export async function POST(request: NextRequest) {
     const depositorName = typeof body.depositorName === "string" ? body.depositorName.trim() : "";
     const gmail = typeof body.gmail === "string" ? body.gmail.trim().toLowerCase() : "";
     const gmailIsValid = /^[^\s@]+@gmail\.com$/i.test(gmail);
-    const agreementsAccepted = body.gmailAccepted === true
-      && body.refundAccepted === true
+    const agreementsAccepted = body.refundAccepted === true
       && body.licenseAccepted === true;
 
     if (!depositorName || !gmailIsValid || !agreementsAccepted) {
@@ -62,7 +60,6 @@ export async function POST(request: NextRequest) {
       amount: 39000,
       depositorName,
       gmail,
-      gmailAccepted: true,
       refundAccepted: true,
       licenseAccepted: true,
       status: "pending_deposit_confirmation",
