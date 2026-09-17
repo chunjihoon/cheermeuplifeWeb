@@ -9,12 +9,12 @@ import { footerNavigation, siteConfig, siteNavigation } from "@/lib/site-config"
 export function SiteChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const isOverlay = pathname === "/" || pathname === "/vod-tutorial";
-  const isVod = pathname === "/vod-tutorial";
+  const isOverlay = pathname === "/" || pathname === "/vod-tutorial" || pathname === "/crew";
+  const isOnDark = pathname === "/vod-tutorial" || pathname === "/crew";
 
   return (
     <div className="site-shell">
-      <header className={`site-header ${isOverlay ? "site-header-overlay" : "site-header-solid"} ${isVod ? "site-header-on-dark" : ""}`}>
+      <header className={`site-header ${isOverlay ? "site-header-overlay" : "site-header-solid"} ${isOnDark ? "site-header-on-dark" : ""}`}>
         <div className="site-header-inner">
           <Link className="site-brand" href="/" aria-label="취미로운응원생활 홈">
             <Image src="/cheermeuplife_logo.png" alt="" width={42} height={42} priority={pathname === "/"} />
