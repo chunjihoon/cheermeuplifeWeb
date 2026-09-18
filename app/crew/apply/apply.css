@@ -48,6 +48,7 @@
 .crew-field input::placeholder, .crew-field textarea::placeholder { color: #a99da4; }
 .crew-field input:focus, .crew-field textarea:focus { border-color: var(--apply-pink); box-shadow: 0 0 0 3px rgba(236,72,153,.12); }
 .crew-fieldset { min-width: 0; margin: 26px 0 0; padding: 0; border: 0; }
+.crew-fieldset:focus { outline: 3px solid rgba(236,72,153,.28); outline-offset: 8px; }
 .crew-fieldset legend { margin-bottom: 12px; padding: 0; color: #53474f; font-size: .88rem; font-weight: 800; }
 .crew-choice-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
 .crew-choice-stack, .crew-check-list { display: grid; gap: 8px; }

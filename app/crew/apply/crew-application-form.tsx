@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import { track } from "@/lib/analytics";
 
@@ -73,6 +73,7 @@ export function CrewApplicationForm({ showFirstPerformance }: { showFirstPerform
   const [isComplete, setIsComplete] = useState(false);
   const [error, setError] = useState("");
   const [showAvailableTimesError, setShowAvailableTimesError] = useState(false);
+  const invalidFocusHandledRef = useRef(false);
   const showPreparation = showFirstPerformance && (form.oct21Availability === "참여 가능합니다." || form.oct21Availability === "아직 일정을 확인해야 합니다.");
 
   const updateText = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -106,7 +107,9 @@ export function CrewApplicationForm({ showFirstPerformance }: { showFirstPerform
 
     if (form.availableTimes.length === 0) {
       setShowAvailableTimesError(true);
-      document.getElementById("crew-available-times")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      const availableTimesField = document.getElementById("crew-available-times");
+      availableTimesField?.focus({ preventScroll: true });
+      availableTimesField?.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
 
@@ -133,6 +136,25 @@ export function CrewApplicationForm({ showFirstPerformance }: { showFirstPerform
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const focusFirstInvalid = (event: FormEvent<HTMLFormElement>) => {
+    if (invalidFocusHandledRef.current) return;
+    invalidFocusHandledRef.current = true;
+
+    const invalidControl = event.target as HTMLElement;
+    const questionGroup = invalidControl.closest("fieldset");
+    const focusTarget = questionGroup instanceof HTMLElement ? questionGroup : invalidControl;
+
+    if (questionGroup instanceof HTMLElement) questionGroup.tabIndex = -1;
+    window.requestAnimationFrame(() => {
+      focusTarget.focus({ preventScroll: true });
+      focusTarget.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+
+    window.setTimeout(() => {
+      invalidFocusHandledRef.current = false;
+    }, 300);
   };
 
   if (isComplete) {
@@ -170,7 +192,7 @@ export function CrewApplicationForm({ showFirstPerformance }: { showFirstPerform
         </div>
       </header>
 
-      <form className="crew-apply-form crew-apply-container" onSubmit={submitApplication}>
+      <form className="crew-apply-form crew-apply-container" onSubmit={submitApplication} onInvalid={focusFirstInvalid}>
         <section className="crew-form-section" aria-labelledby="basic-info-title">
           <div className="crew-form-section-heading"><span>01</span><div><p>BASIC INFORMATION</p><h2 id="basic-info-title">기본정보</h2></div></div>
           <div className="crew-form-grid">
@@ -208,7 +230,7 @@ export function CrewApplicationForm({ showFirstPerformance }: { showFirstPerform
 
         <section className="crew-form-section" aria-labelledby="availability-title">
           <div className="crew-form-section-heading"><span>03</span><div><p>AVAILABILITY</p><h2 id="availability-title">활동 가능 일정</h2></div></div>
-          <fieldset className="crew-fieldset" id="crew-available-times" aria-describedby={showAvailableTimesError ? "crew-available-times-error" : undefined}>
+          <fieldset className="crew-fieldset" id="crew-available-times" tabIndex={-1} aria-describedby={showAvailableTimesError ? "crew-available-times-error" : undefined}>
             <legend>평소 공연 참여가 비교적 가능한 시간대를 모두 선택해주세요. <RequiredMark /></legend>
             <div className="crew-check-list">{availableTimeOptions.map((option) => <label className="crew-check" key={option}><input type="checkbox" name="availableTimes" value={option} checked={form.availableTimes.includes(option)} onChange={(event) => updateAvailableTime(option, event.target.checked)} /><span>{option}</span></label>)}</div>
             {form.availableTimes.includes("기타") && <label className="crew-field crew-other-field"><span>가능한 시간대를 직접 입력해주세요.</span><input name="availableTimeOther" value={form.availableTimeOther} onChange={updateText} maxLength={200} required /></label>}
