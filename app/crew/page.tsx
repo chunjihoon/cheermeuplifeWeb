@@ -68,6 +68,9 @@ export default function CrewRecruitmentPage() {
             <p className="crew-highlight-line">응원단 활동은 끝났지만,<br />응원까지 끝내고 싶지는 않은 사람들을 위한 새로운 무대.</p>
           </div>
         </div>
+        <div className="crew-section-visual crew-definition-visual">
+          <Image src="/crew/crew-what-we-are.png" alt="야외 무대에서 액션 치어리딩 공연을 펼치는 응원단원" fill sizes="(max-width: 820px) calc(100vw - 40px), 1120px" />
+        </div>
       </section>
 
       <section className="crew-fit crew-section" id="eligibility">
@@ -99,6 +102,9 @@ export default function CrewRecruitmentPage() {
         <div className="crew-section-kicker">HOW IT WORKS</div>
         <h2>평소에는 각자의 자리에서,<br />공연이 생기면 함께.</h2>
         <p className="crew-section-intro">멤버들은 공연 영상을 통해 기본 레퍼토리를 개별적으로 익힙니다. 실제 공연이 결정되면 참여 가능한 멤버들이 모여 필요한 합주를 진행한 뒤 함께 무대에 섭니다.</p>
+        <div className="crew-section-visual crew-process-visual">
+          <Image src="/crew/crew-how-it-works.png" alt="관객 앞에서 함께 액션 치어리딩 공연을 펼치는 응원단" fill sizes="(max-width: 820px) calc(100vw - 40px), 1120px" />
+        </div>
         <ol className="crew-process-list">
           <li><span className="crew-process-number">01</span><strong>개별 레퍼토리 습득</strong><p>공연 영상을 보고 각자 안무를 익힙니다.</p></li>
           <li><span className="crew-process-number">02</span><strong>공연 기회 안내</strong><p>날짜·지역·공연 조건을 공유합니다.</p></li>
