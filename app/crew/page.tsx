@@ -11,7 +11,7 @@ export const metadata: Metadata = createMetadata({
   title,
   description,
   path: "/crew",
-  image: "/crew/crew-stage.jpg",
+  image: "/crew/crew-stage.png",
   keywords: ["액션 치어리딩", "응원단 모집", "치어리딩 크루", "공연 크루", "취미로운 응원 크루"],
 });
 
@@ -20,7 +20,7 @@ export default function CrewRecruitmentPage() {
     <main id="main" className="crew-page">
       <section className="crew-hero" aria-labelledby="crew-hero-title">
         <div className="crew-hero-media" aria-hidden="true">
-          <Image src="/crew/crew-stage.jpg" alt="" fill priority sizes="100vw" />
+          <Image src="/crew/crew-stage.png" alt="" fill priority sizes="100vw" />
         </div>
         <div className="crew-hero-overlay" />
         <div className="crew-hero-content">
@@ -154,7 +154,7 @@ export default function CrewRecruitmentPage() {
       </section>
 
       <section className="crew-final-cta">
-        <Image src="/crew/crew-group.jpg" alt="공연을 마치고 무대에서 함께 포즈를 취한 액션 치어리딩 팀" fill sizes="100vw" />
+        <Image src="/crew/crew-group.png" alt="공연을 마치고 무대에서 함께 포즈를 취한 액션 치어리딩 팀" fill sizes="100vw" />
         <div className="crew-final-overlay" />
         <div className="crew-final-content">
           <p className="crew-eyebrow">ONE MORE STAGE, TOGETHER</p>
