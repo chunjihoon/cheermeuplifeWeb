@@ -52,15 +52,15 @@
 .crew-prose strong { color: var(--crew-ink); }
 
 .crew-section-navy { color: #fff; background: var(--crew-navy); }
-.crew-definition, .crew-process { position: relative; isolation: isolate; overflow: hidden; }
+.crew-intro, .crew-definition { position: relative; isolation: isolate; overflow: hidden; }
 .crew-section-background, .crew-section-background-overlay { position: absolute; inset: 0; }
 .crew-section-background { z-index: -2; }
 .crew-section-background img { object-fit: cover; }
 .crew-section-background-overlay { z-index: -1; }
+.crew-intro .crew-section-background img { object-position: center 45%; }
+.crew-intro .crew-section-background-overlay { background: linear-gradient(105deg,rgba(255,255,255,.97),rgba(255,250,245,.84)); }
 .crew-definition .crew-section-background img { object-position: center 44%; }
 .crew-definition .crew-section-background-overlay { background: linear-gradient(90deg,rgba(37,27,35,.94),rgba(37,27,35,.78)),linear-gradient(rgba(48,37,45,.7),rgba(48,37,45,.88)); }
-.crew-process .crew-section-background img { object-position: center 45%; }
-.crew-process .crew-section-background-overlay { background: linear-gradient(110deg,rgba(255,251,234,.95),rgba(255,244,248,.86)); }
 .crew-section-kicker-light { color: #f8b7d4; }
 .crew-definition h2 span { color: var(--crew-yellow); }
 .crew-definition-copy { color: rgba(255,255,255,.74); font-size: 1.06rem; }
@@ -142,10 +142,10 @@
   .crew-fit-list { grid-template-columns: 1fr; }
   .crew-fit-list li:nth-child(odd) { margin-right: 0; }
   .crew-process-list { grid-template-columns: repeat(2,1fr); }
+  .crew-intro .crew-section-background img { object-position: 48% center; }
+  .crew-intro .crew-section-background-overlay { background: rgba(255,252,248,.9); }
   .crew-definition .crew-section-background img { object-position: 52% center; }
   .crew-definition .crew-section-background-overlay { background: rgba(37,27,35,.86); }
-  .crew-process .crew-section-background img { object-position: 48% center; }
-  .crew-process .crew-section-background-overlay { background: rgba(255,248,242,.88); }
   .crew-stage-card { grid-template-columns: 1fr; border-radius: 22px; box-shadow: 10px 10px 0 var(--crew-navy); }
   .crew-stage-photo { min-height: 400px; max-height: 520px; }
   .crew-application-heading { position: static; }

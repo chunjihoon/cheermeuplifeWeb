@@ -45,6 +45,10 @@ export default function CrewRecruitmentPage() {
       </section>
 
       <section className="crew-intro crew-section" id="about">
+        <div className="crew-section-background" aria-hidden="true">
+          <Image src="/crew/crew-how-it-works.png" alt="" fill sizes="100vw" />
+        </div>
+        <div className="crew-section-background-overlay" />
         <div className="crew-section-kicker">ABOUT THE CREW</div>
         <div className="crew-intro-grid">
           <h2>다시 시작하되,<br />예전과 똑같을 필요는 없으니까.</h2>
@@ -100,10 +104,6 @@ export default function CrewRecruitmentPage() {
       </section>
 
       <section className="crew-process crew-section crew-section-sky" id="process">
-        <div className="crew-section-background" aria-hidden="true">
-          <Image src="/crew/crew-how-it-works.png" alt="" fill sizes="100vw" />
-        </div>
-        <div className="crew-section-background-overlay" />
         <div className="crew-section-kicker">HOW IT WORKS</div>
         <h2>평소에는 각자의 자리에서,<br />공연이 생기면 함께.</h2>
         <p className="crew-section-intro">멤버들은 공연 영상을 통해 기본 레퍼토리를 개별적으로 익힙니다. 실제 공연이 결정되면 참여 가능한 멤버들이 모여 필요한 합주를 진행한 뒤 함께 무대에 섭니다.</p>
