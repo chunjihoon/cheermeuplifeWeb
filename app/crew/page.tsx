@@ -5,7 +5,7 @@ import "./crew.css";
 
 const title = "취미로운 응원 크루 모집";
 const description = "액션 치어리딩 경험자들이 부담 없이 다시 만나고 무대에 설 수 있는 프로젝트형 크루, 취미로운 응원 크루의 멤버를 모집합니다.";
-const applicationFormUrl = process.env.NEXT_PUBLIC_CREW_APPLICATION_URL || "#application";
+const applicationFormUrl = "/crew/apply";
 
 export const metadata: Metadata = createMetadata({
   title,

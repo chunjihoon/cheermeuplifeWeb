@@ -15,7 +15,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: absoluteUrl("/posts"), lastModified: new Date("2026-07-15"), changeFrequency: "weekly", priority: .9 },
     { url: absoluteUrl("/faq"), lastModified: new Date("2026-07-15"), changeFrequency: "monthly", priority: .6 },
     { url: absoluteUrl("/contact"), lastModified: new Date("2026-07-15"), changeFrequency: "monthly", priority: .5 },
-    { url: absoluteUrl("/privacy"), lastModified: new Date("2026-07-15"), changeFrequency: "yearly", priority: .3 },
+    { url: absoluteUrl("/privacy"), lastModified: new Date("2026-09-17"), changeFrequency: "yearly", priority: .3 },
     { url: absoluteUrl("/terms"), lastModified: new Date("2026-07-15"), changeFrequency: "yearly", priority: .3 },
   ];
   return [...staticPages, ...publishedPosts.map((post) => ({ url: absoluteUrl(`/posts/${post.slug}`), lastModified: new Date(post.updatedAt), changeFrequency: "monthly" as const, priority: .75 }))];
