@@ -30,7 +30,7 @@ export default function CrewRecruitmentPage() {
         <div className="crew-hero-overlay" />
         <div className="crew-hero-content">
           <p className="crew-eyebrow">HOBBY CHEER CREW · NEW MEMBERS</p>
-          <h1 id="crew-hero-title">응원단 활동,<br /><span>그때로 끝내기 아쉬웠다면.</span></h1>
+          <h1 id="crew-hero-title">응원단 활동,<br /><span>그대로 끝내기 아쉬웠다면.</span></h1>
           <p className="crew-hero-lead">예전에 함께했던 열정은 그대로 두고, 부담은 가볍게.<br />액션 치어리딩 경험자들과 다시 무대에 서보세요.</p>
           <div className="crew-hero-actions">
             <a className="crew-button crew-button-primary" href={applicationFormUrl}>크루 지원하기 <span aria-hidden="true">→</span></a>
