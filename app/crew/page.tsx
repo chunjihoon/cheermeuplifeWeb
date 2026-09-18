@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { isFirstPerformanceOpen } from "@/lib/crew";
 import { createMetadata } from "@/lib/seo";
 import "./crew.css";
 
 const title = "취미로운 응원 크루 모집";
 const description = "액션 치어리딩 경험자들이 부담 없이 다시 만나고 무대에 설 수 있는 프로젝트형 크루, 취미로운 응원 크루의 멤버를 모집합니다.";
 const applicationFormUrl = "/crew/apply";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = createMetadata({
   title,
@@ -16,6 +19,8 @@ export const metadata: Metadata = createMetadata({
 });
 
 export default function CrewRecruitmentPage() {
+  const showFirstPerformance = isFirstPerformanceOpen();
+
   return (
     <main id="main" className="crew-page">
       <section className="crew-hero" aria-labelledby="crew-hero-title">
@@ -104,10 +109,10 @@ export default function CrewRecruitmentPage() {
         </ol>
       </section>
 
-      <section className="crew-first-stage crew-section" id="first-stage">
+      {showFirstPerformance && <section className="crew-first-stage crew-section" id="first-stage">
         <article className="crew-stage-card">
           <div className="crew-stage-photo">
-            <Image src="/crew/crew-festival.jpg" alt="야외 축제 무대에서 공연 중인 액션 치어리딩 팀" width={479} height={665} sizes="(max-width: 820px) 100vw, 45vw" />
+            <Image src="/crew/crew-festival.png" alt="야외 축제 무대에서 공연 중인 액션 치어리딩 팀" width={479} height={665} sizes="(max-width: 820px) 100vw, 45vw" />
           </div>
           <div className="crew-stage-copy">
             <p className="crew-stage-badge">FIRST STAGE</p>
@@ -122,7 +127,7 @@ export default function CrewRecruitmentPage() {
             <p>이번 모집은 이 공연만을 위한 단기 모집이 아닙니다. 향후 기업·기관·축제·체육대회 등의 공연에 함께할 크루 멤버를 모집합니다.</p>
           </div>
         </article>
-      </section>
+      </section>}
 
       <section className="crew-opportunities crew-section">
         <div className="crew-opportunity-grid">

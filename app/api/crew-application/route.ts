@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { addDoc, collection } from "firebase/firestore";
 import nodemailer from "nodemailer";
+import { isFirstPerformanceOpen } from "@/lib/crew";
 import { db } from "@/lib/firebase";
 
 type CrewApplicationBody = Record<string, unknown>;
@@ -54,11 +55,13 @@ export async function POST(request: NextRequest) {
     const oct21PreparationAvailability = normalizeText(payload.oct21PreparationAvailability);
     const questions = normalizeText(payload.questions);
     const privacyAccepted = payload.privacyAccepted === true;
+    const firstPerformanceOpen = isFirstPerformanceOpen();
     const availableTimes = Array.isArray(payload.availableTimes)
       ? [...new Set(payload.availableTimes.map(normalizeText).filter(Boolean))]
       : [];
 
-    const requiredText = [name, birthYear, gender, phone, email, location, cheerleadingExperience, activityStatus, seoulMetroAvailable, motivation, oct21Availability];
+    const requiredText = [name, birthYear, gender, phone, email, location, cheerleadingExperience, activityStatus, seoulMetroAvailable, motivation];
+    if (firstPerformanceOpen) requiredText.push(oct21Availability);
     if (requiredText.some((value) => !value) || availableTimes.length === 0 || !privacyAccepted) {
       return NextResponse.json({ ok: false, error: "필수 입력값과 개인정보 동의를 확인해주세요." }, { status: 400 });
     }
@@ -67,7 +70,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ ok: false, error: "출생연도는 4자리로 입력해주세요." }, { status: 400 });
     }
 
-    if (!genders.has(gender) || !activityStatuses.has(activityStatus) || !seoulMetroOptions.has(seoulMetroAvailable) || !oct21Options.has(oct21Availability)) {
+    if (!genders.has(gender) || !activityStatuses.has(activityStatus) || !seoulMetroOptions.has(seoulMetroAvailable) || (firstPerformanceOpen && !oct21Options.has(oct21Availability))) {
       return NextResponse.json({ ok: false, error: "선택 항목을 다시 확인해주세요." }, { status: 400 });
     }
 
@@ -83,7 +86,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ ok: false, error: "기타 활동 가능 시간대를 입력해주세요." }, { status: 400 });
     }
 
-    const preparationRequired = oct21Availability === "참여 가능합니다." || oct21Availability === "아직 일정을 확인해야 합니다.";
+    const preparationRequired = firstPerformanceOpen && (oct21Availability === "참여 가능합니다." || oct21Availability === "아직 일정을 확인해야 합니다.");
     if (preparationRequired && !preparationOptions.has(oct21PreparationAvailability)) {
       return NextResponse.json({ ok: false, error: "첫 공연 준비 일정 참여 여부를 확인해주세요." }, { status: 400 });
     }
@@ -126,7 +129,7 @@ export async function POST(request: NextRequest) {
       seoulMetroAvailable,
       activityLink,
       motivation,
-      oct21Availability,
+      oct21Availability: firstPerformanceOpen ? oct21Availability : null,
       oct21PreparationAvailability: preparationRequired ? oct21PreparationAvailability : null,
       questions,
       privacyAccepted: true,
@@ -170,7 +173,7 @@ export async function POST(request: NextRequest) {
               <tr><th style="padding:8px;border:1px solid #eadce3;text-align:left">수도권 공연 참여</th><td style="padding:8px;border:1px solid #eadce3">${escapeHtml(seoulMetroAvailable)}</td></tr>
               <tr><th style="padding:8px;border:1px solid #eadce3;text-align:left">활동 영상/SNS</th><td style="padding:8px;border:1px solid #eadce3">${escapeHtml(activityLink || "미입력")}</td></tr>
               <tr><th style="padding:8px;border:1px solid #eadce3;text-align:left">지원동기</th><td style="padding:8px;border:1px solid #eadce3">${formatMultiline(motivation)}</td></tr>
-              <tr><th style="padding:8px;border:1px solid #eadce3;text-align:left">10월 21일 참여</th><td style="padding:8px;border:1px solid #eadce3">${escapeHtml(oct21Availability)}</td></tr>
+              <tr><th style="padding:8px;border:1px solid #eadce3;text-align:left">10월 21일 참여</th><td style="padding:8px;border:1px solid #eadce3">${escapeHtml(firstPerformanceOpen ? oct21Availability : "해당 없음")}</td></tr>
               <tr><th style="padding:8px;border:1px solid #eadce3;text-align:left">첫 공연 준비</th><td style="padding:8px;border:1px solid #eadce3">${escapeHtml(preparationRequired ? oct21PreparationAvailability : "해당 없음")}</td></tr>
               <tr><th style="padding:8px;border:1px solid #eadce3;text-align:left">기타 문의</th><td style="padding:8px;border:1px solid #eadce3">${formatMultiline(questions || "미입력")}</td></tr>
             </tbody>

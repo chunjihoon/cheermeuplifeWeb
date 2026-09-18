@@ -66,12 +66,12 @@ function RequiredMark() {
   return <span className="crew-apply-required" aria-label="필수 입력">*</span>;
 }
 
-export function CrewApplicationForm() {
+export function CrewApplicationForm({ showFirstPerformance }: { showFirstPerformance: boolean }) {
   const [form, setForm] = useState<CrewApplication>(initialForm);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
   const [error, setError] = useState("");
-  const showPreparation = form.oct21Availability === "참여 가능합니다." || form.oct21Availability === "아직 일정을 확인해야 합니다.";
+  const showPreparation = showFirstPerformance && (form.oct21Availability === "참여 가능합니다." || form.oct21Availability === "아직 일정을 확인해야 합니다.");
 
   const updateText = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
@@ -207,7 +207,7 @@ export function CrewApplicationForm() {
           </fieldset>
         </section>
 
-        <section className="crew-form-section crew-first-performance" aria-labelledby="first-performance-title">
+        {showFirstPerformance && <section className="crew-form-section crew-first-performance" aria-labelledby="first-performance-title">
           <div className="crew-form-section-heading"><span>04</span><div><p>FIRST PERFORMANCE</p><h2 id="first-performance-title">첫 공연</h2></div></div>
           <fieldset className="crew-fieldset">
             <legend>2026년 10월 21일(수) 서울에서 진행되는 첫 공연에 참여할 수 있나요? <RequiredMark /></legend>
@@ -220,7 +220,7 @@ export function CrewApplicationForm() {
             <p className="crew-field-description">첫 공연에 참여하게 될 경우 약 2~3주 동안 공연 레퍼토리 약 3곡을 개별적으로 익힌 뒤, 공연 전 주에 서울에서 참여 멤버들과 합주를 진행할 예정입니다.</p>
             <div className="crew-choice-stack">{preparationOptions.map((option) => <label className="crew-choice" key={option}><input type="radio" name="oct21PreparationAvailability" value={option} checked={form.oct21PreparationAvailability === option} onChange={() => updateRadio("oct21PreparationAvailability", option)} required /><span>{option}</span></label>)}</div>
           </fieldset>}
-        </section>
+        </section>}
 
         <section className="crew-form-section" aria-labelledby="final-info-title">
           <div className="crew-form-section-heading"><span>05</span><div><p>ONE LAST THING</p><h2 id="final-info-title">기타 및 제출</h2></div></div>
