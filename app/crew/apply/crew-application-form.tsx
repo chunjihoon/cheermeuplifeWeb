@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import { track } from "@/lib/analytics";
 
-const genderOptions = ["남성", "여성", "기타", "응답하지 않음"] as const;
+const genderOptions = ["여성", "남성", "기타", "응답하지 않음"] as const;
 const activityStatusOptions = ["졸업생", "휴학생", "재학생", "기타"] as const;
 const availableTimeOptions = [
   "평일 오전",
@@ -71,6 +72,7 @@ export function CrewApplicationForm({ showFirstPerformance }: { showFirstPerform
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
   const [error, setError] = useState("");
+  const [showAvailableTimesError, setShowAvailableTimesError] = useState(false);
   const showPreparation = showFirstPerformance && (form.oct21Availability === "참여 가능합니다." || form.oct21Availability === "아직 일정을 확인해야 합니다.");
 
   const updateText = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -88,6 +90,7 @@ export function CrewApplicationForm({ showFirstPerformance }: { showFirstPerform
   };
 
   const updateAvailableTime = (value: string, checked: boolean) => {
+    if (checked) setShowAvailableTimesError(false);
     setForm((current) => ({
       ...current,
       availableTimes: checked
@@ -100,6 +103,12 @@ export function CrewApplicationForm({ showFirstPerformance }: { showFirstPerform
   const submitApplication = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isSubmitting) return;
+
+    if (form.availableTimes.length === 0) {
+      setShowAvailableTimesError(true);
+      document.getElementById("crew-available-times")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
 
     setIsSubmitting(true);
     setError("");
@@ -145,6 +154,10 @@ export function CrewApplicationForm({ showFirstPerformance }: { showFirstPerform
   return (
     <main className="crew-apply-page">
       <header className="crew-apply-hero">
+        <div className="crew-apply-hero-media" aria-hidden="true">
+          <Image src="/crew/crew-apply-hero.png" alt="" fill priority sizes="100vw" />
+        </div>
+        <div className="crew-apply-hero-overlay" />
         <div className="crew-apply-container">
           <Link className="crew-apply-back" href="/crew">← 모집 안내로 돌아가기</Link>
           <p className="crew-apply-eyebrow">HOBBY CHEER CREW · APPLICATION</p>
@@ -195,10 +208,11 @@ export function CrewApplicationForm({ showFirstPerformance }: { showFirstPerform
 
         <section className="crew-form-section" aria-labelledby="availability-title">
           <div className="crew-form-section-heading"><span>03</span><div><p>AVAILABILITY</p><h2 id="availability-title">활동 가능 일정</h2></div></div>
-          <fieldset className="crew-fieldset">
+          <fieldset className="crew-fieldset" id="crew-available-times" aria-describedby={showAvailableTimesError ? "crew-available-times-error" : undefined}>
             <legend>평소 공연 참여가 비교적 가능한 시간대를 모두 선택해주세요. <RequiredMark /></legend>
             <div className="crew-check-list">{availableTimeOptions.map((option) => <label className="crew-check" key={option}><input type="checkbox" name="availableTimes" value={option} checked={form.availableTimes.includes(option)} onChange={(event) => updateAvailableTime(option, event.target.checked)} /><span>{option}</span></label>)}</div>
             {form.availableTimes.includes("기타") && <label className="crew-field crew-other-field"><span>가능한 시간대를 직접 입력해주세요.</span><input name="availableTimeOther" value={form.availableTimeOther} onChange={updateText} maxLength={200} required /></label>}
+            {showAvailableTimesError && form.availableTimes.length === 0 && <p className="crew-field-error" id="crew-available-times-error" role="alert">활동 가능 시간대를 한 개 이상 선택해주세요.</p>}
           </fieldset>
 
           <fieldset className="crew-fieldset">
@@ -233,9 +247,8 @@ export function CrewApplicationForm({ showFirstPerformance }: { showFirstPerform
             <label className="crew-privacy-check"><input type="checkbox" checked={form.privacyAccepted} onChange={(event) => setForm((current) => ({ ...current, privacyAccepted: event.target.checked }))} required /><span>개인정보 수집 및 이용에 동의합니다.</span></label>
           </div>
 
-          {form.availableTimes.length === 0 && <p className="crew-form-hint">활동 가능 시간대를 한 개 이상 선택해주세요.</p>}
           {error && <p className="crew-form-error" role="alert">{error}</p>}
-          <button className="crew-apply-button crew-submit-button" type="submit" disabled={isSubmitting || form.availableTimes.length === 0}>{isSubmitting ? "지원서 제출 중..." : "취미로운 응원 크루 지원하기 📣"}</button>
+          <button className="crew-apply-button crew-submit-button" type="submit" disabled={isSubmitting}>{isSubmitting ? "지원서 제출 중..." : "취미로운 응원 크루 지원하기 📣"}</button>
           <p className="crew-submit-note">제출 후 내용을 확인해 개별적으로 연락드리겠습니다.</p>
         </section>
       </form>
