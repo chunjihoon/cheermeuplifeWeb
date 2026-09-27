@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
-import { isFirstPerformanceOpen } from "@/lib/crew";
 import { createMetadata } from "@/lib/seo";
 import { CrewApplicationForm } from "./crew-application-form";
 import "./apply.css";
-
-export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = createMetadata({
   title: "취미로운 응원 크루 지원하기",
@@ -14,5 +11,5 @@ export const metadata: Metadata = createMetadata({
 });
 
 export default function CrewApplicationPage() {
-  return <CrewApplicationForm showFirstPerformance={isFirstPerformanceOpen()} />;
+  return <CrewApplicationForm />;
 }

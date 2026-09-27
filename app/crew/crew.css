@@ -91,19 +91,6 @@
 .crew-process-list strong { display: block; font-size: 1.08rem; }
 .crew-process-list p { margin: .5rem 0 0; color: var(--crew-muted); font-size: .9rem; line-height: 1.6; }
 
-.crew-stage-card { display: grid; grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); overflow: hidden; border-radius: 28px; background: var(--crew-yellow); box-shadow: 18px 18px 0 var(--crew-navy); }
-.crew-stage-photo { min-height: 680px; overflow: hidden; }
-.crew-stage-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
-.crew-stage-copy { padding: clamp(2rem,5vw,4.5rem); }
-.crew-stage-badge { display: inline-block; margin: 0 0 1.5rem; padding: .4rem .68rem; border-radius: 999px; color: #fff; background: var(--crew-navy); font-size: .75rem; font-weight: 900; letter-spacing: .14em; }
-.crew-stage-copy h2 { font-size: clamp(2.35rem,5vw,4.6rem); }
-.crew-event-facts { margin: 2rem 0; border-top: 2px solid var(--crew-navy); }
-.crew-event-facts div { display: grid; grid-template-columns: 4rem 1fr; gap: 1rem; padding: .85rem 0; border-bottom: 1px solid rgba(48,37,45,.35); }
-.crew-event-facts dt { font-weight: 900; }
-.crew-event-facts dd { margin: 0; }
-.crew-stage-copy > p { font-size: .96rem; }
-.crew-stage-emphasis { font-size: 1.12rem !important; font-weight: 900; }
-
 .crew-opportunities { padding-top: 4rem; background: #fff; }
 .crew-application { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(3rem,8vw,7rem); }
 .crew-section-ink { color: #fff; background: #211921; }
@@ -146,8 +133,6 @@
   .crew-intro .crew-section-background-overlay { background: rgba(255,252,248,.9); }
   .crew-definition .crew-section-background img { object-position: 52% center; }
   .crew-definition .crew-section-background-overlay { background: rgba(37,27,35,.86); }
-  .crew-stage-card { grid-template-columns: 1fr; border-radius: 22px; box-shadow: 10px 10px 0 var(--crew-navy); }
-  .crew-stage-photo { min-height: 400px; max-height: 520px; }
   .crew-application-heading { position: static; }
   .crew-mobile-cta { position: fixed; z-index: 90; inset: auto 0 0; display: block; padding: .7rem 1rem max(.7rem,env(safe-area-inset-bottom)); background: rgba(48,37,45,.96); box-shadow: 0 -8px 30px rgba(0,0,0,.18); backdrop-filter: blur(12px); }
   .crew-mobile-cta a { display: flex; align-items: center; justify-content: space-between; min-height: 48px; padding: .55rem 1rem; border-radius: 11px; color: #fff; background: linear-gradient(90deg,#e2a900,var(--crew-pink)); font-weight: 900; text-decoration: none; }
@@ -162,8 +147,6 @@
   .crew-process-list { grid-template-columns: 1fr; }
   .crew-process-list li { min-height: auto; }
   .crew-process-number { margin-bottom: 1.5rem; }
-  .crew-stage-photo { min-height: 340px; }
-  .crew-event-facts div { grid-template-columns: 3.5rem 1fr; }
   .crew-final-cta { min-height: 650px; }
   .crew-final-content > p br { display: none; }
 }

@@ -40,7 +40,7 @@
 .crew-form-grid { display: grid; gap: 20px; }
 .crew-field { display: grid; gap: 8px; margin-top: 22px; color: #53474f; font-size: .88rem; font-weight: 800; }
 .crew-form-section-heading + .crew-field, .crew-form-section-heading + .crew-form-grid, .crew-form-section-heading + .crew-fieldset { margin-top: 0; }
-.crew-field small, .crew-field-description { color: var(--apply-muted); font-size: .78rem; font-style: normal; font-weight: 500; line-height: 1.65; }
+.crew-field small { color: var(--apply-muted); font-size: .78rem; font-style: normal; font-weight: 500; line-height: 1.65; }
 .crew-field em { padding: 10px 12px; border-radius: 10px; color: #785f00; background: #fff8d9; font-size: .76rem; font-style: normal; font-weight: 800; }
 .crew-apply-required { color: var(--apply-pink-dark); }
 .crew-field input, .crew-field textarea { width: 100%; min-height: 50px; padding: 12px 14px; border: 1px solid #dfd1d9; border-radius: 12px; color: var(--apply-ink); background: #fff; font: inherit; font-size: .92rem; font-weight: 500; outline: none; transition: border-color .16s ease,box-shadow .16s ease; }
@@ -63,10 +63,11 @@
 .crew-check input:checked + span::before { display: grid; place-items: center; border-color: var(--apply-pink); color: #fff; background: var(--apply-pink); font-size: .72rem; font-weight: 900; content: "✓"; }
 .crew-choice input:focus-visible + span, .crew-check input:focus-visible + span { outline: 3px solid rgba(236,72,153,.25); outline-offset: 2px; }
 .crew-other-field { margin: 12px 0 0; }
-.crew-field-description { margin: -2px 0 13px; }
-.crew-conditional-field { padding: 18px; border: 1px solid #efbfd4; border-radius: 16px; background: #fff7fa; }
-.crew-conditional-field legend { padding: 0 5px; }
-.crew-first-performance { background: linear-gradient(145deg,#fff,#fffaf0); }
+.crew-conditional-group { margin-top: 20px; padding: 18px; border: 1px solid #efbfd4; border-radius: 16px; background: #fff9fb; }
+.crew-conditional-group > :first-child { margin-top: 0; }
+.crew-training-notice { display: grid; gap: 10px; margin-top: 15px; padding: 15px; border-radius: 12px; color: #665a62; background: #fff8dc; font-size: .79rem; line-height: 1.7; }
+.crew-training-notice p { margin: 0; }
+.crew-training-notice strong { color: #765d00; }
 
 .crew-privacy-card { margin-top: 28px; padding: 18px; border: 1px solid #ead5df; border-radius: 16px; background: #faf7f9; }
 .crew-privacy-card h3 { margin: 0; font-size: .92rem; }

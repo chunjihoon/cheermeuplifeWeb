@@ -1,12 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { addDoc, collection } from "firebase/firestore";
 import nodemailer from "nodemailer";
-import { isFirstPerformanceOpen } from "@/lib/crew";
 import { db } from "@/lib/firebase";
 
 type CrewApplicationBody = Record<string, unknown>;
 
 const genders = new Set(["남성", "여성", "기타", "응답하지 않음"]);
+const experienceOptions = new Set(["경험 있음", "경험 없음"]);
+const basicTrainingOptions = new Set([
+  "네, 참여할 의향이 있습니다.",
+  "비용과 일정을 확인한 뒤 결정하고 싶습니다.",
+  "현재는 참여가 어렵습니다.",
+]);
 const activityStatuses = new Set(["졸업생", "휴학생", "재학생", "기타"]);
 const availableTimeOptions = new Set([
   "평일 오전",
@@ -18,8 +23,6 @@ const availableTimeOptions = new Set([
   "기타",
 ]);
 const seoulMetroOptions = new Set(["참여 가능합니다.", "일정이나 지역에 따라 가능합니다.", "참여가 어렵습니다."]);
-const oct21Options = new Set(["참여 가능합니다.", "아직 일정을 확인해야 합니다.", "이번 공연은 어렵습니다."]);
-const preparationOptions = new Set(["가능합니다.", "세부 일정 협의가 필요합니다.", "어렵습니다."]);
 
 const normalizeText = (value: unknown) => typeof value === "string" ? value.trim() : "";
 const isWithin = (value: string, max: number) => value.length <= max;
@@ -45,23 +48,23 @@ export async function POST(request: NextRequest) {
     const email = normalizeText(payload.email).toLowerCase();
     const location = normalizeText(payload.location);
     const cheerleadingExperience = normalizeText(payload.cheerleadingExperience);
+    const cheerleadingHistory = normalizeText(payload.cheerleadingHistory);
+    const basicTrainingInterest = normalizeText(payload.basicTrainingInterest);
     const activityStatus = normalizeText(payload.activityStatus);
     const activityStatusOther = normalizeText(payload.activityStatusOther);
     const availableTimeOther = normalizeText(payload.availableTimeOther);
     const seoulMetroAvailable = normalizeText(payload.seoulMetroAvailable);
     const activityLink = normalizeText(payload.activityLink);
     const motivation = normalizeText(payload.motivation);
-    const oct21Availability = normalizeText(payload.oct21Availability);
-    const oct21PreparationAvailability = normalizeText(payload.oct21PreparationAvailability);
     const questions = normalizeText(payload.questions);
     const privacyAccepted = payload.privacyAccepted === true;
-    const firstPerformanceOpen = isFirstPerformanceOpen();
+    const hasExperience = cheerleadingExperience === "경험 있음";
+    const hasNoExperience = cheerleadingExperience === "경험 없음";
     const availableTimes = Array.isArray(payload.availableTimes)
       ? [...new Set(payload.availableTimes.map(normalizeText).filter(Boolean))]
       : [];
 
-    const requiredText = [name, birthYear, gender, phone, email, location, cheerleadingExperience, activityStatus, seoulMetroAvailable, motivation];
-    if (firstPerformanceOpen) requiredText.push(oct21Availability);
+    const requiredText = [name, birthYear, gender, phone, email, location, cheerleadingExperience, seoulMetroAvailable, motivation];
     if (requiredText.some((value) => !value) || availableTimes.length === 0 || !privacyAccepted) {
       return NextResponse.json({ ok: false, error: "필수 입력값과 개인정보 동의를 확인해주세요." }, { status: 400 });
     }
@@ -70,25 +73,28 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ ok: false, error: "출생연도는 4자리로 입력해주세요." }, { status: 400 });
     }
 
-    if (!genders.has(gender) || !activityStatuses.has(activityStatus) || !seoulMetroOptions.has(seoulMetroAvailable) || (firstPerformanceOpen && !oct21Options.has(oct21Availability))) {
+    if (!genders.has(gender) || !experienceOptions.has(cheerleadingExperience) || !seoulMetroOptions.has(seoulMetroAvailable)) {
       return NextResponse.json({ ok: false, error: "선택 항목을 다시 확인해주세요." }, { status: 400 });
+    }
+
+    if (hasExperience && (!cheerleadingHistory || !activityStatuses.has(activityStatus))) {
+      return NextResponse.json({ ok: false, error: "액션 치어리딩 경력과 현재 활동 상태를 확인해주세요." }, { status: 400 });
+    }
+
+    if (hasNoExperience && !basicTrainingOptions.has(basicTrainingInterest)) {
+      return NextResponse.json({ ok: false, error: "기초 그룹 트레이닝 참여 의향을 확인해주세요." }, { status: 400 });
     }
 
     if (availableTimes.some((value) => !availableTimeOptions.has(value))) {
       return NextResponse.json({ ok: false, error: "활동 가능 시간대를 다시 확인해주세요." }, { status: 400 });
     }
 
-    if (activityStatus === "기타" && !activityStatusOther) {
+    if (hasExperience && activityStatus === "기타" && !activityStatusOther) {
       return NextResponse.json({ ok: false, error: "현재 활동 상태를 입력해주세요." }, { status: 400 });
     }
 
     if (availableTimes.includes("기타") && !availableTimeOther) {
       return NextResponse.json({ ok: false, error: "기타 활동 가능 시간대를 입력해주세요." }, { status: 400 });
-    }
-
-    const preparationRequired = firstPerformanceOpen && (oct21Availability === "참여 가능합니다." || oct21Availability === "아직 일정을 확인해야 합니다.");
-    if (preparationRequired && !preparationOptions.has(oct21PreparationAvailability)) {
-      return NextResponse.json({ ok: false, error: "첫 공연 준비 일정 참여 여부를 확인해주세요." }, { status: 400 });
     }
 
     const phoneDigits = phone.replace(/\D/g, "").replace(/^82/, "0");
@@ -101,7 +107,7 @@ export async function POST(request: NextRequest) {
     }
 
     const textLimits: Array<[string, number]> = [
-      [name, 50], [phone, 20], [location, 100], [cheerleadingExperience, 3000],
+      [name, 50], [phone, 20], [location, 100], [cheerleadingHistory, 3000],
       [activityStatusOther, 100], [availableTimeOther, 200], [activityLink, 500],
       [motivation, 3000], [questions, 3000],
     ];
@@ -122,15 +128,15 @@ export async function POST(request: NextRequest) {
       email,
       location,
       cheerleadingExperience,
-      activityStatus,
-      activityStatusOther: activityStatus === "기타" ? activityStatusOther : "",
+      cheerleadingHistory: hasExperience ? cheerleadingHistory : "",
+      basicTrainingInterest: hasNoExperience ? basicTrainingInterest : null,
+      activityStatus: hasExperience ? activityStatus : null,
+      activityStatusOther: hasExperience && activityStatus === "기타" ? activityStatusOther : "",
       availableTimes,
       availableTimeOther: availableTimes.includes("기타") ? availableTimeOther : "",
       seoulMetroAvailable,
-      activityLink,
+      activityLink: hasExperience ? activityLink : "",
       motivation,
-      oct21Availability: firstPerformanceOpen ? oct21Availability : null,
-      oct21PreparationAvailability: preparationRequired ? oct21PreparationAvailability : null,
       questions,
       privacyAccepted: true,
       status: "new",
@@ -148,7 +154,9 @@ export async function POST(request: NextRequest) {
       ...availableTimes.filter((value) => value !== "기타"),
       ...(availableTimes.includes("기타") ? [`기타: ${availableTimeOther}`] : []),
     ].join(", ");
-    const activityStatusLabel = activityStatus === "기타" ? `기타: ${activityStatusOther}` : activityStatus;
+    const activityStatusLabel = hasExperience
+      ? (activityStatus === "기타" ? `기타: ${activityStatusOther}` : activityStatus)
+      : "해당 없음";
 
     await transporter.sendMail({
       from: `"취미로운 응원 크루 지원" <${process.env.EMAIL_USER}>`,
@@ -167,14 +175,14 @@ export async function POST(request: NextRequest) {
               <tr><th style="padding:8px;border:1px solid #eadce3;text-align:left">연락처</th><td style="padding:8px;border:1px solid #eadce3">${escapeHtml(phone)}</td></tr>
               <tr><th style="padding:8px;border:1px solid #eadce3;text-align:left">이메일</th><td style="padding:8px;border:1px solid #eadce3">${escapeHtml(email)}</td></tr>
               <tr><th style="padding:8px;border:1px solid #eadce3;text-align:left">거주지역</th><td style="padding:8px;border:1px solid #eadce3">${escapeHtml(location)}</td></tr>
-              <tr><th style="padding:8px;border:1px solid #eadce3;text-align:left">액션 치어리딩 경력</th><td style="padding:8px;border:1px solid #eadce3">${formatMultiline(cheerleadingExperience)}</td></tr>
+              <tr><th style="padding:8px;border:1px solid #eadce3;text-align:left">액션 치어리딩 경험 여부</th><td style="padding:8px;border:1px solid #eadce3">${escapeHtml(cheerleadingExperience)}</td></tr>
+              <tr><th style="padding:8px;border:1px solid #eadce3;text-align:left">액션 치어리딩 경력</th><td style="padding:8px;border:1px solid #eadce3">${hasExperience ? formatMultiline(cheerleadingHistory) : "해당 없음"}</td></tr>
               <tr><th style="padding:8px;border:1px solid #eadce3;text-align:left">현재 활동 상태</th><td style="padding:8px;border:1px solid #eadce3">${escapeHtml(activityStatusLabel)}</td></tr>
+              <tr><th style="padding:8px;border:1px solid #eadce3;text-align:left">기초 그룹 트레이닝 참여 의향</th><td style="padding:8px;border:1px solid #eadce3">${escapeHtml(hasNoExperience ? basicTrainingInterest : "해당 없음")}</td></tr>
               <tr><th style="padding:8px;border:1px solid #eadce3;text-align:left">가능한 시간</th><td style="padding:8px;border:1px solid #eadce3">${escapeHtml(availableTimesLabel)}</td></tr>
               <tr><th style="padding:8px;border:1px solid #eadce3;text-align:left">수도권 공연 참여</th><td style="padding:8px;border:1px solid #eadce3">${escapeHtml(seoulMetroAvailable)}</td></tr>
-              <tr><th style="padding:8px;border:1px solid #eadce3;text-align:left">활동 영상/SNS</th><td style="padding:8px;border:1px solid #eadce3">${escapeHtml(activityLink || "미입력")}</td></tr>
+              <tr><th style="padding:8px;border:1px solid #eadce3;text-align:left">활동 영상/SNS</th><td style="padding:8px;border:1px solid #eadce3">${escapeHtml(hasExperience ? (activityLink || "미입력") : "해당 없음")}</td></tr>
               <tr><th style="padding:8px;border:1px solid #eadce3;text-align:left">지원동기</th><td style="padding:8px;border:1px solid #eadce3">${formatMultiline(motivation)}</td></tr>
-              <tr><th style="padding:8px;border:1px solid #eadce3;text-align:left">10월 21일 참여</th><td style="padding:8px;border:1px solid #eadce3">${escapeHtml(firstPerformanceOpen ? oct21Availability : "해당 없음")}</td></tr>
-              <tr><th style="padding:8px;border:1px solid #eadce3;text-align:left">첫 공연 준비</th><td style="padding:8px;border:1px solid #eadce3">${escapeHtml(preparationRequired ? oct21PreparationAvailability : "해당 없음")}</td></tr>
               <tr><th style="padding:8px;border:1px solid #eadce3;text-align:left">기타 문의</th><td style="padding:8px;border:1px solid #eadce3">${formatMultiline(questions || "미입력")}</td></tr>
             </tbody>
           </table>
