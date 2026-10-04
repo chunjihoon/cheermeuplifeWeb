@@ -110,7 +110,7 @@ export function BeginnerProgram() {
 
       <section className="beginner-section beginner-section-white beginner-section-staff" aria-labelledby="staff-title">
         <div className="beginner-container">
-          <div className="beginner-heading"><p className="beginner-eyebrow">WHO RUNS THE PROGRAM</p><h2 id="staff-title">프로그램을 함께 운영하는 사람들</h2><p>8주 과정 전체를 기획하고 관리하는 프로그램 총괄과 매주 오프라인 수업을 진행하는 현장 강사가 역할을 나누어 함께 운영합니다.</p></div>
+          <div className="beginner-heading"><p className="beginner-eyebrow">WHO RUNS THE PROGRAM</p><h2 id="staff-title">프로그램을 함께 운영하는 사람들</h2><p>8주 과정 전체를 기획/관리하는 프로그램 총괄과 매주 오프라인 수업을 진행하는 현장 강사가 역할을 나누어 함께 운영합니다.</p></div>
           <div className="beginner-staff-grid">
             {beginnerStaff.map((person) => <article className="beginner-staff-card" key={person.role}>
               <div className="beginner-staff-photo">
@@ -127,8 +127,8 @@ export function BeginnerProgram() {
         <div className="beginner-container">
           <div className="beginner-heading"><p className="beginner-eyebrow">ATTENDANCE</p><h2 id="attendance-title">출석 및 결석 안내</h2><p>본 과정은 동일한 멤버가 함께 진도를 맞추는 <strong>고정 기수제 그룹 수업</strong>입니다. 참가자 개인 사정으로 특정 회차에 참석하지 못하더라도 전체 수업은 예정된 일정에 따라 정상적으로 진행됩니다.</p></div>
           <div className="beginner-policy-grid">
-            <article><span>01</span><h3>개인 사정으로 결석하는 경우</h3><p>참가자의 개인 사정으로 결석한 회차는 <strong>별도 환불 제공되지 않습니다.</strong></p></article>
-            <article><span>02</span><h3>결석자를 위한 온라인 보충</h3><p>개인 사정으로 결석하여 다음 수업 참여에 어려움이 있는 경우, 참가자의 요청에 따라 <strong>온라인 화상 미팅을 통한 보충을 과정 중 최대 2회까지 제공할 수 있습니다.</strong></p><p>같은 기간에 보충이 필요한 참가자가 여러 명인 경우 공동으로 진행될 수 있습니다.</p><p>온라인 보충은 결석 회차 자체를 대체하는 별도의 정규수업이나 1:1 개인레슨이 아니며, 참가자의 진도 복귀를 지원하기 위한 보충 프로그램입니다.</p></article>
+            <article><span>01</span><h3>개인 사정으로 결석하는 경우</h3><p>참가자의 개인 사정으로 결석한 회차는 <strong>별도 환불되지 않습니다.</strong></p></article>
+            <article><span>02</span><h3>결석자를 위한 온라인 보충</h3><p>개인 사정으로 결석하여 다음 수업 참여에 어려움이 있는 경우, 참가자의 요청에 따라 <strong>온라인 화상 미팅을 통한 보충을 과정 중 최대 2회까지 제공할 수 있습니다.</strong></p><p>온라인 보충은 결석 회차 자체를 대체하는 별도의 정규수업이나 1:1 개인레슨이 아니며, 참가자의 진도 복귀를 지원하기 위한 보충 프로그램입니다.</p></article>
             <article><span>03</span><h3>운영자 사정으로 수업이 진행되지 못하는 경우</h3><p>취미로운 응원생활 측의 사정으로 예정된 오프라인 수업을 진행할 수 없는 경우에는 일정 조정 또는 별도 보강을 통해 <strong>총 8회의 오프라인 수업이 제공되도록 운영하는 것을 원칙</strong>으로 합니다.</p></article>
           </div>
         </div>
@@ -174,7 +174,7 @@ export function BeginnerProgram() {
       </section>
 
       <section className="beginner-closing" aria-labelledby="closing-title">
-        <div className="beginner-container"><p>2026년 10월 11일,</p><h2 id="closing-title">우리의 첫 연습을 시작합니다.</h2><p>처음이어도 괜찮습니다.</p><p>8주 동안 하나씩 배우고, 함께 맞춰가면서<br />처음에는 낯설었던 동작이 한 곡의 응원으로 완성되는 경험을 만들어보겠습니다.</p><strong>취미로운 응원크루 Beginner 1기에서 만나요.</strong></div>
+        <div className="beginner-container"><p>2026년 10월 11일,</p><h2 id="closing-title">온라인 오리엔테이션에서 만나요!</h2><p>처음이어도 괜찮습니다.</p><p>8주 동안 하나씩 배우고, 함께 맞춰가면서<br />처음에는 낯설었던 동작이 한 곡의 응원으로 완성되는 경험을 만들어보겠습니다.</p><strong>취미로운 응원크루 Beginner 1기에서 만나요.</strong></div>
       </section>
     </main>
   );
