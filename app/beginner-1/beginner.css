@@ -1,0 +1,316 @@
+:root { scroll-behavior: smooth; }
+
+.beginner-page {
+  --beginner-ink: #40363e;
+  --beginner-muted: #71656e;
+  --beginner-pink: #ec4899;
+  --beginner-pink-dark: #be185d;
+  --beginner-yellow: #facc15;
+  --beginner-line: #efdce5;
+  min-height: 70vh;
+  color: var(--beginner-ink);
+  background: #fffaf5;
+  font-family: Arial, "Apple SD Gothic Neo", sans-serif;
+  line-height: 1.72;
+  word-break: keep-all;
+}
+
+.beginner-page * { box-sizing: border-box; }
+.beginner-container { width: min(1120px,calc(100% - 40px)); margin: 0 auto; }
+.beginner-section { padding: 90px 0; }
+.beginner-section-white { background: #fff; }
+.beginner-section-soft { background: linear-gradient(135deg,#fffbea,#fff4f9); }
+.beginner-eyebrow { margin: 0 0 10px; color: var(--beginner-pink); font-size: .76rem; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
+.beginner-heading { max-width: 760px; margin-bottom: 38px; }
+.beginner-heading h2, .beginner-confirm-copy h2, .beginner-payment h2, .beginner-closing h2 { margin: 0; font-family: "SANJUGotgam",Arial,sans-serif; font-size: clamp(1.8rem,3vw,2.65rem); line-height: 1.25; letter-spacing: -.04em; }
+.beginner-heading > p:last-child { margin: 14px 0 0; color: var(--beginner-muted); }
+.beginner-heading strong, .beginner-prose strong, .beginner-policy-grid strong { color: var(--beginner-pink-dark); }
+
+.beginner-hero {
+  position: relative;
+  isolation: isolate;
+  padding: 76px 0 82px;
+  overflow: hidden;
+  background-image:
+    linear-gradient(105deg,rgba(255,251,234,.96) 0%,rgba(255,248,238,.91) 52%,rgba(255,244,249,.82) 100%),
+    url("/beginner-1/beginner-hero.png");
+  background-position: center;
+  background-size: cover;
+}
+.beginner-hero-grid { display: grid; grid-template-columns: minmax(0,1.25fr) minmax(310px,.75fr); align-items: center; gap: 58px; }
+.beginner-hero-grid > *, .beginner-copy-layout > *, .beginner-confirm-grid > *, .beginner-payment-card > * { min-width: 0; }
+.beginner-hero-copy h1 { max-width: 760px; margin: 0; font-family: "SANJUGotgam",Arial,sans-serif; font-size: clamp(2.7rem,5vw,4.45rem); line-height: 1.13; letter-spacing: -.06em; }
+.beginner-hero-copy h1 span { color: var(--beginner-pink-dark); }
+.beginner-hero-description { max-width: 680px; margin-top: 25px; color: var(--beginner-muted); font-size: 1.02rem; }
+.beginner-hero-description p { margin: 0 0 11px; }
+.beginner-hero-description strong { color: #55414f; }
+.beginner-button { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 23px; border: 1px solid transparent; border-radius: 12px; font: inherit; font-size: .92rem; font-weight: 850; text-decoration: none; cursor: pointer; transition: transform .18s ease,box-shadow .18s ease,opacity .18s ease; }
+.beginner-button:hover:not(:disabled) { transform: translateY(-2px); }
+.beginner-button:focus-visible { outline: 3px solid rgba(236,72,153,.3); outline-offset: 3px; }
+.beginner-button-primary { margin-top: 22px; color: #fff; background: linear-gradient(90deg,#e9b714,#ec4899); box-shadow: 0 12px 28px rgba(210,55,125,.2); }
+.beginner-hero-card { padding: 30px; border: 1px solid rgba(239,220,229,.9); border-radius: 26px; background: rgba(255,255,255,.92); box-shadow: 0 24px 60px rgba(107,60,86,.14); }
+.beginner-hero-card > span { color: var(--beginner-pink-dark); font-size: .76rem; font-weight: 900; letter-spacing: .11em; }
+.beginner-hero-card > strong { display: block; margin: 8px 0 22px; color: #332a31; font-family: "SANJUGotgam",Arial,sans-serif; font-size: 2.5rem; line-height: 1.2; }
+.beginner-hero-card dl { display: grid; gap: 13px; margin: 0; }
+.beginner-hero-card dl div { display: flex; justify-content: space-between; gap: 20px; padding-top: 13px; border-top: 1px solid var(--beginner-line); }
+.beginner-hero-card dt { color: var(--beginner-muted); font-size: .82rem; }
+.beginner-hero-card dd { margin: 0; text-align: right; font-size: .88rem; font-weight: 800; }
+
+#program-info {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-image:
+    linear-gradient(110deg,rgba(255,255,255,.96) 0%,rgba(255,255,255,.89) 50%,rgba(255,250,245,.84) 100%),
+    url("/beginner-1/beginner-programInfo.png");
+  background-position: center;
+  background-size: cover;
+}
+.beginner-info-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 14px; margin: 0; }
+.beginner-info-grid > div { min-height: 165px; padding: 23px; border: 1px solid var(--beginner-line); border-radius: 20px; background: #fff; box-shadow: 0 12px 28px rgba(101,61,85,.06); }
+.beginner-info-grid dt { color: var(--beginner-pink-dark); font-size: .78rem; font-weight: 900; }
+.beginner-info-grid dd { margin: 15px 0 0; color: #3d333a; font-size: 1.04rem; font-weight: 850; line-height: 1.45; }
+.beginner-info-grid small { display: block; margin-top: 9px; color: var(--beginner-muted); font-size: .76rem; line-height: 1.55; }
+.beginner-info-grid .beginner-info-price { grid-column: span 2; color: #fff; border-color: transparent; background: linear-gradient(105deg,#e6ae11,#ec4899); }
+.beginner-info-price dt, .beginner-info-price small { color: rgba(255,255,255,.86); }
+.beginner-info-price dd { margin-top: 8px; color: #fff; font-family: "SANJUGotgam",Arial,sans-serif; font-size: 2.25rem; }
+.beginner-info-grid .beginner-info-recruitment { grid-column: span 2; background: rgba(255,255,255,.96); }
+.beginner-info-recruitment dd { margin-top: 8px; color: var(--beginner-pink-dark); font-family: "SANJUGotgam",Arial,sans-serif; font-size: 1.55rem; }
+.beginner-info-recruitment.is-full dd { color: #5d5059; }
+.beginner-recruitment-progress { height: 7px; margin-top: 18px; overflow: hidden; border-radius: 999px; background: #f4e5ec; }
+.beginner-recruitment-progress span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg,var(--beginner-yellow),var(--beginner-pink)); }
+
+.beginner-section-curriculum {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-image:
+    linear-gradient(115deg,rgba(255,251,234,.94) 0%,rgba(255,248,239,.9) 48%,rgba(255,244,249,.86) 100%),
+    url("/beginner-1/beginner-curriculum.png");
+  background-position: center;
+  background-size: cover;
+}
+.beginner-curriculum-detail { margin: 0; }
+.beginner-curriculum-detail-heading { max-width: 790px; margin-bottom: 30px; }
+.beginner-curriculum-detail-heading h2 { margin: 0; font-family: "SANJUGotgam",Arial,sans-serif; font-size: clamp(1.65rem,2.6vw,2.3rem); line-height: 1.3; letter-spacing: -.04em; }
+.beginner-curriculum-detail-heading > strong { display: block; margin-top: 13px; color: var(--beginner-pink-dark); font-size: 1rem; }
+.beginner-curriculum-detail-heading > p:last-child { margin: 8px 0 0; color: var(--beginner-muted); }
+.beginner-curriculum-table-wrap { overflow: hidden; border: 1px solid var(--beginner-line); border-radius: 22px; background: rgba(255,255,255,.95); box-shadow: 0 18px 42px rgba(101,61,85,.09); }
+.beginner-curriculum-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.beginner-curriculum-date-column { width: 11%; }
+.beginner-curriculum-session-column { width: 12%; }
+.beginner-curriculum-title-column { width: 24%; }
+.beginner-curriculum-description-column { width: 53%; }
+.beginner-curriculum-table th { padding: 15px 17px; color: #675761; background: rgba(252,231,243,.72); font-size: .76rem; font-weight: 900; text-align: left; letter-spacing: .02em; }
+.beginner-curriculum-table td { padding: 19px 17px; border-top: 1px solid #f1e3ea; color: var(--beginner-muted); font-size: .84rem; line-height: 1.7; vertical-align: top; overflow-wrap: anywhere; }
+.beginner-curriculum-table td:first-child { color: #574a52; font-weight: 850; white-space: nowrap; }
+.beginner-curriculum-table td:nth-child(3) strong { display: block; color: #463940; font-size: .91rem; line-height: 1.5; }
+.beginner-curriculum-table td:nth-child(3) small { display: inline-block; margin-top: 8px; color: var(--beginner-pink-dark); font-size: .7rem; font-weight: 850; }
+.beginner-curriculum-table tbody tr:hover { background: rgba(255,249,252,.8); }
+.beginner-curriculum-table tbody tr.is-orientation { background: rgba(255,249,226,.55); }
+.beginner-session-badge { display: inline-flex; align-items: center; justify-content: center; min-height: 28px; padding: 4px 9px; border-radius: 999px; color: var(--beginner-pink-dark); background: #fce7f3; font-size: .72rem; font-weight: 900; white-space: nowrap; }
+.beginner-curriculum-table .is-orientation .beginner-session-badge { color: #75580a; background: #fff0ad; }
+.beginner-curriculum-mobile { display: none; margin: 0; padding: 0; list-style: none; }
+
+.beginner-section-staff { border-top: 1px solid #f2e2e9; }
+.beginner-staff-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 18px; }
+.beginner-staff-card { display: grid; grid-template-columns: 174px minmax(0,1fr); min-width: 0; overflow: hidden; border: 1px solid var(--beginner-line); border-radius: 23px; background: #fff; box-shadow: 0 16px 36px rgba(101,61,85,.07); }
+.beginner-staff-photo { position: relative; min-height: 250px; overflow: hidden; background: linear-gradient(145deg,#fff2b8,#fce7f3); }
+.beginner-staff-photo img { object-fit: cover; object-position: center 24%; }
+.beginner-staff-photo-placeholder { display: flex; height: 100%; min-height: 250px; padding: 22px; flex-direction: column; align-items: center; justify-content: center; color: #8c6c7d; text-align: center; }
+.beginner-staff-photo-placeholder::before { display: block; width: 64px; height: 64px; margin-bottom: 15px; border: 2px solid rgba(190,24,93,.24); border-radius: 50%; background: rgba(255,255,255,.5); content: ""; }
+.beginner-staff-photo-placeholder span { color: var(--beginner-pink-dark); font-size: .67rem; font-weight: 900; letter-spacing: .11em; }
+.beginner-staff-photo-placeholder strong { margin-top: 4px; font-size: .78rem; }
+.beginner-staff-copy { padding: 27px 25px; align-self: center; }
+.beginner-staff-copy > span { display: inline-flex; padding: 4px 9px; border-radius: 999px; color: var(--beginner-pink-dark); background: #fce7f3; font-size: .72rem; font-weight: 900; }
+.beginner-staff-copy h3 { margin: 11px 0 0; font-family: "SANJUGotgam",Arial,sans-serif; font-size: 1.55rem; line-height: 1.3; }
+.beginner-staff-copy p { margin: 12px 0 0; color: var(--beginner-muted); font-size: .88rem; line-height: 1.75; }
+.beginner-staff-note { margin: 22px 0 0; padding: 16px 19px; border-left: 3px solid var(--beginner-yellow); color: #645760; background: #fffaf0; font-size: .86rem; }
+.beginner-staff-note strong { color: var(--beginner-pink-dark); }
+.beginner-copy-layout { display: grid; grid-template-columns: minmax(260px,.72fr) minmax(0,1.28fr); align-items: start; gap: 70px; }
+.beginner-copy-layout .beginner-heading { position: sticky; top: 26px; margin-bottom: 0; }
+.beginner-prose { color: var(--beginner-muted); font-size: .98rem; }
+.beginner-prose > p { margin: 0 0 17px; }
+
+.beginner-section-attendance { background: #fffaf5; }
+.beginner-policy-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
+.beginner-policy-grid article { padding: 27px; border: 1px solid var(--beginner-line); border-radius: 22px; background: #fff; }
+.beginner-policy-grid article:nth-child(2) { grid-row: span 2; }
+.beginner-policy-grid article > span { display: inline-grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; color: var(--beginner-pink-dark); background: #fce7f3; font-size: .74rem; font-weight: 900; }
+.beginner-policy-grid h3 { margin: 17px 0 10px; font-size: 1.08rem; }
+.beginner-policy-grid p { margin: 10px 0 0; color: var(--beginner-muted); font-size: .88rem; }
+
+.beginner-check { display: flex; align-items: flex-start; gap: 13px; min-height: 54px; padding: 14px 16px; border: 1px solid var(--beginner-line); border-radius: 13px; color: #51464e; background: #fff; font-size: .88rem; font-weight: 700; cursor: pointer; transition: border-color .16s ease,background .16s ease,box-shadow .16s ease; }
+.beginner-check:hover { border-color: #e8a9c5; background: #fffafd; }
+.beginner-check:has(input:checked) { border-color: var(--beginner-pink); background: #fff5fa; box-shadow: 0 0 0 2px rgba(236,72,153,.08); }
+.beginner-check input { flex: none; width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--beginner-pink); }
+.beginner-check input:focus-visible { outline: 3px solid rgba(236,72,153,.25); outline-offset: 3px; }
+
+.beginner-section-refund { color: #f8edf3; background: #332a31; }
+.beginner-section-refund .beginner-heading > p:last-child { color: #d7c8d1; }
+.beginner-section-refund .beginner-eyebrow { color: #ffd86b; }
+.beginner-refund-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 17px; }
+.beginner-refund-grid article { padding: 29px; border: 1px solid rgba(255,255,255,.14); border-radius: 22px; background: rgba(255,255,255,.06); }
+.beginner-refund-grid article > span { color: #ffd86b; font-size: .74rem; font-weight: 900; }
+.beginner-refund-grid h3 { margin: 8px 0 17px; color: #fff; font-family: "SANJUGotgam",Arial,sans-serif; font-size: 1.45rem; }
+.beginner-refund-grid p { margin: 10px 0 0; color: #e2d5dd; font-size: .89rem; }
+.beginner-refund-grid strong { color: #fff; }
+.beginner-refund-grid small { display: block; margin-top: 15px; color: #bcaeb7; }
+
+.beginner-section-confirm { background: linear-gradient(135deg,#fffbea,#fff4f9); }
+.beginner-confirm-grid { display: grid; grid-template-columns: minmax(260px,.65fr) minmax(0,1.35fr); align-items: start; gap: 64px; }
+.beginner-confirm-copy { position: sticky; top: 26px; }
+.beginner-confirm-copy > p:not(.beginner-eyebrow) { color: var(--beginner-muted); }
+.beginner-confirm-progress { display: flex; align-items: center; gap: 13px; margin-top: 24px; }
+.beginner-confirm-progress strong { display: grid; place-items: center; width: 58px; height: 58px; border-radius: 50%; color: #fff; background: linear-gradient(145deg,var(--beginner-yellow),var(--beginner-pink)); font-size: .83rem; }
+.beginner-confirm-progress span { color: #5d5059; font-size: .88rem; font-weight: 800; }
+.beginner-check-list { display: grid; gap: 9px; margin-top: 12px; }
+.beginner-check-all { min-height: 58px; color: #fff; border-color: transparent; background: #57464f; font-size: .94rem; }
+.beginner-check-all:hover, .beginner-check-all:has(input:checked) { color: #fff; border-color: transparent; background: #493942; }
+.beginner-payment {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 72px 0;
+  color: #fff;
+  background-image:
+    linear-gradient(105deg,rgba(96,64,20,.89) 0%,rgba(151,69,73,.86) 48%,rgba(104,39,76,.88) 100%),
+    url("/beginner-1/beginner-pay.png");
+  background-position: center 46%;
+  background-size: cover;
+}
+.beginner-payment-card { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 70px; }
+.beginner-payment .beginner-eyebrow { color: #fff5c5; }
+.beginner-payment-card > div:first-child > strong { display: block; margin-top: 10px; font-family: "SANJUGotgam",Arial,sans-serif; font-size: clamp(2.8rem,5vw,4.3rem); line-height: 1.1; }
+.beginner-payment-card > div:first-child > p:last-child { color: rgba(255,255,255,.88); }
+.beginner-payment-action { padding: 27px; border-radius: 20px; background: rgba(255,255,255,.14); }
+.beginner-button-payment { width: 100%; min-height: 58px; color: var(--beginner-pink-dark); background: #fff; box-shadow: 0 12px 28px rgba(96,43,69,.18); }
+.beginner-button-payment:disabled { color: #8e7e87; background: #eadfe4; box-shadow: none; cursor: not-allowed; opacity: .82; }
+.beginner-payment-status { min-height: 23px; margin: 12px 0 0; color: rgba(255,255,255,.9); font-size: .78rem; }
+
+.beginner-closing { padding: 92px 0; text-align: center; background: #fff; }
+.beginner-closing > div { max-width: 760px; }
+.beginner-closing > div > p:first-child { margin: 0 0 7px; color: var(--beginner-pink); font-weight: 900; }
+.beginner-closing h2 { margin-bottom: 22px; }
+.beginner-closing p { color: var(--beginner-muted); }
+.beginner-closing strong { display: block; margin-top: 24px; color: var(--beginner-pink-dark); font-size: 1.08rem; }
+
+@media (max-width: 900px) {
+  .beginner-hero-grid { grid-template-columns: 1fr 320px; gap: 32px; }
+  .beginner-info-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .beginner-curriculum-table-wrap { display: none; }
+  .beginner-curriculum-mobile { display: block; overflow: hidden; border: 1px solid var(--beginner-line); border-radius: 20px; background: rgba(255,255,255,.95); box-shadow: 0 16px 36px rgba(101,61,85,.08); }
+  .beginner-curriculum-mobile li { padding: 23px; border-top: 1px solid #f1e3ea; }
+  .beginner-curriculum-mobile li:first-child { border-top: 0; }
+  .beginner-curriculum-mobile li.is-orientation { background: rgba(255,249,226,.6); }
+  .beginner-curriculum-mobile-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; }
+  .beginner-curriculum-mobile-meta > span { color: #594c54; font-size: .8rem; font-weight: 900; }
+  .beginner-curriculum-mobile-meta > b { padding: 3px 8px; border-radius: 999px; color: var(--beginner-pink-dark); background: #fce7f3; font-size: .7rem; }
+  .beginner-curriculum-mobile .is-orientation .beginner-curriculum-mobile-meta > b { color: #75580a; background: #fff0ad; }
+  .beginner-curriculum-mobile-meta > small { color: var(--beginner-pink-dark); font-size: .7rem; font-weight: 800; }
+  .beginner-curriculum-mobile h4 { margin: 12px 0 0; color: #44373f; font-size: 1rem; line-height: 1.5; font-weight: 700;}
+  .beginner-curriculum-mobile p { margin: 8px 0 0; color: var(--beginner-muted); font-size: .84rem; line-height: 1.72; }
+}
+
+@media (max-width: 760px) {
+  .beginner-page { overflow-x: hidden; }
+  .beginner-container { width: min(100% - 28px,1120px); }
+  .beginner-section { padding: 58px 0; }
+  .beginner-heading { margin-bottom: 27px; }
+  .beginner-heading h2, .beginner-confirm-copy h2, .beginner-payment h2, .beginner-closing h2 { font-size: clamp(1.7rem,8vw,2.15rem); }
+  .beginner-hero,
+  #program-info,
+  .beginner-section-curriculum,
+  .beginner-payment {
+    padding-top: calc(56.28vw + 32px);
+    background-image: none;
+  }
+  .beginner-hero { padding-bottom: 55px; background: #fffaf5; }
+  #program-info { background: #fff; }
+  .beginner-section-curriculum { background: linear-gradient(135deg,#fffbea,#fff4f9); }
+  .beginner-payment { background: linear-gradient(105deg,#775126,#934b55 52%,#64304f); }
+  .beginner-hero::before,
+  #program-info::before,
+  .beginner-section-curriculum::before,
+  .beginner-payment::before {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(56.28vw + 86px);
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%,100% auto;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(to bottom,#000 0%,#000 38%,rgba(0,0,0,.56) 58%,transparent 78%);
+    mask-image: linear-gradient(to bottom,#000 0%,#000 38%,rgba(0,0,0,.56) 58%,transparent 78%);
+    content: "";
+  }
+  .beginner-hero::before {
+    background-image:
+      linear-gradient(105deg,rgba(255,248,224,.3),rgba(255,240,246,.52)),
+      url("/beginner-1/beginner-hero.png");
+  }
+  #program-info::before {
+    background-image:
+      linear-gradient(110deg,rgba(255,255,255,.28),rgba(255,249,244,.56)),
+      url("/beginner-1/beginner-programInfo.png");
+  }
+  .beginner-section-curriculum::before {
+    background-image:
+      linear-gradient(115deg,rgba(255,249,224,.26),rgba(255,239,247,.5)),
+      url("/beginner-1/beginner-curriculum.png");
+  }
+  .beginner-payment::before {
+    background-image:
+      linear-gradient(105deg,rgba(82,54,24,.38),rgba(95,35,69,.58)),
+      url("/beginner-1/beginner-pay.png");
+  }
+  .beginner-hero > .beginner-container,
+  #program-info > .beginner-container,
+  .beginner-section-curriculum > .beginner-container,
+  .beginner-payment > .beginner-container { position: relative; z-index: 1; }
+  .beginner-hero-grid, .beginner-copy-layout, .beginner-confirm-grid, .beginner-payment-card { grid-template-columns: minmax(0,1fr); gap: 32px; }
+  .beginner-hero-copy { text-align: center; }
+  .beginner-hero-copy h1 { font-size: clamp(2.1rem,10vw,3rem); word-break: normal; overflow-wrap: anywhere; }
+  .beginner-hero-description { font-size: .92rem; }
+  .beginner-button-primary { width: 100%; }
+  .beginner-hero-card { padding: 23px; border-radius: 21px; }
+  .beginner-hero-card dl div { min-width: 0; }
+  .beginner-hero-card dd { min-width: 0; overflow-wrap: anywhere; }
+  .beginner-info-grid { grid-template-columns: 1fr; gap: 10px; }
+  .beginner-info-grid > div { min-height: auto; padding: 19px; }
+  .beginner-info-grid .beginner-info-price { grid-column: span 1; }
+  .beginner-info-grid .beginner-info-recruitment { grid-column: span 1; }
+  .beginner-info-recruitment dd { font-size: 1.35rem; }
+  .beginner-curriculum-detail-heading { margin-bottom: 23px; }
+  .beginner-curriculum-detail-heading h2 { font-size: 1.65rem; }
+  .beginner-curriculum-detail-heading > strong { font-size: .92rem; }
+  .beginner-curriculum-detail-heading > p:last-child { font-size: .86rem; }
+  .beginner-curriculum-mobile { border-radius: 17px; }
+  .beginner-curriculum-mobile li { padding: 20px 18px; }
+  .beginner-staff-grid { grid-template-columns: 1fr; gap: 13px; }
+  .beginner-staff-card { grid-template-columns: 1fr; border-radius: 19px; }
+  .beginner-staff-photo, .beginner-staff-photo-placeholder { min-height: 220px; }
+  .beginner-staff-photo { aspect-ratio: 16/9; }
+  .beginner-staff-card:first-child .beginner-staff-photo { aspect-ratio: 4/3; }
+  .beginner-staff-card:first-child .beginner-staff-photo img { object-position: center top; }
+  .beginner-staff-copy { padding: 23px 21px 25px; }
+  .beginner-staff-note { font-size: .82rem; }
+  .beginner-copy-layout .beginner-heading, .beginner-confirm-copy { position: static; }
+  .beginner-policy-grid, .beginner-refund-grid { grid-template-columns: 1fr; }
+  .beginner-policy-grid article:nth-child(2) { grid-row: auto; }
+  .beginner-policy-grid article, .beginner-refund-grid article { padding: 22px; }
+  .beginner-check { min-height: 58px; padding: 15px 14px; font-size: .84rem; }
+  .beginner-payment { padding-bottom: 55px; text-align: center; }
+  .beginner-payment-card { gap: 25px; }
+  .beginner-payment-action { padding: 20px; }
+  .beginner-closing { padding: 65px 0; }
+  .beginner-closing br { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { scroll-behavior: auto; }
+  .beginner-button, .beginner-check { transition: none; }
+}

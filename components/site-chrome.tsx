@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { footerNavigation, siteConfig, siteNavigation } from "@/lib/site-config";
 
-export function SiteChrome({ children }: { children: React.ReactNode }) {
+export function SiteChrome({ children, copyrightYear }: { children: React.ReactNode; copyrightYear: number }) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const isOverlay = pathname === "/" || pathname === "/vod-tutorial" || pathname === "/crew";
@@ -44,7 +44,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
           </nav>
           <div className="site-footer-channel">
             <a href={siteConfig.youtube} target="_blank" rel="noreferrer">YouTube 채널</a>
-            <small>© {new Date().getFullYear()} {siteConfig.name}</small>
+            <small>© {copyrightYear} {siteConfig.name}</small>
           </div>
         </div>
       </footer>

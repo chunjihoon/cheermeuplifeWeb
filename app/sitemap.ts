@@ -11,6 +11,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: absoluteUrl("/vod-tutorial"), lastModified: new Date("2026-07-15"), changeFrequency: "monthly", priority: .9 },
     { url: absoluteUrl("/performance"), lastModified: new Date("2026-08-26"), changeFrequency: "monthly", priority: .9 },
     { url: absoluteUrl("/crew"), lastModified: new Date("2026-09-27"), changeFrequency: "weekly", priority: .9 },
+    { url: absoluteUrl("/beginner-1"), lastModified: new Date("2026-10-03"), changeFrequency: "weekly", priority: .9 },
     { url: absoluteUrl("/about"), lastModified: new Date("2026-07-15"), changeFrequency: "monthly", priority: .7 },
     { url: absoluteUrl("/posts"), lastModified: new Date("2026-07-15"), changeFrequency: "weekly", priority: .9 },
     { url: absoluteUrl("/faq"), lastModified: new Date("2026-07-15"), changeFrequency: "monthly", priority: .6 },

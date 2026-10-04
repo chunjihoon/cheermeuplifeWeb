@@ -49,6 +49,11 @@ export const metadata: Metadata = {
   verification: process.env.GOOGLE_SITE_VERIFICATION
     ? { google: process.env.GOOGLE_SITE_VERIFICATION }
     : undefined,
+  formatDetection: {
+    telephone: false,
+    email: false,
+    address: false,
+  },
 };
 
 export default function RootLayout({
@@ -56,6 +61,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const copyrightYear = new Date().getFullYear();
+
   return (
     <html lang="ko">
       <body
@@ -80,7 +87,7 @@ export default function RootLayout({
             sameAs: [siteConfig.youtube],
           },
         ]} />
-        <SiteChrome>{children}</SiteChrome>
+        <SiteChrome copyrightYear={copyrightYear}>{children}</SiteChrome>
       </body>
     </html>
   );
