@@ -1,11 +1,11 @@
 export const beginnerProgramConfig = {
   name: "Beginner 1기",
-  startDate: "2026년 10월 18일(일)",
+  startDate: "2026년 10월 18일 (일)",
   schedule: "매주 일요일 19:00–21:00",
   scheduleNote: "",
   duration: "주 1회, 2시간 × 총 8회",
   venue: "서울 사당역 인근 연습실",
-  venueNote: "정확한 장소는 참가 확정 후 공지 예정입니다.",
+  venueNote: "연습실 위치는 참가 확정 후 공지드립니다.",
   price: 280000,
   priceLabel: "280,000원",
   totalHours: 16,

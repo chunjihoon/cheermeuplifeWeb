@@ -70,6 +70,7 @@ export function BeginnerProgram() {
         <div className="beginner-container">
           <div className="beginner-heading"><p className="beginner-eyebrow">PROGRAM INFO</p><h2 id="program-info-title">Beginner 1기 프로그램</h2><p>참여 전 일정과 운영 조건을 확인해주세요.</p></div>
           <dl className="beginner-info-grid">
+            <div><dt>사전 OT</dt><dd>2026년 10월 11일 (일)</dd></div>
             <div><dt>첫 연습</dt><dd>{program.startDate}</dd></div>
             <div><dt>수업 일정</dt><dd>{program.schedule}</dd><small>{program.scheduleNote}</small></div>
             <div><dt>기간</dt><dd>{program.duration}</dd></div>
