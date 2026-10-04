@@ -110,7 +110,7 @@ export function BeginnerProgram() {
 
       <section className="beginner-section beginner-section-white beginner-section-staff" aria-labelledby="staff-title">
         <div className="beginner-container">
-          <div className="beginner-heading"><p className="beginner-eyebrow">WHO RUNS THE PROGRAM</p><h2 id="staff-title">프로그램을 함께 운영하는 담당자</h2><p>8주 과정 전체를 기획하고 관리하는 프로그램 총괄과 매주 오프라인 수업을 진행하는 현장 강사가 역할을 나누어 함께 운영합니다.</p></div>
+          <div className="beginner-heading"><p className="beginner-eyebrow">WHO RUNS THE PROGRAM</p><h2 id="staff-title">프로그램을 함께 운영하는 사람들</h2><p>8주 과정 전체를 기획하고 관리하는 프로그램 총괄과 매주 오프라인 수업을 진행하는 현장 강사가 역할을 나누어 함께 운영합니다.</p></div>
           <div className="beginner-staff-grid">
             {beginnerStaff.map((person) => <article className="beginner-staff-card" key={person.role}>
               <div className="beginner-staff-photo">
