@@ -11,7 +11,7 @@ export const beginnerProgramConfig = {
   totalHours: 16,
   recruitment: {
     capacity: 7,
-    confirmedParticipants: 5,
+    confirmedParticipants: 3,
   },
   orientation: {
     date: null,

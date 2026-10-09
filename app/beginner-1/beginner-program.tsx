@@ -170,7 +170,33 @@ export function BeginnerProgram() {
       <section className="beginner-payment" aria-labelledby="payment-title">
         <div className="beginner-container beginner-payment-card">
           <div><p className="beginner-eyebrow">JOIN BEGINNER 01</p><h2 id="payment-title">Beginner 1기 참가비</h2><strong>{program.priceLabel}</strong><p>8주 오프라인 트레이닝 / 총 {program.totalHours}시간<br />(연습실 대관비 포함)</p></div>
-          <div className="beginner-payment-action"><button className="beginner-button beginner-button-payment" type="button" disabled={!allConfirmed} onClick={handlePayment}>안내사항을 확인하고 {program.priceLabel} 결제하기</button><p className="beginner-payment-status" aria-live="polite">{!allConfirmed ? `필수 확인사항 ${remaining}개를 확인하면 결제 버튼이 활성화됩니다.` : paymentMessage || (program.paymentUrl ? "필수 확인이 완료되었습니다. 결제를 진행할 수 있습니다." : "필수 확인이 완료되었습니다. 현재 결제 페이지 연결을 준비하고 있습니다.")}</p></div>
+          <div className="beginner-payment-action">
+            <div
+              style={{
+                marginBottom: "20px",
+                padding: "14px 16px",
+                borderRadius: "10px",
+                backgroundColor: "rgba(255,255,255,0.10)",
+                color: "#fff",
+                fontSize: "14px",
+                lineHeight: 1.65,
+              }}
+            >
+              <p style={{ margin: "0 0 6px", fontWeight: 700 }}>
+                결제 완료 후 안내
+              </p>
+
+              <p style={{ margin: 0, opacity: 0.9 }}>
+                결제 후 성함과 결제 완료 사실을 문자로 알려주세요.
+                확인 후 단체 채팅방 참여를 안내드립니다.
+              </p>
+
+              <p style={{ margin: "8px 0 0", fontWeight: 700 }}>
+                010-3343-7576
+              </p>
+            </div>
+            <button className="beginner-button beginner-button-payment" type="button" disabled={!allConfirmed} onClick={handlePayment}>안내사항을 확인하고 {program.priceLabel} 결제하기</button><p className="beginner-payment-status" aria-live="polite">{!allConfirmed ? `필수 확인사항 ${remaining}개를 확인하면 결제 버튼이 활성화됩니다.` : paymentMessage || (program.paymentUrl ? "필수 확인이 완료되었습니다. 결제를 진행할 수 있습니다." : "필수 확인이 완료되었습니다. 현재 결제 페이지 연결을 준비하고 있습니다.")}</p>
+          </div>
         </div>
       </section>
 

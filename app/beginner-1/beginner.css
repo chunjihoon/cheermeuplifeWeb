@@ -182,10 +182,14 @@
 .beginner-payment-card { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 70px; }
 .beginner-payment .beginner-eyebrow { color: #fff5c5; }
 .beginner-payment-card > div:first-child > strong { display: block; margin-top: 10px; font-family: "SANJUGotgam",Arial,sans-serif; font-size: clamp(2.8rem,5vw,4.3rem); line-height: 1.1; }
-.beginner-payment-card > div:first-child > p:last-child { color: rgba(255,255,255,.88); }
+.beginner-payment-card > div:first-child > p:last-child { color: rgba(255, 162, 0, 0.88); }
 .beginner-payment-action { padding: 27px; border-radius: 20px; background: rgba(255,255,255,.14); }
 .beginner-button-payment { width: 100%; min-height: 58px; color: var(--beginner-pink-dark); background: #fff; box-shadow: 0 12px 28px rgba(96,43,69,.18); }
 .beginner-button-payment:disabled { color: #8e7e87; background: #eadfe4; box-shadow: none; cursor: not-allowed; opacity: .82; }
+.beginner-button-payment:not(:disabled) {
+  background: #ff8800;
+  color: #fff;
+}
 .beginner-payment-status { min-height: 23px; margin: 12px 0 0; color: rgba(255,255,255,.9); font-size: .78rem; }
 
 .beginner-closing { padding: 92px 0; text-align: center; background: #fff; }
