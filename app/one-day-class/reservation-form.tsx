@@ -84,7 +84,7 @@ export function OneDayClassReservationForm({ reservationOpen }: { reservationOpe
             return item ? <li key={date}>{item.label} · {item.time}</li> : null;
           })}</ul>
         </div>
-        <p>사전예약 종료 후 클래스 진행 날짜가 선정되면 입력하신 이메일로 결과와 결제 안내를 보내드립니다.</p>
+        <p>사전예약 종료 후 클래스 진행 날짜가 확정되면 입력하신 이메일로 결과와 결제 안내를 보내드립니다.</p>
         <p className="oneday-success-note">사전예약은 참가 확정이 아니며, 실제 참가 신청은 추후 결제를 통해 완료됩니다.</p>
       </div>
     );
